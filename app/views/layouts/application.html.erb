@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gift</title>
+  <%= stylesheet_link_tag    "application", "bootstrap-responsive.css", "bootstrap.css", :media => "all" %>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <%= javascript_include_tag "application","bootstrap.min.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class='container'>
+	<div class='well'>	
+	
+		<div class='homelogo'>
+			<%= link_to image_tag('rails.png', :alt =>'logo'), '#'%>
+		</div>
+	
+		<div class='header'<>
+			<h1><em>Gifts</em></h1>
+			<p>Make those around you happy</p>
+		</div>
+	
+		<div class='login floatright'>
+		  <% if user_signed_in? %>
+		    <%= current_user.email%> |
+		    <%= link_to current_user.email, edit_user_registration_path %> |
+		    <%= link_to "My Wish List", '#' %> |
+		    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %> | 
+		    <%= link_to "Need Help", '#' %>
+		  <% else %>
+		    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "Sign in", new_user_session_path %>
+		  <% end %>
+		</div>
+		
+		<div class='clear'></div>
+		
+		<form class='form-search myform'>
+			<input type='text' class='input-medium search-query'>
+			<button type='submit' class='btn'>Search</button>
+		</form>
+	
+	</div>
+	
+	<div><em>
+		<% flash.each do |name, msg| %>
+		  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+		<% end %></em>
+	</div>
+	
+	<div class='container'>
+		</br>
+		<div class='span12'>
+			<% if user_signed_in? %>
+			<ul class='nav nav-tabs'>
+				<li class='dropdown active'>
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>tbd<b class='caret'></b></a>				
+					<ul class='dropdown-menu'>
+						<li><%= link_to 'Recommendations', '#' %></li>
+						<li><%= link_to 'New', '#' %></li>
+					</ul>
+				</li>
+				<li class='dropdown active'>
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>tbd<b class='caret'></b></a>				
+					<ul class='dropdown-menu'>
+						<li><%= link_to 'tbd', '#' %></li>
+					</ul>
+				</li>
+				<li class='active'><%= link_to 'tbd', '#' %></li>	
+				<li class='active'><%= link_to 'tbd', '#' %></li>		
+
+			</ul>
+			<% end %>
+		</div>
+		
+		<div class='span12'>
+			<%= yield %>
+		</div>
+	</div>
+	
+	<div class='footer'>
+		<p>copyright ©2012</p>
+	</div>
+	
+	
+</div>
+
+</body>
+</html>
