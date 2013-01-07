@@ -11,7 +11,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102223001) do
+ActiveRecord::Schema.define(:version => 20130105003817) do
+
+  create_table "category_product_links", :force => true do |t|
+    t.integer  "product_cat_id"
+    t.integer  "product_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "category_product_links", ["product_cat_id"], :name => "index_category_product_links_on_product_cat_id"
+  add_index "category_product_links", ["product_id"], :name => "index_category_product_links_on_product_id"
+
+  create_table "occassions", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "date"
+    t.integer  "user_id"
+    t.string   "price_range"
+    t.string   "type_of_gift"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "occassions", ["user_id"], :name => "index_occassions_on_user_id"
+
+  create_table "product_cats", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "products", :force => true do |t|
     t.string   "name"
@@ -19,15 +49,21 @@ ActiveRecord::Schema.define(:version => 20130102223001) do
     t.text     "description"
     t.string   "gender"
     t.string   "age_range"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "category"
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
   end
 
   create_table "recommendations", :force => true do |t|
     t.integer  "product_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "occassion_id"
   end
 
   add_index "recommendations", ["product_id"], :name => "index_recommendations_on_product_id"

@@ -1,0 +1,38 @@
+<%= form_for(@occassion) do |f| %>
+  <% if @occassion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@occassion.errors.count, "error") %> prohibited this occassion from being saved:</h2>
+
+      <ul>
+      <% @occassion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+	<%= f.select :name, options_for_select([["Birthday", "Birthday"], ["Anniversary", "Anniversary"], ["Christmas", "Christmas"], ["Other", "Other"], ["Any", "Any"]]) %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :date %><br />
+ 	<%= f.text_field :date, :id => 'datepicker' %>
+  </div>
+  </div>
+  <div class="field">
+    <%= f.label :price_range %><br />
+	<%= f.select :price_range, options_for_select([["under $25", "under $25"], ["$25.01-$100", "$25.01-$100"], ["$100.01-$250", "$100.01-$250"], ["$250+", "$250+"]], @occassion.price_range) %>
+  </div>
+  <div class="field">
+    <%= f.label :type_of_gift %><br />
+	<%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Gamer", "Gamer"], ["Romantic", "Romantic"]], @occassion.type_of_gift) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

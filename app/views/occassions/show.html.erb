@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @occassion.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @occassion.description %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @occassion.date %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @occassion.user %>
+</p>
+
+<p>
+  <b>Price range:</b>
+  <%= @occassion.price_range %>
+</p>
+
+<p>
+  <b>Type of gift:</b>
+  <%= @occassion.type_of_gift %>
+</p>
+
+
+<%= link_to 'Edit', edit_occassion_path(@occassion) %> |
+<%= link_to 'Back', occassions_path %>

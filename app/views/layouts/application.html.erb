@@ -2,9 +2,9 @@
 <html>
 <head>
   <title>Gift</title>
-  <%= stylesheet_link_tag    "application", "bootstrap-responsive.css", "bootstrap.css", :media => "all" %>
+  <%= stylesheet_link_tag    "application", "bootstrap-responsive.css", "bootstrap.css", 'jquery-ui-1.9.2.custom.css', :media => "all" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <%= javascript_include_tag "application","bootstrap.min.js" %>
+  <%= javascript_include_tag "application","bootstrap.min.js", "jquery-ui-1.9.2.custom.js" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -12,7 +12,7 @@
 	<div class='well'>	
 	
 		<div class='homelogo'>
-			<%= link_to image_tag('rails.png', :alt =>'logo'), '#'%>
+			<%= link_to image_tag('rails.png', :alt =>'logo'), dashboard_index_path %>
 		</div>
 	
 		<div class='header'<>
@@ -53,21 +53,20 @@
 			<% if user_signed_in? %>
 			<ul class='nav nav-tabs'>
 				<li class='dropdown active'>
-					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>tbd<b class='caret'></b></a>				
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Dashboard<b class='caret'></b></a>				
 					<ul class='dropdown-menu'>
-						<li><%= link_to 'Recommendations', '#' %></li>
-						<li><%= link_to 'New', '#' %></li>
+						<li><%= link_to 'Dashboard', dashboard_index_path %></li>
 					</ul>
 				</li>
 				<li class='dropdown active'>
-					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>tbd<b class='caret'></b></a>				
+					<a href='#' class='dropdown-toggle' data-toggle='dropdown'>All Recommendations<b class='caret'></b></a>				
 					<ul class='dropdown-menu'>
-						<li><%= link_to 'tbd', '#' %></li>
+						<li><%= link_to 'Recommendations', recommendations_path %></li>
 					</ul>
 				</li>
-				<li class='active'><%= link_to 'tbd', '#' %></li>	
-				<li class='active'><%= link_to 'tbd', '#' %></li>		
-
+				<li class='active'><%= link_to 'Products', products_path %></li>	
+				<li class='active'><%= link_to 'Occassions', occassions_path %></li>		
+				<li class='active'><%= link_to 'Product Category', product_cats_path %></li>						
 			</ul>
 			<% end %>
 		</div>
@@ -85,4 +84,13 @@
 </div>
 
 </body>
+    <script>
+    $(function() {
+        $( "#datepicker" ).datepicker({
+            showOn: "button",
+            buttonImage: "images/calendar.gif",
+            buttonImageOnly: true
+        });
+    });
+    </script>
 </html>

@@ -1,8 +1,11 @@
 Gift::Application.routes.draw do
-  get "dashboard/index"
+  resources :category_product_links
 
-  get "recommendations/index"
+  resources :product_cats
 
+  resources :occassions
+
+  resources :dashboard
   resources :products
   resources :recommendations
   devise_for :users

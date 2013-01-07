@@ -25,6 +25,15 @@
   <%= @product.age_range %>
 </p>
 
+<p>
+  <b>Category:</b>
+  <% @product_cat.each do |cats| %>
+  <%= cats.name %>
+    <% end %>
+</p>
+
+<%= image_tag @product.pic.url %>
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

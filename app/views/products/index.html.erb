@@ -1,8 +1,9 @@
 <h1>Listing products</h1>
 
-<table>
+<table class='table table-bordered table-striped table-condensed'>
   <tr>
     <th>Name</th>
+    <th>Category</th>
     <th>Price</th>
     <th>Description</th>
     <th>Gender</th>
@@ -15,6 +16,7 @@
 <% @products.each do |product| %>
   <tr>
     <td><%= product.name %></td>
+    <td><%= product.category %></td>
     <td><%= product.price %></td>
     <td><%= product.description %></td>
     <td><%= product.gender %></td>

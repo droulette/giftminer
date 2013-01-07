@@ -5,6 +5,7 @@ class RecommendationsController < ApplicationController
     @products=Product.all
     @recommendation=Recommendation.new
     @recs=Recommendation.all
+    @occassions=Occassion.all
   end
   
   def show
@@ -18,9 +19,11 @@ class RecommendationsController < ApplicationController
 
 
   def new
+    debugger
     @recommendation = Recommendation.new
     @users=User.all
     @products=Product.all
+    @occassions=Occassion.select('distinct name')
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @recommendation }
@@ -32,15 +35,16 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.find(params[:id])
     @users=User.all
     @products=Product.all
+    @occassions=Occassion.all
   end
 
   # POST /products
   # POST /products.json
   def create
-    debugger
     @recommendation = Recommendation.new(params[:recommendation])
     @users=User.all
     @products=Product.all
+    @occassions=Occassion.all
     respond_to do |format|
       if @recommendation.save
         format.html { redirect_to @recommendation, notice: 'Recommendation was successfully created.' }
@@ -58,6 +62,7 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.find(params[:id])
     @users=User.all
     @products=Product.all
+    @occassions=Occassion.all
     respond_to do |format|
       if @recommendation.update_attributes(params[:recommendation])
         format.html { redirect_to @recommendation, notice: 'Recommendation was successfully updated.' }

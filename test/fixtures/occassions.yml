@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  name: MyString
+  description: MyText
+  date: 2013-01-02 20:47:52
+  user: 
+  price_range: MyString
+  type_of_gift: MyString
+
+two:
+  id: 2
+  name: MyString
+  description: MyText
+  date: 2013-01-02 20:47:52
+  user: 
+  price_range: MyString
+  type_of_gift: MyString

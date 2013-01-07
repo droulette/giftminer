@@ -11,10 +11,19 @@
     </div>
   <% end %>
 
-<%= f.select :user_id, options_for_select(@users.collect{ |u| [u.email,u.id] }) %>
 
-<%= f.select :product_id, options_for_select(@products.collect{ |p| [p.name,p.id] }) %>
-
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.select :user_id, options_for_select(@users.collect{ |u| [u.email,u.id] }, @recommendation.user ? @recommendation.user.id : "") %>
+  </div>
+  <div class="field">
+    <%= f.label :product_id %><br />
+    <%= f.select :product_id, options_for_select(@products.collect{ |p| [p.name,p.id] }, @recommendation.product ? @recommendation.product.id : "") %>
+  </div>
+  <div class="field">
+    <%= f.label :occassion_id %><br />
+    <%= f.select :occassion_id, options_for_select(@occassions.each{ |p| p.name }, @recommendation.occassion ? @recommendation.occassion.id : "") %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

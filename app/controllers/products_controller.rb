@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
+    @product_cat = @product.product_cats
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,7 +27,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
-
+    @product_cat= ProductCat.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -36,14 +37,13 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @product = Product.find(params[:id])
+    @product_cat= ProductCat.all
   end
 
   # POST /products
   # POST /products.json
   def create
-    debugger
     @product = Product.new(params[:product])
-
     respond_to do |format|
       if @product.save
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
@@ -60,6 +60,13 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
 
+    params['product']['product_cat_ids'].each do |product_cat_id|
+      @category_product_link = @product.category_product_links.build({:product_cat_id => product_cat_id})
+      @category_product_link.save
+    end
+    
+    params['product'].delete('product_cat_ids')
+    
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }

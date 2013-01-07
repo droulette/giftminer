@@ -1,25 +1,6 @@
-<h1>Listing recommendations</h1>
+<h1>Editing recommendation</h1>
 
-<table>
-  <tr>
-    <th>User</th>
-    <th>Product</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= render 'form' %>
 
-<% @recs.each do |recommendation| %>
-  <tr>
-    <td><%= @recs.user_id %></td>
-    <td><%= @recs.product_id %></td>
-    <td><%= link_to 'Show', recommendation %></td>
-    <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
-    <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Recommendations', new_recommendation_path %>
+<%= link_to 'Show', @recommendation %> |
+<%= link_to 'Back', recommendations_path %>

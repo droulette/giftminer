@@ -1,6 +1,6 @@
 <h1>My recommendations</h1>
 
-<table>
+<table class='table table-bordered table-striped table-condensed'>
   <tr>
     <th>User</th>
     <th>Product</th>
@@ -16,6 +16,34 @@
     <td><%= link_to 'Show', recommendation %></td>
     <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
     <td><%= link_to 'Destroy', recommendation, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<h1>My occassions</h1>
+
+<table class='table table-bordered table-striped table-condensed'>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th>Price range</th>
+    <th>Type of gift</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @occassions.each do |occassion| %>
+  <tr>
+    <td><%= occassion.name %></td>
+    <td><%= occassion.description %></td>
+    <td><%= occassion.date %></td>
+    <td><%= occassion.price_range %></td>
+    <td><%= occassion.type_of_gift %></td>
+    <td><%= link_to 'Show', occassion %></td>
+    <td><%= link_to 'Edit', edit_occassion_path(occassion) %></td>
+    <td><%= link_to 'Destroy', occassion, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
