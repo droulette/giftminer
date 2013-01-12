@@ -13,11 +13,11 @@
 
   <div class="field">
     <%= f.label :name %><br />
-	<%= f.select :name, options_for_select([["Birthday", "Birthday"], ["Anniversary", "Anniversary"], ["Christmas", "Christmas"], ["Other", "Other"], ["Any", "Any"]]) %>
+	<%= f.text_field :name %>
   </div>
   <div class="field">
     <%= f.label :description %><br />
-    <%= f.text_area :description %>
+    <%= f.text_area :description, :size => "30x5" %>
   </div>
   <div class="field">
     <%= f.label :date %><br />
@@ -32,7 +32,14 @@
     <%= f.label :type_of_gift %><br />
 	<%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Gamer", "Gamer"], ["Romantic", "Romantic"]], @occassion.type_of_gift) %>
   </div>
+  </div>
+  <% @ocats.each do |ocat| %>
+    <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
+    <%= ocat.category %>
+  <% end %>
+</div>
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

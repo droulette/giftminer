@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Category:</b>
+  <%= @ocat.category %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @ocat.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_ocat_path(@ocat) %> |
+<%= link_to 'Back', ocats_path %>

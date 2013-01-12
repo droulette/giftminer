@@ -3,7 +3,6 @@ class RecommendationsController < ApplicationController
   def index
     @users=User.all
     @products=Product.all
-    @recommendation=Recommendation.new
     @recs=Recommendation.all
     @occassions=Occassion.all
   end
@@ -19,11 +18,10 @@ class RecommendationsController < ApplicationController
 
 
   def new
-    debugger
     @recommendation = Recommendation.new
     @users=User.all
     @products=Product.all
-    @occassions=Occassion.select('distinct name')
+    @occassions=Occassion.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @recommendation }
@@ -41,6 +39,7 @@ class RecommendationsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    
     @recommendation = Recommendation.new(params[:recommendation])
     @users=User.all
     @products=Product.all

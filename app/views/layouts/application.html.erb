@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gift</title>
-  <%= stylesheet_link_tag    "application", "bootstrap-responsive.css", "bootstrap.css", 'jquery-ui-1.9.2.custom.css', :media => "all" %>
+  <title>Gifter</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-  <%= javascript_include_tag "application","bootstrap.min.js", "jquery-ui-1.9.2.custom.js" %>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -22,7 +22,6 @@
 	
 		<div class='login floatright'>
 		  <% if user_signed_in? %>
-		    <%= current_user.email%> |
 		    <%= link_to current_user.email, edit_user_registration_path %> |
 		    <%= link_to "My Wish List", '#' %> |
 		    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %> | 
@@ -65,6 +64,7 @@
 					</ul>
 				</li>
 				<li class='active'><%= link_to 'Products', products_path %></li>	
+				<li class='active'><%= link_to 'Occassion Categories', ocats_path %></li>
 				<li class='active'><%= link_to 'Occassions', occassions_path %></li>		
 				<li class='active'><%= link_to 'Product Category', product_cats_path %></li>						
 			</ul>
@@ -84,13 +84,5 @@
 </div>
 
 </body>
-    <script>
-    $(function() {
-        $( "#datepicker" ).datepicker({
-            showOn: "button",
-            buttonImage: "images/calendar.gif",
-            buttonImageOnly: true
-        });
-    });
-    </script>
+
 </html>

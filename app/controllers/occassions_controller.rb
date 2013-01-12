@@ -26,7 +26,7 @@ class OccassionsController < ApplicationController
   # GET /occassions/new.json
   def new
     @occassion = Occassion.new
-
+    @ocats = Ocat.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @occassion }
@@ -36,13 +36,15 @@ class OccassionsController < ApplicationController
   # GET /occassions/1/edit
   def edit
     @occassion = Occassion.find(params[:id])
+    @ocats = Ocat.all
   end
 
   # POST /occassions
   # POST /occassions.json
   def create
     @occassion = current_user.occassions.build(params[:occassion])
-
+    @ocats = Ocat.all
+    
     respond_to do |format|
       if @occassion.save
         format.html { redirect_to @occassion, notice: 'Occassion was successfully created.' }
@@ -57,6 +59,7 @@ class OccassionsController < ApplicationController
   # PUT /occassions/1
   # PUT /occassions/1.json
   def update
+
     @occassion = Occassion.find(params[:id])
 
     respond_to do |format|

@@ -1,4 +1,8 @@
 Gift::Application.routes.draw do
+  resources :ocat_occassions
+
+  resources :ocats
+
   resources :category_product_links
 
   resources :product_cats

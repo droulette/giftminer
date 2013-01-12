@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require_tree .
 
+$(function() {
+	$("#datepicker").datepicker({
+	    showOn: 'button'
+	}).next('button').text('').button({
+	    icons: {
+	        primary: 'ui-icon-calendar'
+	    },
+	    text: false
+	});
+});

@@ -6,14 +6,14 @@ one:
   description: MyText
   date: 2013-01-02 20:47:52
   user: 
-  price_range: MyString
-  type_of_gift: MyString
-
+  price_range: "under $25"
+  type_of_gift: "silly"
+  
 two:
   id: 2
   name: MyString
   description: MyText
   date: 2013-01-02 20:47:52
   user: 
-  price_range: MyString
-  type_of_gift: MyString
+  price_range: "$25.01 - $50"
+  type_of_gift: "gamer"

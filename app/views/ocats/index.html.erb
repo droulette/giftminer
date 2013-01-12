@@ -1,0 +1,25 @@
+<h1>Listing ocats</h1>
+
+<table class='table table-bordered table-striped table-condensed'>
+  <tr>
+    <th>Category</th>
+    <th>Description</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @ocats.each do |ocat| %>
+  <tr>
+    <td><%= ocat.category %></td>
+    <td><%= ocat.description %></td>
+    <td><%= link_to 'Show', ocat %></td>
+    <td><%= link_to 'Edit', edit_ocat_path(ocat) %></td>
+    <td><%= link_to 'Destroy', ocat, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ocat', new_ocat_path %>

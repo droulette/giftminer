@@ -22,7 +22,7 @@
   </div>
   <div class="field">
     <%= f.label :occassion_id %><br />
-    <%= f.select :occassion_id, options_for_select(@occassions.each{ |p| p.name }, @recommendation.occassion ? @recommendation.occassion.id : "") %>
+    <%= f.select :occassion_id, options_for_select(@occassions.collect{ |p| [p.name,p.id] }, @recommendation.occassion ? @recommendation.occassion.id : "") %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105003817) do
+ActiveRecord::Schema.define(:version => 20130110043645) do
 
   create_table "category_product_links", :force => true do |t|
     t.integer  "product_cat_id"
@@ -22,6 +22,21 @@ ActiveRecord::Schema.define(:version => 20130105003817) do
 
   add_index "category_product_links", ["product_cat_id"], :name => "index_category_product_links_on_product_cat_id"
   add_index "category_product_links", ["product_id"], :name => "index_category_product_links_on_product_id"
+
+  create_table "ocats", :force => true do |t|
+    t.string   "category"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "ocats_occassions", :force => true do |t|
+    t.integer "ocat_id"
+    t.integer "occassion_id"
+  end
+
+  add_index "ocats_occassions", ["ocat_id"], :name => "index_ocats_occassions_on_ocat_id"
+  add_index "ocats_occassions", ["occassion_id"], :name => "index_ocats_occassions_on_occassion_id"
 
   create_table "occassions", :force => true do |t|
     t.string   "name"

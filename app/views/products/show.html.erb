@@ -32,7 +32,7 @@
     <% end %>
 </p>
 
-<%= image_tag @product.pic.url %>
+<%= image_tag @product.pic.url(:thumb) %>
 
 
 <%= link_to 'Edit', edit_product_path(@product) %> |

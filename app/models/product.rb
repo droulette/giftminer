@@ -8,7 +8,9 @@ class Product < ActiveRecord::Base
   has_many :category_product_links  
   has_many :product_cats, :through => :category_product_links  
   
-  accepts_nested_attributes_for :product_cats
+  accepts_nested_attributes_for :category_product_links
+  attr_accessible :category_product_links_attributes
   
   validates :age_range, :description, :gender, :name, :price, :presence => true
+
 end

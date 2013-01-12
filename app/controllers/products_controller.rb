@@ -27,7 +27,10 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
+    @cat= ProductCat.new
     @product_cat= ProductCat.all
+   
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -43,9 +46,23 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
+    debugger
+    product_cat_ids = params['product'].delete('product_cat_ids')
+    
     @product = Product.new(params[:product])
+    @product_cat= ProductCat.all
+    @cat= ProductCat.new
+    
+
+    
     respond_to do |format|
       if @product.save
+        
+        product_cat_ids.each do |product_cat_id|
+          @category_product_link = @product.category_product_links.build({:product_cat_id => product_cat_id})
+          @category_product_link.save
+        end if product_cat_ids
+        
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -59,13 +76,27 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
-    params['product']['product_cat_ids'].each do |product_cat_id|
-      @category_product_link = @product.category_product_links.build({:product_cat_id => product_cat_id})
-      @category_product_link.save
-    end
+    @product_cat= ProductCat.all
+    @category_product_links= CategoryProductLink.all
     
-    params['product'].delete('product_cat_ids')
+    @product_cat_ids = Array.new
+     
+    @product.category_product_links.each do |x|
+        @product_cat_ids.push(x.product_cat_id)
+        unless params['product']['product_cat_ids'] && params['product']['product_cat_ids'].include?(x.product_cat_id)
+          x.destroy
+        end
+    end
+         
+    params['product']['product_cat_ids'].each do |product_cat_id|
+      if !@product_cat_ids.include?(product_cat_id)
+        @category_product_link = @product.category_product_links.build({:product_cat_id => product_cat_id})
+        @category_product_link.save
+      end       
+    end if params['product']['product_cat_ids']
+
+    
+    params['product'].delete('product_cat_ids')    
     
     respond_to do |format|
       if @product.update_attributes(params[:product])
