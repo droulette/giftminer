@@ -26,7 +26,15 @@ gem 'devise'
 
 gem "paperclip", "~> 3.0"
 gem "american_date"
-gem "factory_girl_rails", "~> 4.0"
+gem 'launchy'
+
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'guard-rspec'
+  gem "factory_girl_rails", "~> 4.0"
+  gem 'capybara'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

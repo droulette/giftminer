@@ -29,6 +29,19 @@
   <b>Type of gift:</b>
   <%= @occassion.type_of_gift %>
 </p>
+<p>
+  <b>Ocats:</b>
+  <% @occassion.ocats.each do |ocat| %>
+  	<%= ocat.category %>
+  <% end %>
+</p>
+<p>
+  <b>Recommendations</b>
+  <% @occassion.recommendations.each do |recommendation| %>
+  	<%= recommendation.product.name %>
+  <% end %>
+</p>
+
 
 
 <%= link_to 'Edit', edit_occassion_path(@occassion) %> |

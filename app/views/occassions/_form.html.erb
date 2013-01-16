@@ -21,8 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :date %><br />
- 	<%= f.text_field :date, :id => 'datepicker' %>
-  </div>
+ 	<%= f.text_field :date, :class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :price_range %><br />
@@ -32,12 +31,12 @@
     <%= f.label :type_of_gift %><br />
 	<%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Gamer", "Gamer"], ["Romantic", "Romantic"]], @occassion.type_of_gift) %>
   </div>
-  </div>
+  <div>
   <% @ocats.each do |ocat| %>
     <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
     <%= ocat.category %>
   <% end %>
-</div>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

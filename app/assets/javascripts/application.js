@@ -15,7 +15,7 @@
 //= require_tree .
 
 $(function() {
-	$("#datepicker").datepicker({
+	$(".datepicker").datepicker({
 	    showOn: 'button'
 	}).next('button').text('').button({
 	    icons: {

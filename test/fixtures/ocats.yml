@@ -1,9 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  category: MyString
+  id: 1
+  category: Birthday
   description: MyString
 
 two:
+  id: 2
   category: MyString
   description: MyString
