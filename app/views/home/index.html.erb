@@ -1,26 +1,32 @@
 <div class="container" id='background' style='-moz-border-radius: 5px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;'>
+
     <div class='home'>
-      <h1 style = "color:#f00; text-align:center;">we'll Mine it and you'll Gift it</h1>
-      <h3 style = 'text-align:center;'><em>Three easy steps</em></h3>
-      <div class = "steps">
-      	<p> Step 1: Create an Occasion</p>
+      <div class="subhead">
+        <h1 style="color:white">gifminer</h1>
+        <p class="lead">Let us help you find the perfect gift</p>
+      </div>
+      <div class="steps well">
+      	<p><span class="badge">Step 1</span></p>
+      	<p>Tell us the occasion</p>
       	<%= image_tag 'notepad.png' %>
       </div>
-      <div class = "steps">
-      	<p>Step 2: Mine a Gift</p>
+      <div class="steps well">
+      	<p><span class="badge">Step 2</span></p>
+      	<p>We'll find the gift<br/>&nbsp;</p>
       	<%= image_tag 'Gift_Box.png' %>
       </div>
-      <div class = "steps">
-      	<p>Step 3: Profit</p>
+      <div class="steps well">
+      	<p><span class="badge">Step 3</span></p>
+      	<p>You enjoy the present!</p>
       	<%= image_tag 'smile-big.png' %>
       </div>
 	</div>
 	<% if !user_signed_in? %> 
-      <div class = "signup">
-  	    <h4>Sign up</h4>
-	    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-	    <%= devise_error_messages! %>	
-  	      <div><%= f.label :email %>
+	    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"well",:style=>"float:right;background-color: rgba(245,245,245,.5);margin-top:29px"}) do |f| %>
+	      <h3 style="margin-top:0">Sign up</h3>
+	      <%= devise_error_messages! %>	
+  	    <div>
+  	      <%= f.label :email %>
 	        <%= f.email_field :email %>
 	      </div>	
 	      <div>
@@ -31,10 +37,26 @@
 	        <%= f.label :password_confirmation %>
 	        <%= f.password_field :password_confirmation %>
 	      </div>	
-	      <div style='padding-top:0px;'>
-	        <%= f.submit "Sign up", :class => 'signupbutton btn btn-primary' %>
+	      <div style="margin-top:10px">
+	        <%= f.submit "Sign up", :class => 'signupbutton btn btn-primary', :style=>"float:left" %>
+	        <div class="clear"></div>
 	      </div>
 	    <% end %>
-	  </div>
 	<% end %>
+	<div style="clear:both"></div>
 </div>
+
+<div class="row">
+    <div class="span6">
+      <blockquote>
+        <p>Before giftminer, I just picked up whatever I can find at the gas station on the way home.</p>
+        <small>Morgan Freeman from <cite title="Source Title">Shawshank Prison</cite></small>
+      </blockquote>
+    </div>
+    <div class="span6">
+      <blockquote class="pull-right">
+        <p>My wife is one of those people who has everything. It is very hard to shop for her. Giftminer gives me great suggestions and takes care of the leg work. I am very happy with their service!</p>
+        <small>Barack Obama at the <cite title="Source Title">White House</cite></small>
+      </blockquote>
+    </div>
+  </div>
