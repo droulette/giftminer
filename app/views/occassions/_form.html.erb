@@ -1,7 +1,7 @@
 <%= form_for(@occassion) do |f| %>
   <% if @occassion.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@occassion.errors.count, "error") %> prohibited this occassion from being saved:</h2>
+      <h2><%= pluralize(@occassion.errors.count, "error") %> prohibited this occasion from being saved:</h2>
 
       <ul>
       <% @occassion.errors.full_messages.each do |msg| %>
@@ -29,14 +29,16 @@
   </div>
   <div class="field">
     <%= f.label :type_of_gift %><br />
-	<%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Gamer", "Gamer"], ["Romantic", "Romantic"]], @occassion.type_of_gift) %>
+	<%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Serious", "Serious"], ["Gamer", "Gamer"], ["Romantic", "Romantic"], ["Cool", "Cool"]], @occassion.type_of_gift) %>
   </div>
-  <div>
+  <div class ="field">
+  <p>Category:</p>	
   <% @ocats.each do |ocat| %>
     <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
     <%= ocat.category %>
   <% end %>
   </div>
+  </br>
   <div class="actions">
     <%= f.submit %>
   </div>

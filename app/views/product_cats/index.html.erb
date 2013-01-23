@@ -1,19 +1,22 @@
 <h1>Listing product_cats</h1>
 
+</br>
+<%= link_to 'New Product cat', new_product_cat_path, :class => 'btn btn-success'  %>
+</br></br>
+
 <table class='table table-bordered table-striped table-condensed'>
   <tr>
     <th>Name</th>
     <th>Description</th>
     <th></th>
     <th></th>
-    <th></th>
+
   </tr>
 
 <% @product_cats.each do |product_cat| %>
   <tr>
     <td><%= product_cat.name %></td>
     <td><%= product_cat.description %></td>
-    <td><%= link_to 'Show', product_cat %></td>
     <td><%= link_to 'Edit', edit_product_cat_path(product_cat) %></td>
     <td><%= link_to 'Destroy', product_cat, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
@@ -22,4 +25,3 @@
 
 <br />
 
-<%= link_to 'New Product cat', new_product_cat_path %>

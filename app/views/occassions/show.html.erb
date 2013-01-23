@@ -1,23 +1,16 @@
-<p id="notice"><%= notice %></p>
+<h1>
 
-<p>
-  <b>Name:</b>
   <%= @occassion.name %>
-</p>
+</h1>
 
-<p>
+<!-- <p>
   <b>Description:</b>
   <%= @occassion.description %>
 </p>
 
 <p>
   <b>Date:</b>
-  <%= @occassion.date %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= current_user.email %>
+  <%= @occassion.date.strftime("%B %d, %Y") %>
 </p>
 
 <p>
@@ -30,19 +23,21 @@
   <%= @occassion.type_of_gift %>
 </p>
 <p>
-  <b>Ocats:</b>
+  <b>Occassion type:</b></br>
   <% @occassion.ocats.each do |ocat| %>
-  	<%= ocat.category %>
+  	<%= ocat.category %></br>
+  <% end %>
+</p> -->
+<p">
+  <h3><b>Recommendations:</b></h3></br>
+  <% @occassion.product_recommendations.each do |product| %>
+  	<div style="float:left; margin-right:20px;">
+  	<%= link_to product.name, product_path(product.id) %></br></br>
+  	<%= link_to image_tag(product.pic.url(:thumb)), product_path(product.id) %></br>
+  	</div>
   <% end %>
 </p>
-<p>
-  <b>Recommendations</b>
-  <% @occassion.recommendations.each do |recommendation| %>
-  	<%= recommendation.product.name %>
-  <% end %>
-</p>
 
-
-
-<%= link_to 'Edit', edit_occassion_path(@occassion) %> |
+<div class="clear">
+</br>
 <%= link_to 'Back', occassions_path %>

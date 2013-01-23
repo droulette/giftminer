@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+	<div>
+	<div class = "floatleft">
+	<%= image_tag @product.pic.url(:croppable)%>
+	</div>
+	
+	<div class = "show">
+	<p>
+	  <h1><%= @product.name %></h1>
+	</p>
+	
+	<p>
+	  <h4 style="color:#da4f49;"><%= number_to_currency(number_with_precision(@product.price, :precision => 2), :unit => "$") %></h4>
+	</p>
+	</br>
+	<p>
+	  <b>Description:</b>
+	  <%= @product.description %>
+	</p>
+	</br>
+	<div>	
+	  <%= link_to 'Giftarator', '#', :class => 'btn btn-success'  %>
+	</div>
+	</div>
+	<div class='clear'></div>
+	</br>
+	
+	<div class='container'>
+		</br>
+		<div class='span12'>
 
-<p>
-  <b>Name:</b>
-  <%= @product.name %>
-</p>
+			<ul class='nav nav-tabs'>
 
-<p>
-  <b>Price:</b>
-  <%= @product.price %>
-</p>
+				<li class='active'><%= link_to 'Specs', occassions_path %></li>	
+				<li class='active'><%= link_to 'Reviews', '#' %></li>		
 
-<p>
-  <b>Description:</b>
-  <%= @product.description %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%= @product.gender %>
-</p>
-
-<p>
-  <b>Age range:</b>
-  <%= @product.age_range %>
-</p>
-
-<p>
-  <b>Category:</b>
-  <% @product_cat.each do |cats| %>
-  <%= cats.name %>
-    <% end %>
-</p>
-
-<%= image_tag @product.pic.url(:thumb) %>
+			</ul>
+		</div>	
+	</div>
+</div>
 
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>

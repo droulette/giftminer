@@ -6,6 +6,7 @@ describe Product do
     user = FactoryGirl.create(:user)
     ocat = FactoryGirl.create(:ocat)
     product = FactoryGirl.create(:product)
+    occassion = FactoryGirl.create(:occassion)
     login_as(user, :scope => :user)
   end
 
@@ -36,13 +37,16 @@ describe Product do
       select 'Silly',:from => 'occassion_type_of_gift'
       find(:css, "#occassion_ocat_ids_[value='1']").set(true)
       click_button('Create Occassion')
-      page.should have_content('successful')
-      
       save_and_open_page
-      
+      page.should have_content('successful')
     end
-    
 
-    
+    # it 'has a recommendation' do
+      # FactoryGirl.create_list(:occassion, 3)
+      # visit ('/occassions')
+      # save_and_open_page
+      # click_link('Click Me')
+      # occassion.product_recommendations.count.should eql(1)        
+    # end
   end  
 end

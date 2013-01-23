@@ -11,9 +11,8 @@
     </div>
   <% end %>
 
-  </br><%= f.file_field :pic %>
-
-
+</br><%= f.file_field :pic %> </br></br>
+ 
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -27,17 +26,20 @@
     <%= f.text_area :description, :size => "30x5" %>
   </div>
   <div class="field"
-    <%= f.label :gender %><br />
+    <%= f.label :gender %> <br /></br>
 	<%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"], ["Both", "Both"]], @product.gender) %>
   </div>
   <div class="field">
     <%= f.label :age_range %><br />
 	<%= f.select :age_range, options_for_select([["kids", "kids"], ["adults", "adults"], ["any", "any"]], @product.age_range) %>
   </div>
-  <% @product_cat.each do |x| %>
-    <%= check_box_tag 'product[product_cat_ids][]', x.id, @product.product_cats.include?(x) %>
+  <div class="field">
+  	Product Categories:</br></br>
+  	<% @product_cat.each do |x| %>
+    <%= check_box_tag 'product[product_cat_ids][]', x.id, @product.product_cats.include?(x) %> 
     <%= x.name %>
   <% end %>
+  </div>
 </div>
 <div class="actions">
 	<%= f.submit %>

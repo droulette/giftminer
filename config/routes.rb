@@ -1,21 +1,21 @@
 Gift::Application.routes.draw do
+  get "contact_us/index"
+  get "home/index"
+
   resources :ocat_occassions
-
   resources :ocats
-
   resources :category_product_links
-
   resources :product_cats
-
   resources :occassions
-
   resources :dashboard
   resources :products
   resources :recommendations
+  resources :about_us
+  resources :contact_us
   devise_for :users
   
 
-  root :to => 'dashboard#index'
+  root :to => 'home#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

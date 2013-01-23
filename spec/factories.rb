@@ -35,6 +35,12 @@ FactoryGirl.define do
     category 'category'
     description 'my thing'
   end
+
+  factory :recommendation do
+    user
+    product
+  end
  
+   
   
 end

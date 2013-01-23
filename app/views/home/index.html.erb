@@ -1,0 +1,40 @@
+<div class="container" id='background' style='-moz-border-radius: 5px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;'>
+    <div class='home'>
+      <h1 style = "color:#f00; text-align:center;">we'll Mine it and you'll Gift it</h1>
+      <h3 style = 'text-align:center;'><em>Three easy steps</em></h3>
+      <div class = "steps">
+      	<p> Step 1: Create an Occasion</p>
+      	<%= image_tag 'notepad.png' %>
+      </div>
+      <div class = "steps">
+      	<p>Step 2: Mine a Gift</p>
+      	<%= image_tag 'Gift_Box.png' %>
+      </div>
+      <div class = "steps">
+      	<p>Step 3: Profit</p>
+      	<%= image_tag 'smile-big.png' %>
+      </div>
+	</div>
+	<% if !user_signed_in? %> 
+      <div class = "signup">
+  	    <h4>Sign up</h4>
+	    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+	    <%= devise_error_messages! %>	
+  	      <div><%= f.label :email %>
+	        <%= f.email_field :email %>
+	      </div>	
+	      <div>
+	        <%= f.label :password %>
+	        <%= f.password_field :password %>
+	      </div>	
+	      <div>
+	        <%= f.label :password_confirmation %>
+	        <%= f.password_field :password_confirmation %>
+	      </div>	
+	      <div style='padding-top:0px;'>
+	        <%= f.submit "Sign up", :class => 'signupbutton btn btn-primary' %>
+	      </div>
+	    <% end %>
+	  </div>
+	<% end %>
+</div>

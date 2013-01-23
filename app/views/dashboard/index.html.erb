@@ -1,25 +1,3 @@
-<h1>My recommendations</h1>
-
-<table class='table table-bordered table-striped table-condensed'>
-  <tr>
-    <th>User</th>
-    <th>Product</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @recs.each do |recommendation| %>
-  <tr>
-    <td><%= recommendation.user.email %></td>
-    <td><%= recommendation.product.name %></td>
-    <td><%= link_to 'Show', recommendation %></td>
-    <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
-    <td><%= link_to 'Destroy', recommendation, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
-
 <h1>My occassions</h1>
 
 <table class='table table-bordered table-striped table-condensed'>

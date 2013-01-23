@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @cat= ProductCat.new
     @product_cat= ProductCat.all
-   
+       
     
     respond_to do |format|
       format.html # new.html.erb
@@ -46,23 +46,18 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    debugger
     product_cat_ids = params['product'].delete('product_cat_ids')
     
     @product = Product.new(params[:product])
     @product_cat= ProductCat.all
     @cat= ProductCat.new
     
-
-    
+    product_cat_ids.each do |product_cat_id|
+      @product.category_product_links.build({:product_cat_id => product_cat_id})
+    end if product_cat_ids
+        
     respond_to do |format|
-      if @product.save
-        
-        product_cat_ids.each do |product_cat_id|
-          @category_product_link = @product.category_product_links.build({:product_cat_id => product_cat_id})
-          @category_product_link.save
-        end if product_cat_ids
-        
+      if @product.save  
         format.html { redirect_to @product, notice: 'Product was successfully created.' }
         format.json { render json: @product, status: :created, location: @product }
       else
@@ -120,4 +115,5 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+ 
 end
