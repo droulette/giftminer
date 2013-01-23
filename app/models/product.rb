@@ -12,6 +12,8 @@ class Product < ActiveRecord::Base
   attr_accessible :category_product_links
   
   validates :age_range, :description, :gender, :name, :price, :presence => true
+  
+  scope :sorteddesc, order("id DESC")
 
   after_save :add_recommendation
 

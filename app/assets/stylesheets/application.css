@@ -72,24 +72,27 @@ button.ui-button-icon-only {
 }
 
 .steps{
-	width:210px;
+	width:200px;
 	text-align:center;
 	float:left;
 	font-style:italic;
-	color:red;
+	color:white;
 }
 
 #background{
     background-image: url('soft_bokeh.jpg');
     margin-bottom:30px;
     height:350px;
-    padding-top:30px;
+    padding-top:20px;
+    -moz-border-radius: 5px; 
+    border-bottom-left-radius: 5px; 
+    border-bottom-right-radius: 5px;
 }
 
 .home{ 
- 	width:640px; 
+ 	width:600px; 
  	float:left; 
- 	text-align:center; 
+    padding-left:30px;
  	font-style:italic;
 }
 
@@ -112,11 +115,14 @@ button.ui-button-icon-only {
 
 .loginbar{
 	float:right;
-
 }
 
 
 .loginbar A:link    {color:white;}
-.loginbar A:visited {color:purple;}
+.loginbar A:visited {color:darkblue;}
 .loginbar A:hover   {color:red;}
 .loginbar A:active  {color:white;}
+.buttonlink A:link {color:white;}
+.buttonlink A:visited {color:white;
+.buttonlink A:hover {color:white;
+.buttonlink A:active {color:white;

@@ -1,7 +1,7 @@
-<div class="container" id='background' style='-moz-border-radius: 5px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;'>
+<div class="container" id='background'>
     <div class='home'>
-      <h1 style = "color:#f00; text-align:center;">we'll Mine it and you'll Gift it</h1>
-      <h3 style = 'text-align:center;'><em>Three easy steps</em></h3>
+      <h1 style = 'color:white;'>giftminer</h1>
+      <h4 style='color:white;'><em>we'll mine it and you'll gift it</em></h4></br>
       <div class = "steps">
       	<p> Step 1: Create an Occasion</p>
       	<%= image_tag 'notepad.png' %>
@@ -37,4 +37,16 @@
 	    <% end %>
 	  </div>
 	<% end %>
+	
+	<div class='clear'></div>
+</div>
+
+
+<div class='well' style='margin-top:150px height:250px;'>
+	<h3>Newest Additions:</h3>
+	<% @new_products.each do |new_product|%>
+	  <%= link_to image_tag(new_product.pic.url(:thumb)), product_path(new_product.id), :alt => new_product.name %>
+	<% end %>
+	
+	
 </div>

@@ -1,7 +1,9 @@
 Gift::Application.routes.draw do
   get "contact_us/index"
   get "home/index"
-
+  
+#  match 'products/:name' => 'products#show'
+  
   resources :ocat_occassions
   resources :ocats
   resources :category_product_links

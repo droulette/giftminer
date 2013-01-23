@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gift</title>
+  <title>giftminder</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -26,7 +26,16 @@
 	  <div class="navbar-inner">
 	    <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
 	    <ul class="nav">
-  		
+  		  		    		
+  		  <li class="dropdown">
+		    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		      Products<b class="caret"></b>
+		    </a>
+    	    <ul class="dropdown-menu">
+			  <li><%= link_to 'Dashboard', '#' %></li>
+    	    </ul>
+  		  </li>
+  		  
   		  <li class="dropdown">
     	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       		  Occasions<b class="caret"></b>
@@ -35,16 +44,6 @@
 			  <li><%= link_to 'All Occasions', occassions_path %></li>
 			  <li><%= link_to 'New Occasion', new_occassion_path %></li>    
 		    </ul>
-  		  </li>
-  		
-  		  <li class="dropdown">
-		    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		      Products<b class="caret"></b>
-		    </a>
-    	    <ul class="dropdown-menu">
-			  <li><%= link_to 'All Products', products_path %></li>
-			  <li><%= link_to 'New Product', new_product_path %></li>
-    	    </ul>
   		  </li>
 
 		  <li><%= link_to 'About Us', about_us_path %></li>
@@ -61,7 +60,7 @@
 		    <%= link_to "Need Help", '#' %>
 		  </div>
 		  <% else %>
-		      <%= link_to "Sign in", new_user_session_path, :class => 'btn btn-success' %>
+		      <div class='buttonlink'><%= link_to "Sign in", new_user_session_path, :class => 'btn btn-success' %></div>
 		  <% end %>
 	    </div>
 	  </div>
