@@ -1,91 +1,98 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>giftminder</title>
-  <%= stylesheet_link_tag "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<div class='container' style='margin-top:10px;min-height:550px'>
-  	
-  <!--div style="color:#dd4814;font-size: 31.5px;line-height: 60px;float: left">giftminer</div-->
+  <head>
+    <title>giftminer</title>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <div class='container' style='margin-top:5px;min-height:550px'>
 
-	
-	<% flash.each do |name, msg| %>
-	  <div>
-		<em>
-		  <%= content_tag :div, msg, :id => "flash_#{name}" %>
-		</em>
-	  </div>
-	<% end %>
+      <!--div style="color:#dd4814;font-size: 31.5px;line-height: 60px;float: left">giftminer</div-->
 
-  
-  <div>
-    <div class="navbar" style='height:40px; margin-bottom:0px;'>
-	  <div class="navbar-inner">
-	    <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
-	    <ul class="nav">
-  		  		    		
-  		  <li class="dropdown">
-		    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		      Products<b class="caret"></b>
-		    </a>
-    	    <ul class="dropdown-menu">
-			  <li><%= link_to 'Dashboard', '#' %></li>
-    	    </ul>
-  		  </li>
-  		  
-  		  <li class="dropdown">
-    	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      		  Occasions<b class="caret"></b>
-    	    </a>
-    	    <ul class="dropdown-menu">
-			  <li><%= link_to 'All Occasions', occassions_path %></li>
-			  <li><%= link_to 'New Occasion', new_occassion_path %></li>    
-		    </ul>
-  		  </li>
+      <% flash.each do |name, msg| %>
+      <div style='float:left;'>
+        <em> <%= content_tag :div, msg, :id => "flash_#{name}" %> </em>
+      </div>
+      <% end %>
 
-		  <li><%= link_to 'About Us', about_us_path %></li>
-		  <li><%= link_to 'Contact Us', contact_us_path %></li>	  
+      <div class='loginbar'>
+        <% if user_signed_in? %>
+        <div>
+          <%= link_to current_user.email, edit_user_registration_path %> |
+          <%= link_to "My Wish List", '#' %> |
+          <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+        </div>
+        <% else %>
+        <div class='buttonlink'>
+          <%= link_to "Sign in", new_user_session_path %>
+        </div>
+        <% end %>
+      </div>
+      <div class='clear'></div>
 
-	    </ul>
-
-  	    <div class='loginbar'>
-	      <% if user_signed_in? %>
-	      <div style='padding-top:10px;'>
-		    <%= link_to current_user.email, edit_user_registration_path %> |
-		    <%= link_to "My Wish List", '#' %> |
-		    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %> | 
-		    <%= link_to "Need Help", '#' %>
-		  </div>
-		  <% else %>
-		      <div class='buttonlink'><%= link_to "Sign in", new_user_session_path, :class => 'btn btn-success' %></div>
-		  <% end %>
-	    </div>
-	  </div>
-
-    </div>
-    	
-	<div >
-	<%= yield %>
-	</div>
-  </div>
-	
-</div><!-- end container -->
-
-  <div class='footer'>
-    <div class="container">
-      <p style="float:right">Copyright &copy; 2013 giftminer</p>
       <div>
-        <span class="label label-info">Home</span>
-        <span class="label label-success">Facebook</span>
-        <span class="label label-warning">Twitter</span>
-        <span class="label label-important">Reddit</span>
+        <div class="navbar" style='height:40px; margin-bottom:0px;'>
+          <div class="navbar-inner">
+            <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
+            <ul class="nav">
+
+              <!--   		  <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Products<b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+              <li><%= link_to 'Dashboard', '#' %></li>
+              </ul>
+              </li> -->
+              <% if user_signed_in? %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Occasions<b class="caret"></b> </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to 'All Occasions', occassions_path %>
+                  </li>
+                  <li>
+                    <%= link_to 'New Occasion', new_occassion_path %>
+                  </li>
+                </ul>
+              </li>
+              <% end %>
+              <li>
+                <%= link_to 'About Us', about_us_path %>
+              </li>
+              <li>
+                <%= link_to 'Contact Us', contact_us_path %>
+              </li>
+
+            </ul>
+
+          </div>
+
+        </div>
+
+        <div class='clear'></div>
+
+        <div >
+          <%= yield %>
+        </div>
+      </div>
+
+    </div><!-- end container -->
+
+    <div class='footer'>
+      <div class="container">
+        <p style="float:right">
+          Copyright &copy; 2013 giftminer
+        </p>
+        <div>
+          <a href='#'><span class="label label-info">Home</span></a>
+          <a href='http://www.facebook.com'><span class="label label-success">Facebook</span></a>
+          <a href='http://www.twitter.com'><span class="label label-warning">Twitter</span></a>
+          <a href='http://www.reddit.com'><span class="label label-important">Reddit</span></a>
+        </div>
       </div>
     </div>
-  </div>
-
-</body>
-
+  </body>
 </html>

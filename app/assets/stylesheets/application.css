@@ -13,10 +13,12 @@
 */
 
 
-.floatleft{
-	width:450px;
-	text-align:center;
+.fleft{
 	float:left;
+}
+
+.fright{
+  float:right;
 }
 
 .show{
@@ -44,7 +46,6 @@
 	margin-top:5px;
 	margin-left:10px;
 }
-
 
 .footer{
 	padding: 10px 0;
@@ -98,6 +99,7 @@ button.ui-button-icon-only {
 
 .loginbar{
 	float:right;
+	margin-bottom:4px;
 }
 
 .subhead {
@@ -105,7 +107,18 @@ button.ui-button-icon-only {
 	margin-bottom: 9px;
 }
 
-
 .subhead h1 {
 	font-size: 54px;
+}
+
+.occassiondetails{
+  float:left;
+  width:300px;
+  margin-top:25px;
+}
+
+.occassionrec{
+  float:left;
+  width:500px;
+  margin-top:25px;
 }

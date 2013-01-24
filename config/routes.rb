@@ -3,7 +3,7 @@ Gift::Application.routes.draw do
   get "home/index"
   
 #  match 'products/:name' => 'products#show'
-  
+  get 'home/dashboard' => 'home#dashboard'
   resources :ocat_occassions
   resources :ocats
   resources :category_product_links
