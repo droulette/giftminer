@@ -13,10 +13,12 @@
 */
 
 
-.floatleft{
-	width:450px;
-	text-align:center;
+.fleft{
 	float:left;
+}
+
+.fright{
+  float:right;
 }
 
 .show{
@@ -44,7 +46,6 @@
 	margin-top:5px;
 	margin-left:10px;
 }
-
 
 .footer{
 	padding: 10px 0;
@@ -82,7 +83,7 @@ button.ui-button-icon-only {
 #background{
     background: url('soft_bokeh.jpg') no-repeat;
     margin-bottom:30px;
-    padding:25px;
+    padding:40px;
     width: auto;
 }
 
@@ -98,7 +99,7 @@ button.ui-button-icon-only {
 
 .loginbar{
 	float:right;
-
+	margin-bottom:4px;
 }
 
 .subhead {
@@ -108,4 +109,28 @@ button.ui-button-icon-only {
 
 .subhead h1 {
 	font-size: 54px;
+}
+
+.occassiondetails{
+  float:left;
+  width:200px;
+  margin-top:25px;
+}
+
+.occassionrec{
+  float:left;
+  width:500px;
+  padding-top:19px;
+  margin: 25px 0px 0px 25px;
+}
+
+.dashboard{
+  margin-top:25px;
+}
+
+.margin{
+  margin-left: 20px;
+}
+.button_to {
+  margin: 0;
 }

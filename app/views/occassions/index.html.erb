@@ -1,6 +1,8 @@
-<h1>My occasions</h1>
-<%= link_to 'New Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
-</br></br>
+<div class='fright' style='padding-top:20px;'>
+<%= link_to 'Create an Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
+</div>
+<div class='clear'></div>
+</br>
 
 <table class='table table-bordered table-striped table-condensed'>
   <tr>
@@ -9,21 +11,19 @@
     <th><em>Date</em></th>
     <th><em>Price Range</em></th>
     <th><em>Gifts to Mine for</em></th>
-    <th><em>Recommendations</em></th>
     <th><em>Edit</em></th>
     <th><em>Delete</em></th>
   </tr>
 
 <% @occassions.each do |occassion| %>
   <tr>
-    <td><%= occassion.name %></td>
+    <td><%= link_to occassion.name, occassion_path(occassion) %></td>
     <td><%= occassion.description %></td>
     <td><%= occassion.date.strftime("%B %d, %Y") %></td>
     <td><%= occassion.price_range %></td>
     <td><%= occassion.type_of_gift %></td>
-    <td><%= link_to 'Click Me', occassion_path(occassion) %></td>
     <td><%= link_to 'Edit', edit_occassion_path(occassion) %></td>
-    <td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %></td>
   </tr>
 <% end if @occassions%>
 </table>

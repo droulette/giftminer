@@ -21,7 +21,7 @@
   </div>
   <div class="field">
     <%= f.label :date %><br />
- 	<%= f.text_field :date, :class => 'datepicker' %>
+ 	  <%= f.text_field :date, :value => f.object.date, :class => 'datepicker' %>
   </div>
   <div class="field">
     <%= f.label :price_range %><br />
@@ -36,11 +36,11 @@
   <% @ocats.each do |ocat| %>
     <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
     <%= ocat.category %>
-  <% end %>
+  <% end if @ocats%>
   </div>
   </br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil, :class => 'btn btn-danger' %>
   </div>
 <% end %>
 

@@ -1,41 +1,43 @@
-	<div>
-	<div class = "floatleft">
-	<%= image_tag @product.pic.url(:croppable)%>
-	</div>
-	
-	<div class = "show">
-	<p>
-	  <h1><%= @product.name %></h1>
-	</p>
-	
-	<p>
-	  <h4 style="color:#da4f49;"><%= number_to_currency(number_with_precision(@product.price, :precision => 2), :unit => "$") %></h4>
-	</p>
-	</br>
-	<p>
-	  <b>Description:</b>
-	  <%= @product.description %>
-	</p>
-	</br>
-	<div>	
-	  <%= link_to 'Giftarator', '#', :class => 'btn btn-success'  %>
-	</div>
-	</div>
-	<div class='clear'></div>
-	</br>
-	
-	<div class='container'>
-		</br>
-		<div class='span12'>
+<div style='margin-top:45px;'>
+  <div class = "fleft" style='width:400px;'>
+    <%= image_tag @product.pic.url(:croppable)%>
+  </div>
 
-			<ul class='nav nav-tabs'>
+  <div class = "show">
+    <p>
+      <h1><%= @product.name %></h1>
+    </p>
 
-				<li class='active'><%= link_to 'Specs', occassions_path %></li>	
-				<li class='active'><%= link_to 'Reviews', '#' %></li>		
+    <p>
+      <h4 style="color:#da4f49;"><%= number_to_currency(number_with_precision(@product.price, :precision => 2), :unit => "$") %></h4>
+    </p>
+    </br>
+    <p>
+      <b>Description:</b>
+      <%= @product.description %>
+    </p>
+    </br>
+    <div>
+      <%= link_to 'Giftarator', '#', :class => 'btn btn-success'  %>
+    </div>
+  </div>
+  <div class='clear'></div>
+  </br>
 
-			</ul>
-		</div>	
-	</div>
+  <div class='container'>
+    </br>
+    <div class='span12'>
+
+      <ul class='nav nav-tabs'>
+
+        <li class='active'>
+          <%= link_to 'Specs', occassions_path %>
+        </li>
+        <li class='active'>
+          <%= link_to 'Reviews', '#' %>
+        </li>
+
+      </ul>
+    </div>
+  </div>
 </div>
-
-

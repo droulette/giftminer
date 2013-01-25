@@ -3,7 +3,7 @@ class OccassionsController < ApplicationController
   # GET /occassions
   # GET /occassions.json
   def index
-    @occassions = current_user.occassions.sorteddesc.upcoming.all
+    @occassions = current_user.occassions.sorteddesc.all
     @products = Product.all
     respond_to do |format|
       format.html # index.html.erb
@@ -15,7 +15,7 @@ class OccassionsController < ApplicationController
   # GET /occassions/1.json
   def show
     @occassion = Occassion.find(params[:id])
-
+    @recommendation = @occassion.product_recommendations.first
     # @my_recommendations= []
     # @ocats_name = @occassion.ocats.collect{|ocat| ocat.category }
     # @product_cats = ProductCat.all

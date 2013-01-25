@@ -1,7 +1,11 @@
 Gift::Application.routes.draw do
+  resources :reviews
+
   get "contact_us/index"
   get "home/index"
-
+  
+#  match 'products/:name' => 'products#show'
+  get 'home/dashboard' => 'home#dashboard'
   resources :ocat_occassions
   resources :ocats
   resources :category_product_links
