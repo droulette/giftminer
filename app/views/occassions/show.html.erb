@@ -1,5 +1,5 @@
 <div class='well occassiondetails'>
-  <h3> <%= @occassion.name %></h3>
+  <h3 style='height:25px;'> <%= @occassion.name %></h3>
 
   <p>
     <b>Description:</b>
@@ -32,19 +32,19 @@
     <% end %>
   </p>
 
+  <%= link_to 'Edit', edit_occassion_path(@occassion)  %>  
+
 </div>
 <div class='occassionrec'>
 
   <div class = "fleft" style='padding-left:15px;'>
-    <%= link_to(image_tag(@recommendation.pic.url(:thumb)), product_path(@recommendation.id)) %>
+    <%= link_to(image_tag(@recommendation.pic.url(:medium)), product_path(@recommendation.id)) %>
   </div>
-</br></br></br></br>
+
   <div class = "show">
-    <p>
-      Name: <%= @recommendation.name %>
-    </p>
-    <p>
-      Price: <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %>
+    <h3> <%= @recommendation.name %> </h3>
+    <p style= 'color:#da4f49;'>
+      <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %>
     </p>
     <p>
       <b>Description: </b><%= @recommendation.description %>
@@ -62,6 +62,6 @@
 
   </div>
 </div>
-  <div class="clear"></div>
-  <%= link_to 'Back', occassions_path %>
+<div class="clear"></div>
+<%= link_to 'Back', occassions_path %>
 

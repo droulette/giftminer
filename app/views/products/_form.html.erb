@@ -1,47 +1,58 @@
-<%= form_for @product, :html => { :multipart => true } do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<%= form_for @product, :html => { :multipart => true, :class => "form-horizontal" } do |f| %>
+<% if @product.errors.any? %>
+<div class='alert alert-error' id="error_explanation">
+  <h4><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h4>
 
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+    <li>
+      <%= msg %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
 </br><%= f.file_field :pic %> </br></br>
- 
-  <div class="field">
-    <%= f.label :name %><br />
+
+<div class="field control-group">
+  <%= f.label :name, :class => 'control-label' %>
+  <div class='controls'>
     <%= f.text_field :name %>
   </div>
-  <div class="field">
-    <%= f.label :price %><br />
+</div>
+<div class="field control-group">
+  <%= f.label :price, :class => 'control-label' %>
+  <div class='controls'>
     <%= f.text_field :price %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br />
+</div>
+<div class="field control-group">
+  <%= f.label :description, :class => 'control-label' %>
+  <div class='controls'>
     <%= f.text_area :description, :size => "30x5" %>
   </div>
-  <div class="field"
-    <%= f.label :gender %> <br /></br>
-	<%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"], ["Both", "Both"]], @product.gender) %>
-  </div>
-  <div class="field">
-    <%= f.label :age_range %><br />
-	<%= f.select :age_range, options_for_select([["kids", "kids"], ["adults", "adults"], ["any", "any"]], @product.age_range) %>
-  </div>
-  <div class="field">
-  	Product Categories:</br></br>
-  	<% @product_cat.each do |x| %>
-    <%= check_box_tag 'product[product_cat_ids][]', x.id, @product.product_cats.include?(x) %> 
-    <%= x.name %>
-  <% end %>
+</div>
+<div class="field control-group">
+  <%= f.label :gender, :class => 'control-label' %>
+  <div class='controls'>
+    <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"], ["Both", "Both"]], @product.gender) %>
   </div>
 </div>
+<div class="field control-group">
+  <%= f.label :age_range, :class => 'control-label' %>
+  <div class='controls'>
+  <%= f.select :age_range, options_for_select([["kids", "kids"], ["adults", "adults"], ["any", "any"]], @product.age_range) %>
+</div>
+</div>
+<div class="field control-group" style='margin-left:50px;'>
+  Product Categories:
+  <% @product_cat.each do |x| %>
+  <%= check_box_tag 'product[product_cat_ids][]', x.id, @product.product_cats.include?(x) %>
+  <%= x.name %>
+  <% end %>
+</div>
 <div class="actions">
-	<%= f.submit %>
+  <%= f.submit %>
 </div>
 <% end %>

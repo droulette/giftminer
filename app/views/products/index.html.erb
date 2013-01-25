@@ -1,6 +1,6 @@
-<h1>All products</h1>
-
+<div class='fright' style='margin:20px 0 20px 0;'>
 <%= link_to 'New Product', new_product_path, :class => 'btn btn-primary'  %>
+</div>
 </br></br>
 
 <table class='table table-bordered table-striped table-condensed'>
@@ -22,7 +22,7 @@
     <td><%= product.gender %></td>
     <td><%= product.age_range %></td>
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-primary'  %></td>
   </tr>
 <% end %>
 </table>
