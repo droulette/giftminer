@@ -1,5 +1,5 @@
-<div class='occassiondetails'>
-  <h1> <%= @occassion.name %> </h1>
+<div class='well occassiondetails'>
+  <h3> <%= @occassion.name %></h3>
 
   <p>
     <b>Description:</b>
@@ -22,24 +22,46 @@
   </p>
 
   <p>
-    <b>Occassion type:</b></br>
+    <b>Occassion type:</b>
+    <% if @occassion.ocats.count >0 %>
     <% @occassion.ocats.each do |ocat| %>
     <%= ocat.category %></br>
+    <% end %>
+    <% else %>
+    none selected
     <% end %>
   </p>
 
 </div>
 <div class='occassionrec'>
-  <p">
-  <h1><b>Recommendations:</b></h1></br>
-  <% @occassion.product_recommendations.each do |product| %>
-  <div style="float:left; margin-right:20px;">
-  <%= link_to product.name, product_path(product.id) %></br></br>
-  <%= link_to image_tag(product.pic.url(:thumb)), product_path(product.id) %></br>
+
+  <div class = "fleft" style='padding-left:15px;'>
+    <%= link_to(image_tag(@recommendation.pic.url(:thumb)), product_path(@recommendation.id)) %>
   </div>
-  <% end %>
-  </p>
+</br></br></br></br>
+  <div class = "show">
+    <p>
+      Name: <%= @recommendation.name %>
+    </p>
+    <p>
+      Price: <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %>
+    </p>
+    <p>
+      <b>Description: </b><%= @recommendation.description %>
+    </p>
+    </br>
+    <div>
+      <%= link_to 'Giftarator', '#', :class => 'btn btn-success'  %>
+    </div>
+
+    <!--   <h3><b>We think they might like</b></h3>
+    <%= image_tag(@recommendation.pic.url(:thumb)) %></br>
+    Product: <%= @recommendation.name %></br>
+    Price: <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %></br>
+    Description: <%= @recommendation.description %></br> -->
+
+  </div>
 </div>
-<div class="clear">
-  </br>
+  <div class="clear"></div>
   <%= link_to 'Back', occassions_path %>
+

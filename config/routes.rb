@@ -1,4 +1,6 @@
 Gift::Application.routes.draw do
+  resources :reviews
+
   get "contact_us/index"
   get "home/index"
   

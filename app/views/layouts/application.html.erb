@@ -20,7 +20,8 @@
       <div class='loginbar'>
         <% if user_signed_in? %>
         <div>
-          <%= link_to current_user.email, edit_user_registration_path %> |
+          <%= link_to current_user.email, edit_user_registration_path %> 
+          <%= image_tag avatar_url(current_user) %> |
           <%= link_to "My Wish List", '#' %> |
           <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
         </div>
@@ -88,9 +89,9 @@
         </p>
         <div>
           <a href='#'><span class="label label-info">Home</span></a>
-          <a href='http://www.facebook.com'><span class="label label-success">Facebook</span></a>
-          <a href='http://www.twitter.com'><span class="label label-warning">Twitter</span></a>
-          <a href='http://www.reddit.com'><span class="label label-important">Reddit</span></a>
+          <a href='#'><span class="label label-success">Facebook</span></a>
+          <a href='#'><span class="label label-warning">Twitter</span></a>
+          <a href='#'><span class="label label-important">Reddit</span></a>
         </div>
       </div>
     </div>

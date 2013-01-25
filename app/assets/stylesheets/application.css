@@ -83,7 +83,7 @@ button.ui-button-icon-only {
 #background{
     background: url('soft_bokeh.jpg') no-repeat;
     margin-bottom:30px;
-    padding:25px;
+    padding:40px;
     width: auto;
 }
 
@@ -113,12 +113,24 @@ button.ui-button-icon-only {
 
 .occassiondetails{
   float:left;
-  width:300px;
+  width:200px;
   margin-top:25px;
 }
 
 .occassionrec{
   float:left;
   width:500px;
+  padding-top:19px;
+  margin: 25px 0px 0px 25px;
+}
+
+.dashboard{
   margin-top:25px;
+}
+
+.margin{
+  margin-left: 20px;
+}
+.button_to {
+  margin: 0;
 }
