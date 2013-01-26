@@ -44,16 +44,16 @@
     <%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Serious", "Serious"], ["Gamer", "Gamer"], ["Romantic", "Romantic"], ["Cool", "Cool"]], @occassion.type_of_gift) %>
   </div>
 </div>
-<div class ="field">
-  <p  style='margin-left:100px;'>
-    Category
+<div class ="field control-group">
+  <%= f.label :category, :class => 'control-label' %>
+  <div class='controls'>
     <% @ocats.each do |ocat| %>
-    <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
-    <%= ocat.category %>
+    <label class='checkbox'> <%= check_box_tag 'occassion[ocat_ids][]', ocat.id, @occassion.ocat_ids.include?(ocat) %>
+      <%= ocat.category %> </label>
     <% end %>
-  </p>
+  </div>
+
 </div>
-</br>
 <div class="actions form-actions">
   <%= f.submit nil, :class => 'btn btn-danger' %>
 </div>

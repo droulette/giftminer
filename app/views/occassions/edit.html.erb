@@ -1,8 +1,22 @@
-<div class='well'>
-<legend>Editing <%= @occassion.name %> Occasion</legend>
-
-<%= render 'form' %>
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Occasion', occassions_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= @occassion.name %>
+    </li>
+  </ul>
 </div>
+<div class='well'>
+  <legend>
+    Editing <%= @occassion.name %> Occasion
+  </legend>
 
-<%= link_to 'Show', @occassion %> |
-<%= link_to 'Back', occassions_path %>
+  <%= render 'form' %>
+</div>

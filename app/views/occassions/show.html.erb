@@ -1,5 +1,21 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Occasion', occassions_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= @occassion.name %>
+    </li>
+  </ul>
+</div>
+
 <div class='well occassiondetails'>
-  <h3 style='height:25px;'> <%= @occassion.name %></h3>
+  <h3> <%= @occassion.name %></h3>
 
   <p>
     <b>Description:</b>
@@ -23,6 +39,7 @@
 
   <p>
     <b>Occassion type:</b>
+    <br/>
     <% if @occassion.ocats.count >0 %>
     <% @occassion.ocats.each do |ocat| %>
     <%= ocat.category %></br>
@@ -32,7 +49,7 @@
     <% end %>
   </p>
 
-  <%= link_to 'Edit', edit_occassion_path(@occassion)  %>  
+  <%= link_to 'Edit', edit_occassion_path(@occassion)  %>
 
 </div>
 <div class='occassionrec'>
@@ -63,5 +80,5 @@
   </div>
 </div>
 <div class="clear"></div>
-<%= link_to 'Back', occassions_path %>
+\
 

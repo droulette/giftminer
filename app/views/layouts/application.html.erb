@@ -14,7 +14,7 @@
       <div class='loginbar'>
         <% if user_signed_in? %>
         <div>
-          <%= link_to current_user.email, edit_user_registration_path %> 
+          <%= link_to current_user.email, edit_user_registration_path %>
           <%= link_to((image_tag avatar_url(current_user)),edit_user_registration_path) %> |
           <%= link_to "My Wish List", '#' %> |
           <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
@@ -27,20 +27,10 @@
       </div>
       <div class='clear'></div>
 
-      <div>
-        <div class="navbar" style='height:40px; margin-bottom:0px;'>
-          <div class="navbar-inner">
-            <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
-            <ul class="nav">
-
-              <!--   		  <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Products<b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-              <li><%= link_to 'Dashboard', '#' %></li>
-              </ul>
-              </li> -->
+      <div class="navbar" style='height:40px; margin-bottom:0px; border-radius: 30px 30px 30px 30px;'>
+        <div class="navbar-inner">
+          <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
+           <ul class="nav">
               <% if user_signed_in? %>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Occasions<b class="caret"></b> </a>
@@ -53,41 +43,39 @@
                   </li>
                 </ul>
               </li>
-              <% end %>
+              <% else %>
               <li>
                 <%= link_to 'About Us', about_us_path %>
               </li>
               <li>
                 <%= link_to 'Contact Us', contact_us_path %>
               </li>
-
-            </ul>
-
-          </div>
-
+              <% end %>
+          </ul>
         </div>
+      </div>
 
-        <div class='clear'></div>
+      <div class='clear'></div>
 
-        
       <% flash.each do |name, msg| %>
       <div class="alert alert-<%= name %>" style="margin-top:20px">
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       </div>
       <% end %>
-      
-        <div >
-          <%= yield %>
-        </div>
-      </div>
 
+      <div >
+        <%= yield %>
+      </div>
+      <div class='clear'></div>
     </div><!-- end container -->
 
     <div class='footer'>
       <div class="container">
-        <p style="float:right">
-          Copyright &copy; 2013 giftminer
-        </p>
+        <div style="float:right">
+          <small> <%= link_to 'About Us', about_us_path %> |
+            <%= link_to 'Contact Us', contact_us_path %> |
+            Copyright &copy; 2013 giftminer <small>
+        </div>
         <div>
           <a href='#'><span class="label label-info">Home</span></a>
           <a href='#'><span class="label label-success">Facebook</span></a>
