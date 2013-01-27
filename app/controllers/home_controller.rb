@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   def index
+    @date = params[:month] ? Date.parse(params[:month]) : Date.today
     if user_signed_in?
       flash.keep 
       redirect_to :action => 'dashboard'
