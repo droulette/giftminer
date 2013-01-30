@@ -16,38 +16,6 @@ class OccassionsController < ApplicationController
   def show
     @occassion = Occassion.find(params[:id])
     @recommendation = @occassion.product_recommendations.first
-    # @my_recommendations= []
-    # @ocats_name = @occassion.ocats.collect{|ocat| ocat.category }
-    # @product_cats = ProductCat.all
-    # @recent_product = Product.all.last
-    # if @occassion.price_range == 'under $25' and @occassion.type_of_gift.downcase == 'silly' and (@ocats_name.include?('Birthday') or @ocats_name.include?('anniversary'))
-      # @product_cats.each do |product_cat|
-        # if product_cat.name == ('Food')
-          # product_cat.products.each do |product|
-            # @my_recommendations.push(product.name)
-          # end
-        # end
-      # end
-    # elsif @occassion.price_range == 'under $25'
-      # @product_cats.each do |product_cat|
-        # if product_cat.name == ('Electronics')
-          # product_cat.products.each do |product|
-            # @my_recommendations.push(product.name)
-          # end
-        # end
-      # end
-    # elsif @occassion.price_range == "$25.01-$100" or @occassion.price_range == "$100.01-$250"
-      # @product_cats.each do |product_cat|
-        # if product_cat.name == ('Clothes')
-          # product_cat.products.each do |product|
-            # @my_recommendations.push(product.name)
-          # end
-        # end
-      # end
-    # else @my_recommendations.push(@recent_product.name)
-#       
-    # end
-# 
 
     respond_to do |format|
       format.html # show.html.erb

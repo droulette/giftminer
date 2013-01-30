@@ -23,7 +23,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'table_builder', '~>0.2.3'
+gem "watu_table_builder", :require => "table_builder"
+gem 'fullcalendar-rails'
 gem 'jquery-rails'
 
 gem 'devise'

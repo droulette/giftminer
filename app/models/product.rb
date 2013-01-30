@@ -13,6 +13,7 @@ class Product < ActiveRecord::Base
   attr_accessible :category_product_links
   
   validates :age_range, :description, :gender, :name, :price, :presence => true
+  validates :name, :uniqueness => true
   
   scope :sorteddesc, order("id DESC")
 
@@ -31,7 +32,7 @@ class Product < ActiveRecord::Base
   
   def add_recommendation
     occass = Occassion.all
-    
+    products = Product.all
     occass.each do |occas|
       ocat_categories = occas.ocats ? occas.ocats.collect{|ocat| ocat.category } : []
       product_categories = product_cats ? product_cats.collect{|product_category| product_category.name } : []
