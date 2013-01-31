@@ -121,7 +121,6 @@ button.ui-button-icon-only {
 .occassionrec{
   float:left;
   width:670px;
-  padding-top:19px;
   margin: 25px 0px 0px 25px;
 }
 
@@ -138,7 +137,6 @@ button.ui-button-icon-only {
 
 
 #calendar table {
-  border-collapse: collapse;
   width: 100%;
 }
 

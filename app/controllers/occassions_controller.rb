@@ -33,6 +33,7 @@ class OccassionsController < ApplicationController
     @products = Product.all
     @productcats = ProductCat.all
     @category_product_link = CategoryProductLink.all
+    @occassion.date ||= params[:date]
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @occassion }
@@ -53,7 +54,10 @@ class OccassionsController < ApplicationController
     
     respond_to do |format|
       if @occassion.save
-        format.html { redirect_to @occassion, notice: 'Occassion was successfully created.' }
+        format.html {
+          flash[:success] = 'Occassion was successfully created.'
+          redirect_to @occassion 
+        }
         format.json { render json: @occassion, status: :created, location: @occassion }
       else
         format.html { render action: "new" }
@@ -70,7 +74,10 @@ class OccassionsController < ApplicationController
 
     respond_to do |format|
       if @occassion.update_attributes(params[:occassion])
-        format.html { redirect_to @occassion, notice: 'Occassion was successfully updated.' }
+        format.html {
+          flash[:success] = 'Occassion was successfully updated.'
+          redirect_to @occassion 
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

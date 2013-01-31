@@ -12,63 +12,32 @@
     <h2 id="month"> <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
     <%= h @date.strftime("%B %Y") %>
     <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </h2>
-    <%= calendar_for(@occassions, :year => @date.year, :month => @date.month) do |calendar| %>
-    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
-    <%= calendar.day(:day_method => :date) do |date, occassions| %>
-    <%= link_to date.day, new_occassion_path %>
-
-    <ul>
-      <% occassions.each do |occassion| %>
-      <li>
-        <%= link_to occassion.name, occassion_path(occassion) %>
-      </li>
+    <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
+      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
+      <%= calendar.day(:day_method => :date) do |date, occassions| %>
+        <%= link_to date.day, new_occassion_path(:date => date) %>
+        <ul>
+          <% occassions.each do |occassion| %>
+            <li>
+              <%= link_to occassion.name, occassion_path(occassion) %>
+            </li>
+          <% end %>
+      </ul>
       <% end %>
-    </ul>
-
-    <% end %>
     <% end %>
   </div>
-</div>
-<br/>
-<!--
-<% if @occassions.count ==0 %>
-<p>
-Please create an occasion
-</p>
-<% else %>
-<table class='table table-bordered table-striped table-condensed'>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Date</th>
-<th>Price Range</th>
-<th>Gifts to Mine for</th>
-<th>Edit</th>
-<th>Delete</th>
-</tr>
+</div> <br/>
 
-<% @occassions.each do |occassion| %>
-<tr>
-<td><%= link_to occassion.name, occassion_path(occassion) %></td>
-<td><%= occassion.description %></td>
-<td><%= occassion.date.strftime("%B %d, %Y") %></td>
-<td><%= occassion.price_range %></td>
-<td><%= occassion.type_of_gift %></td>
-<td><%= link_to 'Edit', edit_occassion_path(occassion) %></td>
-<td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %></td>
-</tr>
-<% end if @occassions%>
-</table>
-<% end %> -->
-
+<div>
 <h4>Newest Additions:</h4></br/>
-<div class='well' style='height:125px'>
-  <% @new_products.each do |new_product| %>
-  <div style='float:left;margin-right:10px;'>
-    <p style='text-align:center;'><%= link_to new_product.name, product_path(new_product.id) %></p>
-    <%= link_to image_tag(new_product.pic.url(:thumb)), product_path(new_product.id) %></br>
+  <div class='well' style='height:125px'>
+    <% @new_products.each do |new_product| %>
+      <div style='float:left;margin-right:10px;width:90px;'>
+      <p style='text-align:center;'>
+        <%= link_to new_product.name, product_path(new_product.id) %>
+      </p>
+      <%= link_to image_tag(new_product.pic.url(:thumb)), product_path(new_product.id), :class =>'img-polaroid' %></br>
+      </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
-
 </div>
