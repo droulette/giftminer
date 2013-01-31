@@ -54,10 +54,10 @@
 </div>
 <div class='occassionrec'>
 
+  <% unless @recommendation.nil? %>
   <div class = "fleft" style='padding-left:15px;'>
     <%= link_to(image_tag(@recommendation.pic.url(:medium)), product_path(@recommendation.id)) %>
   </div>
-
   <div class = "show">
     <h3> <%= @recommendation.name %> </h3>
     <p style= 'color:#da4f49;'>
@@ -70,15 +70,8 @@
     <div>
       <%= link_to 'Giftarator', '#', :class => 'btn btn-success'  %>
     </div>
-
-    <!--   <h3><b>We think they might like</b></h3>
-    <%= image_tag(@recommendation.pic.url(:thumb)) %></br>
-    Product: <%= @recommendation.name %></br>
-    Price: <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %></br>
-    Description: <%= @recommendation.description %></br> -->
-
   </div>
+  <% end %>
 </div>
 <div class="clear"></div>
-\
 

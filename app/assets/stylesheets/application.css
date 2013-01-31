@@ -169,6 +169,12 @@ button.ui-button-icon-only {
   color: #CCC;
 }
 
+.notmonth a:link {color:gray;}      /* unvisited link */
+.notmonth a:visited {color:gray;}  /* visited link */
+.notmonth a:hover {color:gray;}  /* mouse over link */
+.notmonth a:active {color:gray;}  /* selected link */
+
+
 #calendar #month {
   margin: 0;
   padding-top: 10px;

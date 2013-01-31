@@ -16,7 +16,9 @@ class OccassionsController < ApplicationController
   def show
     @occassion = Occassion.find(params[:id])
     @recommendation = @occassion.product_recommendations.first
-
+    @products = Product.all
+    @productcats = ProductCat.all
+@user=current_user
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @occassion }
@@ -28,6 +30,9 @@ class OccassionsController < ApplicationController
   def new
     @occassion = Occassion.new
     @ocats = Ocat.all
+    @products = Product.all
+    @productcats = ProductCat.all
+    @category_product_link = CategoryProductLink.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @occassion }

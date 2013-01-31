@@ -72,12 +72,13 @@ class Occassion < ActiveRecord::Base
     ocats_name = ocats.collect{|ocat| ocat.category }
     product_cats = ProductCat.all
     recent_product = Product.all.last
+    
     if price_range == 'under $25' and type_of_gift.downcase == 'silly'
       product_cats.each do |product_cat|
-        if product_cat.name == ('Other')
+        if product_cat.name == 'Other'
           product_cat.products.each do |product|
             if product.price <= 25
-            my_recommendations.push(product)
+              my_recommendations.push(product)
             end
           end
         end
@@ -89,7 +90,7 @@ class Occassion < ActiveRecord::Base
         if product_cat.name == ('Housewares') or product_cat.name == ('Food') or product_cat.name == ('Clothes')
           product_cat.products.each do |product|
             if product.price <= 25
-            my_recommendations.push(product)
+              my_recommendations.push(product)
             end
           end
         end
@@ -132,18 +133,42 @@ class Occassion < ActiveRecord::Base
       end
     end
 
-    if price_range == "$25.01-$100" or price_range == "$100.01-$250"
+    if price_range == "$25.01-$100"
       product_cats.each do |product_cat|
         if product_cat.name == ('Clothes')
           product_cat.products.each do |product|
+            if product.price > 25 && product.price<= 100
+              my_recommendations.push(product)
+            end
+          end
+        end
+      end
+    end
+
+    if price_range == "$100.01-$250"
+      product_cats.each do |product_cat|
+        if product_cat.name == ('Electronics')
+          product_cat.products.each do |product|
+            if product.price > 100 && product.price<= 250
+              my_recommendations.push(product)
+            end
+          end
+        end
+      end
+    end
+
+    if price_range == "$250+"
+      product_cats.each do |product_cat|
+        product_cat.products.each do |product|
+          if product.price > 250
             my_recommendations.push(product)
           end
         end
       end
     end
 
-    if price_range == '$250+'
-    my_recommendations.push(recent_product)
+    if price_range == "under $25" or price_range == "$25.01-$100" or price_range == "$100.01-$250" or price_range == "$250+"
+      my_recommendations.push(recent_product)
     end
 
     my_recommendations
