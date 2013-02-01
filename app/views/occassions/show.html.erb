@@ -41,11 +41,11 @@
     <b>Occassion type:</b>
     <br/>
     <% if @occassion.ocats.count >0 %>
-    <% @occassion.ocats.each do |ocat| %>
-    <%= ocat.category %></br>
-    <% end %>
+      <% @occassion.ocats.each do |ocat| %>
+        <%= ocat.category %></br>
+      <% end %>
     <% else %>
-    none selected
+      none selected
     <% end %>
   </p>
 
@@ -55,14 +55,12 @@
 <div class='occassionrec'>
 
   <% unless @recommendation.nil? %>
-  <div class = "fleft" style='padding-left:15px;'>
+  <div class = "fleft"; style='width:325px;'>
     <%= link_to(image_tag(@recommendation.pic.url(:medium), :class => 'thumbnail'), product_path(@recommendation.id)) %>
   </div>
   <div class = "show">
     <h3> <%= @recommendation.name %> </h3>
-    <p style= 'color:#da4f49;'>
-      <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %>
-    </p>
+    <h4 style= 'color:#da4f49;'> <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %> </h4>
     <p>
       <b>Description: </b><%= @recommendation.description %>
     </p>

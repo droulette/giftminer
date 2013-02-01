@@ -1,17 +1,21 @@
 <div>
   <div>
-    <div class='fleft' style='margin-top:5px;'>
-      <h2>My Occasions</h2>
+    <div class='fleft'>
+      <h3>My Occasions</h3>
     </div>
-    <div class='fright' style='margin:20px 0px 25px 0px;'>
-      <%= link_to 'Create an Occasion', new_occassion_path, :class => 'btn btn-primary'  %></br>
+    <div class='fright' style='margin:12px 0px 25px 0px;'>
+      <%= link_to 'Enter an Occasion', new_occassion_path, :class => 'btn btn-primary'  %></br>
     </div>
   </div>
 
   <div id="calendar">
-    <h2 id="month"> <%= link_to "<", :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %>
-    <%= h @date.strftime("%B %Y") %>
-    <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </h2>
+    <div class="pagination pagination-centered pagination-large">
+      <ul>
+        <li><%= link_to raw("&laquo;"), :month => (@date.beginning_of_month-1).strftime("%Y-%m-01") %></li>
+        <li><%= link_to h(@date.strftime("%B %Y")), :month => @date %></li>
+        <li><%= link_to raw("&raquo;"), :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </li>
+      </ul>
+    </div>
     <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
     <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
     <%= calendar.day(:day_method => :date) do |date, occassions| %>

@@ -102,7 +102,7 @@ class Occassion < ActiveRecord::Base
         if product_cat.name == ('Jewelry')
           product_cat.products.each do |product|
             if product.price <= 25
-            my_recommendations.push(product)
+              my_recommendations.push(product)
             end
           end
         end
@@ -114,7 +114,7 @@ class Occassion < ActiveRecord::Base
         if product_cat.name == ('Electronics')
           product_cat.products.each do |product|
             if product.price <= 25
-            my_recommendations.push(product)
+              my_recommendations.push(product)
             end
           end
         end
@@ -126,7 +126,7 @@ class Occassion < ActiveRecord::Base
         if product_cat.name == ('Sports')
           product_cat.products.each do |product|
             if product.price <= 25
-            my_recommendations.push(product)
+              my_recommendations.push(product)
             end
           end
         end

@@ -120,7 +120,7 @@ button.ui-button-icon-only {
 
 .occassionrec{
   float:left;
-  width:670px;
+  width:675px;
   margin: 25px 0px 0px 25px;
 }
 
@@ -173,12 +173,12 @@ button.ui-button-icon-only {
 .notmonth a:active {color:gray;}  /* selected link */
 
 
-#calendar #month {
+/*#calendar #month {
   margin: 0;
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: center;
-}
+}*/
 
 #calendar #month a, #calendar #month a:hover {
   text-decoration: none;
@@ -190,13 +190,12 @@ button.ui-button-icon-only {
   background-color: #D7F2FF;
 }
 
-#calendar ul {
+/*#calendar ul {
   margin: 0;
   margin-top: 5px;
   padding: 0;
   list-style: none;
-}
-
+}*/
 #calendar li {
   margin: 0;
   padding: 0;

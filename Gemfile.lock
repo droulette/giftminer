@@ -100,6 +100,7 @@ GEM
     method_source (0.8.1)
     mime-types (1.19)
     multi_json (1.5.0)
+    mysql (2.8.1)
     nokogiri (1.5.6)
     orm_adapter (0.4.0)
     paperclip (3.4.0)
@@ -213,6 +214,7 @@ DEPENDENCIES
   guard-rspec
   jquery-rails
   launchy
+  mysql (= 2.8.1)
   paperclip (~> 3.0)
   rails (= 3.2.3)
   rspec-rails
