@@ -9,7 +9,7 @@ class HomeController < ApplicationController
   end
   
   def dashboard
-    @new_products = Product.sorteddesc.limit(8) 
+    @new_products = Product.sorteddesc.limit(6) 
     @occassions = current_user.occassions.sorteddesc
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     respond_to do |format|

@@ -56,7 +56,7 @@
 
   <% unless @recommendation.nil? %>
   <div class = "fleft" style='padding-left:15px;'>
-    <%= link_to(image_tag(@recommendation.pic.url(:medium)), product_path(@recommendation.id)) %>
+    <%= link_to(image_tag(@recommendation.pic.url(:medium), :class => 'thumbnail'), product_path(@recommendation.id)) %>
   </div>
   <div class = "show">
     <h3> <%= @recommendation.name %> </h3>

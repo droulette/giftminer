@@ -203,3 +203,16 @@ button.ui-button-icon-only {
   font-size: 11px;
   text-align: center;
 }
+
+.new_additions {
+  float:left;
+  margin-right:10px;
+  height:165px;
+  width:130px; 
+  text-align:center;
+  background-color:white;
+}
+
+.new_additions:last-child {
+  margin-right:0px;
+}

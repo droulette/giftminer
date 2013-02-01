@@ -13,31 +13,32 @@
     <%= h @date.strftime("%B %Y") %>
     <%= link_to ">", :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </h2>
     <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
-      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
-      <%= calendar.day(:day_method => :date) do |date, occassions| %>
-        <%= link_to date.day, new_occassion_path(:date => date) %>
-        <ul>
-          <% occassions.each do |occassion| %>
-            <li>
-              <%= link_to occassion.name, occassion_path(occassion) %>
-            </li>
-          <% end %>
-      </ul>
+    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
+    <%= calendar.day(:day_method => :date) do |date, occassions| %>
+    <%= link_to date.day, new_occassion_path(:date => date) %>
+    <ul>
+      <% occassions.each do |occassion| %>
+      <li>
+        <%= link_to occassion.name, occassion_path(occassion) %>
+      </li>
       <% end %>
+    </ul>
+    <% end %>
     <% end %>
   </div>
-</div> <br/>
+</div>
+<br/>
 
 <div>
-<h4>Newest Additions:</h4></br/>
-  <div class='well' style='height:125px'>
+  <h4>Newest Additions:</h4></br/>
+  <div class='well' style='height:180px;padding-left:23px;'>
     <% @new_products.each do |new_product| %>
-      <div style='float:left;margin-right:10px;width:90px;'>
-      <p style='text-align:center;'>
-        <%= link_to new_product.name, product_path(new_product.id) %>
-      </p>
-      <%= link_to image_tag(new_product.pic.url(:thumb)), product_path(new_product.id), :class =>'img-polaroid' %></br>
+    <div class='thumbnail new_additions'>
+      <div class='caption'>
+        <%= link_to(truncate(new_product.name, :length =>12), product_path(new_product.id)) %>
       </div>
+      <%= link_to image_tag(new_product.pic.url(:small)), product_path(new_product.id) %></br>
+    </div>
     <% end %>
   </div>
 </div>
