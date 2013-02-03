@@ -15,6 +15,7 @@ class Occassion < ActiveRecord::Base
   #after_save :create_recommendations
 
   before_destroy :destroy_recommendations
+  
   def save_recommendation(product_id)
     recommendation = Recommendation.new
     recommendation.user_id = user_id

@@ -1,45 +1,35 @@
 <%= form_for(@occassion, :html => { :class => "form-horizontal"}) do |f| %>
-<% if @occassion.errors.any? %>
-<div class='alert alert-error' id="error_explanation">
-  <h4><%= pluralize(@occassion.errors.count, "error") %> prohibited this occasion from being saved:</h4>
 
-  <ul>
-    <% @occassion.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
-<div class="field control-group">
-  <%= f.label :name, :class => 'control-label' %>
+<div class="field control-group <%= 'error' if @occassion.errors[:name].any? %>">
+  <%= f.label :name, :class => 'control-label', :for => 'inputError' %>
   <div class='controls'>
-    <%= f.text_field :name %>
-  </div>
-
-</div>
-<div class="field control-group">
-  <%= f.label :description, :class => 'control-label' %>
-  <div class='controls'>
-    <%= f.text_area :description, :size => "30x5" %>
+    <%= f.text_field :name, :id => 'inputError' %>
+    <span class='help-inline'><%= 'Please enter a Name' if @occassion.errors[:name].any? %></span>
   </div>
 </div>
-<div class="field control-group">
-  <%= f.label :date, :class => 'control-label' %>
+
+<div class="field control-group  <%= 'error' if @occassion.errors[:description].any? %>">
+  <%= f.label :description, :class => 'control-label', :for => 'inputError' %>
   <div class='controls'>
-    <%= f.text_field :date, :value => @occassion.date.to_s, :class => 'datepicker' %>
+    <%= f.text_area :description, :id => 'inputError', :size => "30x5" %>
+    <span class='help-inline'><%= 'Please enter a Decription' if @occassion.errors[:description].any? %></span>
   </div>
 </div>
-<div class="field control-group">
-  <%= f.label :price_range, :class => 'control-label' %>
+<div class="field control-group  <%= 'error' if @occassion.errors[:date].any? %>">
+  <%= f.label :date, :class => 'control-label', :for => 'inputError' %>
+  <div class='controls'>
+    <%= f.text_field :date, :id => 'inputError', :value => @occassion.date.to_s, :class => 'datepicker' %>
+    <span class='help-inline'><%= 'Please enter a Date' if @occassion.errors[:date].any? %></span>
+  </div>
+</div>
+<div class="field control-group  <%= 'error' if @occassion.errors[:price_range].any? %>">
+  <%= f.label :price_range, :class => 'control-label', :for => 'inputError' %>
   <div class='controls'>
     <%= f.select :price_range, options_for_select([["under $25", "under $25"], ["$25.01-$100", "$25.01-$100"], ["$100.01-$250", "$100.01-$250"], ["$250+", "$250+"]], @occassion.price_range) %>
   </div>
 </div>
-<div class="field control-group">
-  <%= f.label :type_of_gift, :class => 'control-label' %>
+<div class="field control-group  <%= 'error' if @occassion.errors[:type_of_gift].any? %>">
+  <%= f.label :type_of_gift, :class => 'control-label', :for => 'inputError' %>
   <div class='controls'>
     <%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Serious", "Serious"], ["Gamer", "Gamer"], ["Romantic", "Romantic"], ["Cool", "Cool"]], @occassion.type_of_gift) %>
   </div>
