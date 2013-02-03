@@ -5,7 +5,7 @@
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal", :method => :put }) do |f| %>
   <%= devise_error_messages! %>
-<%= debug(params[:password]) %>
+
 
   <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>

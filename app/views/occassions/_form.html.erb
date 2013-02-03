@@ -18,8 +18,8 @@
 <div class="field control-group  <%= 'error' if @occassion.errors[:date].any? %>">
   <%= f.label :date, :class => 'control-label', :for => 'inputError' %>
   <div class='controls'>
-    <%= f.text_field :date, :id => 'inputError', :value => @occassion.date.to_s, :class => 'datepicker' %>
-    <span class='help-inline'><%= 'Please enter a Date' if @occassion.errors[:date].any? %></span>
+    <%= f.text_field :date, :value => @occassion.date.to_s, :class => 'datepicker' %>
+    <span class='help-inline' id='inputError'><%= 'Please enter a Date' if @occassion.errors[:date].any? %></span>
   </div>
 </div>
 <div class="field control-group  <%= 'error' if @occassion.errors[:price_range].any? %>">
