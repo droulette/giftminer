@@ -55,7 +55,7 @@ class OccassionsController < ApplicationController
     respond_to do |format|
       if @occassion.save
         format.html {
-          flash[:success] = 'Occassion was successfully created.'
+          flash[:success] = 'Occasion was successfully created.'
           redirect_to @occassion 
         }
         format.json { render json: @occassion, status: :created, location: @occassion }
@@ -75,7 +75,7 @@ class OccassionsController < ApplicationController
     respond_to do |format|
       if @occassion.update_attributes(params[:occassion])
         format.html {
-          flash[:success] = 'Occassion was successfully updated.'
+          flash[:success] = 'Occasion was successfully updated.'
           redirect_to @occassion 
         }
         format.json { head :no_content }

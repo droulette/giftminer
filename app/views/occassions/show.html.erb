@@ -16,12 +16,13 @@
 
 <div class='well occassiondetails'>
   <h3> <%= @occassion.name %></h3>
-
+  
+<% unless @occassion.description == '' %>
   <p>
-    <b>Description:</b>
+    <b><%= "Description:" %></b>
     <%= @occassion.description %>
   </p>
-
+<% end %>
   <p>
     <b>Date:</b>
     <%= @occassion.date.strftime("%B %d, %Y") %>
@@ -38,7 +39,7 @@
   </p>
 
   <p>
-    <b>Occassion type:</b>
+    <b>Occasion type:</b>
     <br/>
     <% if @occassion.ocats.count >0 %>
       <% @occassion.ocats.each do |ocat| %>

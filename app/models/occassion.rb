@@ -6,10 +6,10 @@ class Occassion < ActiveRecord::Base
 
   attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids
 
-  validates :date, :description, :name, :price_range, :type_of_gift, :presence => true
+  validates :date, :name, :price_range, :type_of_gift, :presence => true
 
   scope :sorteddesc, order("date ASC")
-  scope :upcoming, where('date > ?',  Date.today)
+  scope :upcoming, where('date >= ?',  Date.today)
   scope :past, where('date < ?',  Date.today)
 
   #after_save :create_recommendations

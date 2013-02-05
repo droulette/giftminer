@@ -6,6 +6,10 @@
     <div class='fright' style='margin:12px 0px 25px 0px;'>
       <%= link_to 'Enter an Occasion', new_occassion_path, :class => 'btn btn-primary'  %></br>
     </div>
+    <div class='fright' style='margin: 17px 15px 0px 0px'>
+      <%= link_to "View as List", occassions_path %>
+      <%= link_to image_tag('list.png', :size => '17x17'), occassions_path %>
+    </div>
   </div>
 
   <div id="calendar">
@@ -16,25 +20,25 @@
         <li><%= link_to raw("&raquo;"), :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </li>
       </ul>
     </div>
-    <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
-    <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
-    <%= calendar.day(:day_method => :date) do |date, occassions| %>
-    <%= link_to date.day, new_occassion_path(:date => date) %>
-    <ul>
-      <% occassions.each do |occassion| %>
-      <li>
-        <%= link_to occassion.name, occassion_path(occassion) %>
-      </li>
+      <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
+      <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
+      <%= calendar.day(:day_method => :date) do |date, occassions| %>
+      <%= link_to date.day, new_occassion_path(:date => date) %>
+      <ul>
+        <% occassions.each do |occassion| %>
+        <li>
+          <%= link_to occassion.name, occassion_path(occassion) %>
+        </li>
+        <% end %>
+      </ul>
       <% end %>
-    </ul>
-    <% end %>
-    <% end %>
+  <% end %>
   </div>
 </div>
 <br/>
 
 <div>
-  <h4>Newest Additions:</h4></br/>
+  <h4>Newest Additions</h4></br/>
   <div class='well' style='height:180px;padding-left:23px;'>
     <% @new_products.each do |new_product| %>
     <div class='thumbnail new_additions'>
