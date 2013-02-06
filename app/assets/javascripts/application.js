@@ -16,12 +16,10 @@
 //= require_tree .
 
 $(function() {
-	$(".datepicker").datepicker({
-	    showOn: 'button'
-	}).next('button').text('').button({
-	    icons: {
-	        primary: 'ui-icon-calendar'
-	    },
-	    text: false
+	$(".datepicker").datepicker();
+	$(".icon-calendar").click(function(){
+	  $(this).parents('.input-append').find('.datepicker').focus();
 	});
 });
+
+

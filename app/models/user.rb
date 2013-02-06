@@ -14,5 +14,6 @@ class User < ActiveRecord::Base
   has_many :products, :through => :recommendations
   has_many :occassions
   has_many :reviews
+  has_one :subscription
   # attr_accessible :title, :body
 end

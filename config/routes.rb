@@ -1,4 +1,6 @@
 Gift::Application.routes.draw do
+  resources :subscriptions
+
   resources :reviews
 
   get "contact_us/index"

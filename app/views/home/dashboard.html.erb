@@ -24,10 +24,10 @@
       <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
       <%= calendar.day(:day_method => :date) do |date, occassions| %>
       <%= link_to date.day, new_occassion_path(:date => date) %>
-      <ul>
+      <ul style='list-style-type: none;'>
         <% occassions.each do |occassion| %>
         <li>
-          <%= link_to occassion.name, occassion_path(occassion) %>
+          <%= link_to(truncate(occassion.name, :length =>12), occassion_path(occassion)) %>
         </li>
         <% end %>
       </ul>

@@ -28,7 +28,7 @@ gem 'jquery-rails'
 
 gem 'devise'
 
-#gem 'stripe'
+gem 'stripe'
 gem "paperclip", "~> 3.0"
 gem "american_date"
 gem 'launchy'
