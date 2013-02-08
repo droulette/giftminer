@@ -1,9 +1,15 @@
+<!-- Modal -->
 <div class="container" id='background' style='-moz-border-radius: 5px; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;'>
   <div class='home'>
     <div class="subhead">
       <h1 style="color:white">giftminer</h1>
-      <p class="lead" style='color:pink;'>
-        Let us help you find the perfect gift
+      <p class="lead">
+        <% if cookies[:gender] == 'female' %>
+          Let us help you find the perfect gift
+        <% else %>
+          No more sleeping on the couch!<br />
+          Let us help you automate gifting.
+        <% end %>
       </p>
     </div>
     <div class="steps well">
@@ -31,13 +37,17 @@
         <span class="badge">Step 3</span>
       </p>
       <p>
-        You enjoy the present!
+        <% if cookies[:gender] == 'female' %>
+          Enjoy the<br />praises!
+        <% else %>
+          You take the credit!
+        <% end %>
       </p>
-      <%= image_tag 'smile-big.png' %>
+      <%= image_tag 'smile.png' %>
     </div>
   </div>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"well",:style=>"float:right;background-color: rgba(245,245,245,.5);margin-top:29px"}) do |f| %>
-  <h3 style="margin-top:0">Sign up</h3>
+  <h3 style="margin-top:0">Sign up for <span style="color:#df382c">FREE!</span></h3>
   <%= devise_error_messages! %>
   <div>
     <%= f.label :email %>
@@ -64,17 +74,17 @@
   <div class="span6">
     <blockquote>
       <p>
-        Before giftminer, I just picked up whatever I can find at the gas station on the way home.
+        I LOOOOVEEE shopping. Now there is a way to automatically shop? Sign me up!
       </p>
-      <small>Morgan Freeman from <cite title="Source Title">Shawshank Prison</cite></small>
+      <small>Uyen Do from <cite title="Source Title">Shopaholic Anonymous</cite></small>
     </blockquote>
   </div>
   <div class="span6">
     <blockquote class="pull-right">
       <p>
-        My wife is one of those people who has everything. It is very hard to shop for her. Giftminer gives me great suggestions and takes care of the leg work. I am very happy with their service!
+        My wife is one of those people who has everything. It is very hard to shop for her. Giftminer gives me great suggestions and draws money directly from my bank account. Yay!
       </p>
-      <small>Barack Obama at the <cite title="Source Title">White House</cite></small>
+      <small>Vinh Pham in the <cite title="Source Title">Forest Somewhere</cite></small>
     </blockquote>
   </div>
 </div>
