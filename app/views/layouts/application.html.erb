@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>giftminer</title>
+      <title>giftminer</title>
+      <%= favicon_link_tag '/assets/favicon.ico' %>
       <%= stylesheet_link_tag "application", :media => "all" %>
       <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
       <%= csrf_meta_tags %>
       <%= tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY %>
   </head>
-  <body>
-    <div class='container' style='margin-top:5px;min-height:550px'>
+  <body class="<%= cookies[:gender] ? "" : "hidddeeee" %>">
+    <% unless cookies[:gender] %>
+      <div style="overflow:hidden;background:url(/assets/male-female.png) center center no-repeat; width: 530px; height: 398px; margin: auto; margin-top: 100px; position: relative;">
+          <a href="?gender=female" class="female"></a>
+          <a href="?gender=male" class="male"></a>
+      </div>
+    <% end %>
+    <div class='container' style='margin-top:5px;min-height:550px;'>
 
       <div class='loginbar'>
 
@@ -33,7 +40,7 @@
 
       <div class="navbar" style='height:40px; margin-bottom:0px; border-radius: 30px 30px 30px 30px;'>
         <div class="navbar-inner">
-          <a href="/" title="giftminer" class="brand">&hearts; giftminer</a>
+          <a href="/" title="giftminer" class="brand" style="background:url(/assets/glyphicons_069_gift.png) 20px 6px no-repeat; padding-left: 50px">giftminer</a>
           <ul class="nav">
             <% if user_signed_in? %>
               <li class="dropdown">
@@ -48,6 +55,9 @@
                 </ul>
               </li>
             <% else %>
+              <li>
+                <%= link_to 'FAQ', faq_path %>
+              </li>
               <li>
                 <%= link_to 'About Us', about_us_path %>
               </li>
@@ -68,9 +78,7 @@
         </div>
       <% end %>
 
-      <div >
-        <%= yield %>
-      </div>
+      <div><%= yield %></div>
 
       <div class='clear'></div>
     </div><!-- end container -->
@@ -78,9 +86,12 @@
     <div class='footer'>
       <div class="container">
         <div style="float:right">
-          <small> <%= link_to 'About Us', about_us_path %> |
+          <small>
+            <%= link_to 'FAQ', faq_path %> |
+            <%= link_to 'About Us', about_us_path %> |
             <%= link_to 'Contact Us', contact_us_path %> |
-            Copyright &copy; 2013 giftminer <small>
+            Copyright &copy; 2013 giftminer 
+          </small>
         </div>
         <div>
           <a href='#'><span class="label label-info">Home</span></a>

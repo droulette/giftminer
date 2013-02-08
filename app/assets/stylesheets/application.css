@@ -215,3 +215,24 @@ button.ui-button-icon-only {
 [class^="icon-"], [class*=" icon-"] {
   background-image: url("/assets/img/glyphicons-halflings.png");
 }
+.female {
+  width: 135px;
+  height: 294px;
+  position: absolute;
+  top: 52px;
+  left: 101px;
+}
+.female:hover {
+  background: url("/assets/male-female-hover.png") -2px -2px no-repeat;
+}
+.male {
+  width: 116px;
+  height: 294px;
+  position: absolute;
+  top: 52px;
+  left: 315px;
+}
+.male:hover {
+  background: url("/assets/male-female-hover.png") -216px -2px no-repeat;
+}
+.hidddeeee .container, .hidddeeee .footer { display: none; }
