@@ -15,5 +15,6 @@ class User < ActiveRecord::Base
   has_many :occassions
   has_many :reviews
   has_one :subscription
+  has_many :recipients
   # attr_accessible :title, :body
 end

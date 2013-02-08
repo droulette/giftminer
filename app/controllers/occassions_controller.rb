@@ -18,7 +18,7 @@ class OccassionsController < ApplicationController
     @recommendation = @occassion.product_recommendations.first
     @products = Product.all
     @productcats = ProductCat.all
-@user=current_user
+    @user=current_user
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @occassion }

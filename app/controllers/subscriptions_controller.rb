@@ -2,7 +2,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
-    @subscriptions = Subscription.all
+    @subscription = current_user.subscription
 
     respond_to do |format|
       format.html # index.html.erb

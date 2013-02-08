@@ -16,9 +16,16 @@ describe Recipient do
       visit ('/recipients/new')
       fill_in 'Full name', :with => 'bill nye'
       click_button('Submit')
-      save_and_open_page
       page.should have_content('successful')
     end
+
+    it 'destroys a recipient' do
+      visit ('/recipients/index')
+      click_button('Submit')
+      save_and open_page
+      page.should have_content('succussful')
+    end
+
 
   end
 end

@@ -1,25 +1,38 @@
-<h1>Listing subscriptions</h1>
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      Subscriptions
+    </li>
+  </ul>
+</div>
 
-<table>
+<div class='fright' style='margin-bottom:20px;'>
+  <%= link_to 'Subscribe', new_subscription_path, :class => 'btn btn-primary'  %>
+</div>
+
+<table class='table table-bordered table-striped table-condensed'>
   <tr>
-    <th>User</th>
     <th>Stripe customer token</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @subscriptions.each do |subscription| %>
+<% if @subscription %>
   <tr>
-    <td><%= subscription.user %></td>
-    <td><%= subscription.stripe_customer_token %></td>
-    <td><%= link_to 'Show', subscription %></td>
-    <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-    <td><%= link_to 'Destroy', subscription, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= @subscription.stripe_customer_token %></td>
+    <td><%= link_to 'Show', @subscription %></td>
+    <td><%= link_to 'Edit', edit_subscription_path(@subscription) %></td>
+    <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% else %>  
+  <tr>
+    <td>N/A</td>
   </tr>
 <% end %>
+
 </table>
-
-<br />
-
-<%= link_to 'New Subscription', new_subscription_path %>

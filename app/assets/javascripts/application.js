@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require autocomplete-rails
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
 
@@ -20,6 +21,7 @@ $(function() {
 	$(".icon-calendar").click(function(){
 	  $(this).parents('.input-append').find('.datepicker').focus();
 	});
+	
 });
 
-
+ 

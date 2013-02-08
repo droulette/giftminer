@@ -1,0 +1,42 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Recipients', recipients_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= @recipient.full_name %>
+    </li>
+  </ul>
+</div>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Full name:</b>
+  <%= @recipient.full_name %>
+</p>
+
+<p>
+  <b>Age range:</b>
+  <%= @recipient.age_range %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @recipient.gender %>
+</p>
+
+<p>
+  <b>Relationship:</b>
+  <%= @recipient.relationship %>
+</p>
+
+
+<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
+<%= link_to 'Back', recipients_path %>

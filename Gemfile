@@ -10,6 +10,7 @@ gem 'mysql', '2.8.1'
 
 gem 'execjs'
 gem 'therubyracer'
+gem 'rails3-jquery-autocomplete'
 
 # Gems used only for assets and not required
 # in production environments by default.
