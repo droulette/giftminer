@@ -11,12 +11,8 @@
 </div>
 
 <div class='fright'>
-  <%= link_to 'Enter an Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
-</div>
-
-<div class='fright' style='margin: 6px 15px 0px 0px'>
-  <%= link_to "View as Calendar", home_dashboard_path %>
-  <%= link_to image_tag('calendar.png', :size => '24x24'), home_dashboard_path %>
+  <%= link_to 'Add Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
+  <%= link_to "View as Calendar", home_dashboard_path, :class => 'btn btn-secondary' %>
 </div>
 
 <div class='clear'></div>
@@ -41,7 +37,7 @@
     <td><%= occassion.price_range %></td>
     <td><%= occassion.type_of_gift %></td>
     <td><%= link_to 'Edit', edit_occassion_path(occassion) %></td>
-    <td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %></td>
+    <td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', :method => :delete %></td>
   </tr>
   <% end if @occassions%>
 </table>
