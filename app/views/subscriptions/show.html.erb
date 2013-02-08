@@ -1,0 +1,27 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Subscriptions', subscriptions_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      My Subscription
+    </li>
+  </ul>
+</div>
+
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Stripe customer token:</b>
+  <%= @subscription.stripe_customer_token %>
+</p>
+
+
+<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
+<%= link_to 'Back', subscriptions_path %>

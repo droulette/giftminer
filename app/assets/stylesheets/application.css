@@ -8,129 +8,210 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
  *= require_tree .
-*/
+ *= require_tree ../../../vendor/assets/stylesheets/.
+ *= require_self
+ */
 
-
-.fleft{
-	float:left;
+.fleft {
+  float: left;
 }
 
-.fright{
-  float:right;
+.fright {
+  float: right;
 }
 
-.show{
-	width:325px;
-	float:left;
-	margin:0px 0px 0px 25px;
+.show {
+  width: 325px;
+  float: left;
+  margin: 0px 0px 0px 25px;
 }
 
-.clear{
-	clear:both;
+.clear {
+  clear: both;
 }
 
-.center{
-	margin:auto;
-	background-color:red;
+.center {
+  margin: auto;
+  background-color: red;
 }
 
-.homelogo{
-	float:left;
+.homelogo {
+  float: left;
 }
 
-.header{
-	color:red;
-	float:left;
-	margin-top:5px;
-	margin-left:10px;
+.header {
+  color: red;
+  float: left;
+  margin-top: 5px;
+  margin-left: 10px;
 }
 
-.footer{
-	padding: 10px 0;
-	margin-top: 70px;
-	border-top: 1px solid #e5e5e5;
+.footer {
+  padding: 10px 0;
+  margin-top: 70px;
+  border-top: 1px solid #e5e5e5;
 }
 
-
-.red{
-	background-color:red;
-	border-style:solid;
+.red {
+  background-color: red;
+  border-style: solid;
 }
 
-
-button.ui-button-icon-only { 
-    width: 1em;
-    margin-left: 0.5em;
+button.ui-button-icon-only {
+  width: 1em;
+  margin-left: 0.5em;
 }
 
-.myform{
-	position:relative;
-	left:670px;
-	top:-25px;
+.myform {
+  position: relative;
+  left: 670px;
+  top: -25px;
 }
 
-.steps{
-	width:120px;
-	margin:5px;
-	text-align:center;
-	float:left;
-	opacity:0.8;
-	filter:alpha(opacity=80); /* For IE8 and earlier */
+.steps {
+  width: 120px;
+  margin: 5px;
+  text-align: center;
+  float: left;
+  opacity: 0.8;
+  filter: alpha(opacity=80); /* For IE8 and earlier */
 }
 
-#background{
-    background: url('soft_bokeh.jpg') no-repeat;
-    margin-bottom:30px;
-    padding:40px;
-    width: auto;
+#background {
+  background: url('soft_bokeh.jpg') no-repeat;
+  margin-bottom: 30px;
+  padding: 40px;
+  width: auto;
 }
 
-.home{ 
- 	width:600px; 
- 	float:left;
+.home {
+  width: 600px;
+  float: left;
 }
 
-.signupbutton{
-	float:right;
-	margin-right:30px;
+.signupbutton {
+  float: right;
+  margin-right: 30px;
 }
 
-.loginbar{
-	float:right;
-	margin-bottom:4px;
+.loginbar {
+  float: right;
+  margin-bottom: 4px;
 }
 
 .subhead {
-	padding-bottom: 0;
-	margin-bottom: 9px;
+  padding-bottom: 0;
+  margin-bottom: 9px;
 }
 
 .subhead h1 {
-	font-size: 54px;
+  font-size: 54px;
 }
 
-.occassiondetails{
-  float:left;
-  width:200px;
-  margin-top:25px;
+.occassiondetails {
+  float: left;
+  width: 200px;
+  margin-top: 25px;
 }
 
-.occassionrec{
-  float:left;
-  width:670px;
-  padding-top:19px;
+.occassionrec {
+  float: left;
+  width: 675px;
   margin: 25px 0px 0px 25px;
 }
 
-.dashboard{
-  margin-top:25px;
+.dashboard {
+  margin-top: 25px;
 }
 
-.margin{
+.margin {
   margin-left: 20px;
 }
 .button_to {
   margin: 0;
+}
+
+#calendar table {
+  width: 100%;
+}
+
+#calendar td, #calendar th {
+  font-family: "Lucida Grande", arial, helvetica, sans-serif;
+  font-size: 10px;
+  padding: 6px;
+  border: 1px solid #999;
+}
+
+#calendar th {
+  background: #DDD;
+  color: #666;
+  text-align: center;
+  width: 14.2857142857143%;
+}
+
+#calendar td {
+  background: #FFF;
+  color: #777;
+  height: 80px;
+  vertical-align: top;
+  font-size: 16px;
+}
+
+#calendar .notmonth {
+  color: #CCC;
+}
+
+.notmonth a:link {
+  color: gray;
+}/* unvisited link */
+.notmonth a:visited {
+  color: gray;
+}/* visited link */
+.notmonth a:hover {
+  color: gray;
+}/* mouse over link */
+.notmonth a:active {
+  color: gray;
+}/* selected link */
+
+/*#calendar #month {
+ margin: 0;
+ padding-top: 10px;
+ padding-bottom: 10px;
+ text-align: center;
+ }*/
+
+#calendar #month a, #calendar #month a:hover {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #999;
+}
+
+#calendar .today {
+  background-color: #D7F2FF;
+}
+
+#calendar li {
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  text-align: center;
+}
+
+.new_additions {
+  float: left;
+  margin-right: 10px;
+  height: 165px;
+  width: 130px;
+  text-align: center;
+  background-color: white;
+}
+
+.new_additions:last-child {
+  margin-right: 0px;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  background-image: url("/assets/img/glyphicons-halflings.png");
 }

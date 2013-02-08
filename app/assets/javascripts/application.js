@@ -12,15 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require autocomplete-rails
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
 
 $(function() {
-	$(".datepicker").datepicker({
-	    showOn: 'button'
-	}).next('button').text('').button({
-	    icons: {
-	        primary: 'ui-icon-calendar'
-	    },
-	    text: false
+	$(".datepicker").datepicker();
+	$(".icon-calendar").click(function(){
+	  $(this).parents('.input-append').find('.datepicker').focus();
 	});
+	
 });
+
+ 

@@ -1,6 +1,6 @@
 class Product < ActiveRecord::Base
   attr_accessible :age_range, :description, :gender, :name, :price, :pic, :category, :product_cat_id
-  has_attached_file :pic, :styles => { :medium => "300x300>", :thumb => "100x100>", :croppable => "600x600>" }
+  has_attached_file :pic, :styles => { :small => "160x120>", :thumb => "64x64>", :medium => "360x270>" }
   
   has_many :recommendations
   has_many :users, :through => :recommendations
@@ -31,7 +31,7 @@ class Product < ActiveRecord::Base
   
   def add_recommendation
     occass = Occassion.all
-    
+    products = Product.all
     occass.each do |occas|
       ocat_categories = occas.ocats ? occas.ocats.collect{|ocat| ocat.category } : []
       product_categories = product_cats ? product_cats.collect{|product_category| product_category.name } : []

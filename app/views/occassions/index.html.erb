@@ -1,6 +1,24 @@
-<div class='fright' style='padding-top:20px;'>
-<%= link_to 'Create an Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      Occasions
+    </li>
+  </ul>
 </div>
+
+<div class='fright'>
+  <%= link_to 'Enter an Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
+</div>
+
+<div class='fright' style='margin: 6px 15px 0px 0px'>
+  <%= link_to "View as Calendar", home_dashboard_path %>
+  <%= link_to image_tag('calendar.png', :size => '24x24'), home_dashboard_path %>
+</div>
+
 <div class='clear'></div>
 </br>
 
@@ -10,12 +28,12 @@
     <th>Description</th>
     <th>Date</th>
     <th>Price Range</th>
-    <th>Gifts to Mine for</th>
+    <th>Type of Gift</th>
     <th>Edit</th>
     <th>Delete</th>
   </tr>
 
-<% @occassions.each do |occassion| %>
+  <% @occassions.each do |occassion| %>
   <tr>
     <td><%= link_to occassion.name, occassion_path(occassion) %></td>
     <td><%= occassion.description %></td>
@@ -25,10 +43,8 @@
     <td><%= link_to 'Edit', edit_occassion_path(occassion) %></td>
     <td><%= link_to 'Delete', occassion, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %></td>
   </tr>
-<% end if @occassions%>
+  <% end if @occassions%>
 </table>
 
 <br />
-
-
 

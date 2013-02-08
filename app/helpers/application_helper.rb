@@ -11,17 +11,19 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def avatar_url(user, size=15)
+  def avatar_url(user, size=24)
     gravatar_id = Digest::MD5.hexdigest(user.email.downcase)
     "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
   end
 
-  def date_mdY(date)
-    if date.nil?
-      ""
-    else
-      date.strftime("%m-%d-%Y")
+  def flash_class(level)
+    case level
+    when :notice then "alert alert-info"
+    when :success then "alert alert-success"
+    when :error then "alert alert-error"
+    when :alert then "alert alert-error"
     end
   end
+
 
 end

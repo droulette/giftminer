@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124201918) do
+ActiveRecord::Schema.define(:version => 20130208000832) do
 
   create_table "category_product_links", :force => true do |t|
     t.integer  "product_cat_id"
@@ -47,8 +47,10 @@ ActiveRecord::Schema.define(:version => 20130124201918) do
     t.string   "type_of_gift"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.integer  "recipient_id"
   end
 
+  add_index "occassions", ["recipient_id"], :name => "index_occassions_on_recipient_id"
   add_index "occassions", ["user_id"], :name => "index_occassions_on_user_id"
 
   create_table "product_cats", :force => true do |t|
@@ -73,12 +75,29 @@ ActiveRecord::Schema.define(:version => 20130124201918) do
     t.datetime "pic_updated_at"
   end
 
+  create_table "recipients", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "age_range"
+    t.string   "gender"
+    t.string   "relationship"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "full_name"
+  end
+
+  add_index "recipients", ["full_name"], :name => "index_recipients_on_full_name"
+  add_index "recipients", ["user_id"], :name => "index_recipients_on_user_id"
+
   create_table "recommendations", :force => true do |t|
     t.integer  "product_id"
     t.integer  "user_id"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "occassion_id"
+    t.integer  "pass"
+    t.integer  "own"
   end
 
   add_index "recommendations", ["product_id"], :name => "index_recommendations_on_product_id"
@@ -96,6 +115,15 @@ ActiveRecord::Schema.define(:version => 20130124201918) do
 
   add_index "reviews", ["product_id"], :name => "index_reviews_on_product_id"
   add_index "reviews", ["user_id"], :name => "index_reviews_on_user_id"
+
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "stripe_customer_token"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+  end
+
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -120,8 +148,12 @@ ActiveRecord::Schema.define(:version => 20130124201918) do
     t.string   "zip"
     t.datetime "birthday"
     t.string   "gender"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
   end
 
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

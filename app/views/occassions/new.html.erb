@@ -1,8 +1,24 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Occasion', occassions_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      Enter an Occasion
+    </li>
+  </ul>
+</div>
+
 <div class='well'>
   <legend>
-    Create an Occasion
+    Enter an Occasion
   </legend>
 
   <%= render 'form' %>
 </div>
-<%= link_to 'Back', occassions_path %>
+

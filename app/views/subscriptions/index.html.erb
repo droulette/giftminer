@@ -1,0 +1,38 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      Subscriptions
+    </li>
+  </ul>
+</div>
+
+<div class='fright' style='margin-bottom:20px;'>
+  <%= link_to 'Subscribe', new_subscription_path, :class => 'btn btn-primary'  %>
+</div>
+
+<table class='table table-bordered table-striped table-condensed'>
+  <tr>
+    <th>Stripe customer token</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% if @subscription %>
+  <tr>
+    <td><%= @subscription.stripe_customer_token %></td>
+    <td><%= link_to 'Show', @subscription %></td>
+    <td><%= link_to 'Edit', edit_subscription_path(@subscription) %></td>
+    <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% else %>  
+  <tr>
+    <td>N/A</td>
+  </tr>
+<% end %>
+
+</table>
