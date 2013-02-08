@@ -219,8 +219,8 @@ button.ui-button-icon-only {
   width: 135px;
   height: 294px;
   position: absolute;
-  top: 52px;
-  left: 101px;
+  bottom: 3px;
+  left: 2px;
 }
 .female:hover {
   background: url("/assets/male-female-hover.png") -2px -2px no-repeat;
@@ -229,8 +229,8 @@ button.ui-button-icon-only {
   width: 116px;
   height: 294px;
   position: absolute;
-  top: 52px;
-  left: 315px;
+  bottom: 3px;
+  left: 216px;
 }
 .male:hover {
   background: url("/assets/male-female-hover.png") -216px -2px no-repeat;
