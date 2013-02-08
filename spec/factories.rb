@@ -4,7 +4,8 @@ FactoryGirl.define do
       "test#{n}@example.com"
     end  
     password 'foobar'
-  end
+    confirmed_at 2013-01-01
+ end
 
   factory :product do
     sequence :name do |n|
@@ -41,5 +42,7 @@ FactoryGirl.define do
     category 'different_name'
     description 'different'
   end
+
+
 
 end
