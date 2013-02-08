@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   #include CalendarHelper
   def index
-
+    cookies[:gender] ||= params[:gender] unless params[:gender].blank?
     if user_signed_in?
       flash.keep 
       redirect_to :action => 'dashboard'
@@ -19,5 +19,14 @@ class HomeController < ApplicationController
       format.xml  { render :xml => @occassions }
       format.js  { render :json => @occassions }
     end
+  end
+  
+  def about_us
+  end
+  
+  def contact_us
+  end
+  
+  def faq
   end
 end
