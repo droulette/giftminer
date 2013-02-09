@@ -2,7 +2,7 @@ Gift::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
   
   config.after_initialize do
-    Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+    Rails.application.routes.default_url_options[:host] = 'giftminer.com'
   end
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
