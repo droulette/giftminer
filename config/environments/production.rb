@@ -10,7 +10,7 @@ Gift::Application.configure do
     :port                 => 587,
     :domain               => 'giftminer.com',
     :user_name            => 'support@giftminer.com',
-    :password             => ENV['smtp_password'],
+    :password             => ENV['SMTP_PASSWORD'],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
     
