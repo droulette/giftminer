@@ -8,7 +8,7 @@ Gift::Application.routes.draw do
   get 'home/dashboard' => 'home#dashboard'
   get 'about_us' => 'home#about_us'
   get 'contact_us' => 'home#contact_us'
-  get 'faq' => 'home#faq'
+  get 'support' => 'home#support'
   resources :ocat_occassions
   resources :ocats
   resources :category_product_links
