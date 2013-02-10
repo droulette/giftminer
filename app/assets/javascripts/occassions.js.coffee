@@ -2,5 +2,5 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
-  $('#occassion_full_name').autocomplete
-    source: $('#occassion_full_name').data('autocomplete-source')
+  $('#occassion_recipient_name').autocomplete
+    source: $('#occassion_recipient_name').data('autocomplete-source')

@@ -15,7 +15,8 @@ class OccassionsController < ApplicationController
   # GET /occassions/1.json
   def show
     @occassion = Occassion.find(params[:id])
-    @recommendation = @occassion.product_recommendations.first
+    @recommendation = @occassion.product_recommendations.reject().first
+      
     @products = Product.all
     @productcats = ProductCat.all
     @user=current_user

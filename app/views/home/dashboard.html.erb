@@ -24,7 +24,7 @@
       <ul style='list-style-type: none;margin:0;'>
         <% occassions.each do |occassion| %>
         <li>
-          <%= link_to(truncate(occassion.name, :length =>12), occassion_path(occassion)) %>
+          <%= link_to(truncate(occassion.name, :length =>15), occassion_path(occassion)) %>
         </li>
         <% end %>
       </ul>
@@ -40,7 +40,7 @@
     <% @new_products.each do |new_product| %>
     <div class='thumbnail new_additions'>
       <div class='caption'>
-        <%= link_to(truncate(new_product.name, :length =>12), product_path(new_product.id)) %>
+        <%= link_to(truncate(new_product.name, :length =>15), product_path(new_product.id)) %>
       </div>
       <%= link_to image_tag(new_product.pic.url(:small)), product_path(new_product.id) %></br>
     </div>

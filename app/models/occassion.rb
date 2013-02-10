@@ -7,7 +7,7 @@ class Occassion < ActiveRecord::Base
 
 
   
-  attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids, :recipient_id, :full_name
+  attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids, :recipient_id, :recipient_name
 
   validates :date, :name, :price_range, :type_of_gift, :presence => true
 
@@ -16,12 +16,12 @@ class Occassion < ActiveRecord::Base
   scope :past, where('date < ?',  Date.today)
 
   
-  def full_name
+  def recipient_name
     recipient.try(:full_name)
   end
   
-  def full_name=(name)
-    self.recipient = Recipient.find_or_create_by_full_name(name) if name.present?
+  def recipient_name=(name)
+    self.recipient = Recipient.find_or_create_by_recipient_name(name) if name.present?
   end
   
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130208000832) do
+ActiveRecord::Schema.define(:version => 20130209211609) do
 
   create_table "category_product_links", :force => true do |t|
     t.integer  "product_cat_id"
@@ -84,10 +84,8 @@ ActiveRecord::Schema.define(:version => 20130208000832) do
     t.string   "relationship"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "full_name"
   end
 
-  add_index "recipients", ["full_name"], :name => "index_recipients_on_full_name"
   add_index "recipients", ["user_id"], :name => "index_recipients_on_user_id"
 
   create_table "recommendations", :force => true do |t|

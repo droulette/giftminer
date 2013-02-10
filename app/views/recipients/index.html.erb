@@ -27,7 +27,7 @@
   
   <% @recipients.each do |recipient| %>
     <tr>
-      <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
+      <td><%= link_to recipient.recipient_name, recipient_path(recipient) %></td>
       <td><%= recipient.age_range %></td>
       <td><%= recipient.gender %></td>
       <td><%= recipient.relationship %></td>

@@ -29,4 +29,9 @@ class HomeController < ApplicationController
   
   def support
   end
+
+  def subscription
+    @subscription = Subscription.new
+  end
+
 end

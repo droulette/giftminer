@@ -4,11 +4,11 @@ class RecipientsController < ApplicationController
   def index
     @recipients = current_user.recipients.all
     
-    @recipients_search = Recipient.order(:full_name).where("full_name like ?", "%#{params[:term]}%")
+    @recipients_search = Recipient.order(:first_name).where("first_name like ?", "#{params[:term]}%")
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @recipients_search.map(&:full_name) }
+      format.json { render json: @recipients_search.map(&:recipient_name) }
     end
 
 
