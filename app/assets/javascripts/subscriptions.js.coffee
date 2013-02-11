@@ -11,7 +11,8 @@ subscription =
     $('#new_subscription').submit ->
       $('input[type=submit]').attr('disabled', true)
       subscription.processCard()
-
+      false
+      
   processCard: ->
     card =
       number: $('#card_number').val()
