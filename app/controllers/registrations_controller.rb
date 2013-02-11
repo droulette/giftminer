@@ -116,4 +116,8 @@ class RegistrationsController < Devise::RegistrationsController
     send(:"authenticate_#{resource_name}!", :force => true)
     self.resource = send(:"current_#{resource_name}")
   end
+  
+  def subscription
+    @subscription = Subscription.new
+  end
 end
