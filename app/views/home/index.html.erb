@@ -13,37 +13,43 @@
       </p>
     </div>
     <div class="steps well">
+      <%= image_tag "laptop.png", :style => "top: -30px; left:55px; position:absolute" %>
       <p>
         <span class="badge">Step 1</span>
       </p>
-      <p>
+      <h4>
         Tell us the occasion
+      </h4>
+      <p>
+        What, when and for whom?<br />
+        <i>Birthdays, Anniversaries, Holidays, etc...</i>
       </p>
-      <%= image_tag 'notepad.png' %>
     </div>
     <div class="steps well">
       <p>
         <span class="badge">Step 2</span>
       </p>
-      <p>
+      <%= image_tag "giftbox.png", :style => "top: -30px; left:55px; position:absolute" %>
+      <h4>
         We'll find the gift
-        <br/>
-        &nbsp;
-      </p>
-      <%= image_tag 'Gift_Box.png' %>
+      </h4>
+      <p>Our algorithm will recommend the perfect gift for your occasion.<br />&nbsp;</p>
     </div>
     <div class="steps well">
+      <%= image_tag "smile.png", :style => "top: -30px; left:55px; position:absolute" %>
       <p>
         <span class="badge">Step 3</span>
       </p>
-      <p>
+      <h4>
         <% if cookies[:gender] == 'female' %>
-          Enjoy the<br />praises!
+          We save you time!
         <% else %>
           You take the credit!
         <% end %>
+      </h4>
+      <p>
+        We will buy, wrap, and ship the gift for you automatically.<br />&nbsp;
       </p>
-      <%= image_tag 'smile.png' %>
     </div>
   </div>
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"well",:style=>"float:right;background-color: rgba(245,245,245,.5);margin-top:29px"}) do |f| %>
