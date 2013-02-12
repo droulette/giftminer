@@ -5,6 +5,6 @@ class Recommendation < ActiveRecord::Base
   
   attr_accessible :product_id, :user_id, :occassion_id
   
-  validates :user_id, :product_id, :presence => true
+  validates :user_id, :product_id, :occassion_id, :presence => true
 
 end

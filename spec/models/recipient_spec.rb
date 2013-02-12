@@ -1,5 +1,8 @@
 require 'spec_helper'
 
 describe Recipient do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'shoul not create a blank recipient' do
+    recipient = Recipient.new
+    assert !recipient.save
+  end
 end

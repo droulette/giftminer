@@ -84,8 +84,6 @@ class OccassionsController < ApplicationController
     @occassion = Occassion.find(params[:id])
     @ocats = Ocat.all
     
-    
-    
     respond_to do |format|
       if @occassion.update_attributes(params[:occassion])
         format.html {

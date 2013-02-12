@@ -9,10 +9,21 @@ describe Occassion do
 
   after(:each)  { User.delete_all }
 
+  describe 'index' do
+    
+  end
+
+
   describe 'new' do
 
-    it 'creates a new record' do
-      Occassion.new.should be_a(Occassion)
+    it 'shoul not create a blank occassion' do
+      occassion = Occassion.new()
+      !assert occassion.save
+    end
+    
+    it 'should be able to create occassion with a name' do
+      occassion = Occassion.new({'name'=>'birthday'})
+      assert occassion.save
     end
 
     it 'creates a new occassion' do

@@ -5,20 +5,12 @@ class OccassionTest < ActiveSupport::TestCase
   #   assert true
   # end
   
-  setup do
-    @ocat = ocats(:one)
-  end
-  
-  test 'should create a recommendation' do
+  test "should save occassion" do
     occassion = Occassion.new
-    occassion.name = 'Kevin\'s Birthday'
-    occassion.description = 'This is his birthday'
-    occassion.user_id = 1
-    occassion.price_range = 'under $25' 
-    occassion.type_of_gift = 'Silly'
-    occassion.ocat_ids = [@ocat.id]
-    occassion.date = '2013-01-05 16:42:33'
-    occassion.save
-    assert_equal 1, occassion.recommendations.length
-  end 
+    occassion.name = "Occassion Name"
+    occassion.date = "10/10/2013"
+    occassion.type_of_gift = "I don't know"
+    occassion.price_range = "puppy"
+    assert occassion.save, "Occassion could not be saved: #{occassion.errors.full_messages.inspect}"
+  end
 end

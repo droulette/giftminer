@@ -24,15 +24,18 @@
       <th>Edit</th>
       <th>Destroy</th>
     </tr>
-  
+
+
   <% @recipients.each do |recipient| %>
     <tr>
-      <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
-      <td><%= recipient.age_range %></td>
-      <td><%= recipient.gender %></td>
-      <td><%= recipient.relationship %></td>
-      <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
-      <td><%= link_to 'Destroy', recipient, confirm: 'Are you sure?', method: :delete %></td>
+      <% unless recipient.full_name.blank? %>
+        <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
+        <td><%= recipient.age_range %></td>
+        <td><%= recipient.gender %></td>
+        <td><%= recipient.relationship %></td>
+        <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
+        <td><%= link_to 'Destroy', recipient, confirm: 'Are you sure?', method: :delete %></td>
+      <% end %>
     </tr>
   <% end %>
   </table>

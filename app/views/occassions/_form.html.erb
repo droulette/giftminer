@@ -4,7 +4,7 @@
     <%= f.label :name, "Occasion Name", :class => 'control-label' %>
     <div class='controls'>
       <%= f.text_field :name %>
-      <span class='me'><%= 'Please enter a Name' if @occassion.errors[:name].any? %></span>
+      <span class='help-inline'><%= 'Please enter a Name' if @occassion.errors[:name].any? %></span>
     </div>
   </div>
   <div class="field control-group <%= 'error' if @occassion.errors[:recipient_name].any? %>">
@@ -58,7 +58,7 @@
   </div>
   
   <div class="actions form-actions">
-    <%= f.submit 'Create Occassion', :class => 'btn btn-primary' %>
+    <%= f.submit 'Submit', :class => 'btn btn-primary' %>
   </div>
 <% end %>
 
