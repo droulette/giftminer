@@ -26,7 +26,6 @@
           <div>
             <%= link_to current_user.email, edit_user_registration_path %>
             <%= link_to((image_tag avatar_url(current_user)),edit_user_registration_path) %> |
-            <%= link_to "My Wish List", '#' %> |
             <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
           </div>
         <% else %>

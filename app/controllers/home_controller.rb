@@ -29,6 +29,8 @@ class HomeController < ApplicationController
   
   def support
   end
-
+  
+  def thank_you
+  end
 
 end

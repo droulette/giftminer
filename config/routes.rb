@@ -9,7 +9,8 @@ Gift::Application.routes.draw do
   get 'about_us' => 'home#about_us'
   get 'contact_us' => 'home#contact_us'
   get 'support' => 'home#support'
-  
+  get 'thank_you' => 'home#thank_you'
+    
   resources :ocat_occassions
   resources :ocats
   resources :category_product_links
