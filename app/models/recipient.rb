@@ -3,6 +3,8 @@ class Recipient < ActiveRecord::Base
   has_many :occassions
   attr_accessible :age_range, :first_name, :gender, :last_name, :relationship, :recipient_name
 
+  validates :first_name, :presence => true 
+  
   def full_name
     "#{first_name} #{last_name}"
   end
