@@ -144,8 +144,9 @@ class Occassion < ActiveRecord::Base
     if price_range == "under $25" or price_range == "$25.01-$100" or price_range == "$100.01-$250" or price_range == "$250+"
       my_recommendations.push(recent_product)
     end
-
-    my_recommendations
+    
+    my_recommendations.reject{|product| recommendations.find_by_product_id(product.id).owned_or_passed? if recommendations.find_by_product_id(product.id) }
+    
   end
 
 end

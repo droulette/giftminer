@@ -15,17 +15,13 @@ class OccassionsController < ApplicationController
   # GET /occassions/1.json
   def show
     @occassion = Occassion.find(params[:id])
-    @rejects = []
-    @own_pass = @occassion.recommendations.all.each do |recommendation|
-      if recommendation.own ==1 || recommendation.pass ==1
-        @rejects.push(recommendation.product_id)
-      end
-    end
-
-    @recommendation = @occassion.product_recommendations.reject{|recommendation| @own_pass.include?(recommendation.id)}.first
     @products = Product.all
     @productcats = ProductCat.all
-    @user=current_user
+
+    if @my_recommendation = @occassion.product_recommendations.first
+      @recommendation = current_user.recommendations.find_by_product_id_and_occassion_id(@my_recommendation.id,@occassion.id) || current_user.recommendations.build(:product_id => @my_recommendation.id, :occassion_id => @occassion.id)
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @occassion }
@@ -55,7 +51,7 @@ class OccassionsController < ApplicationController
 
   # POST /occassions
   # POST /occassions.json
-  def create    
+  def create
     @occassion = current_user.occassions.build(params[:occassion])
     
     # if you pass recipient_name in before the @occassion-object is initialized,
@@ -63,8 +59,7 @@ class OccassionsController < ApplicationController
     @occassion.recipient_name = params[:occassion][:recipient_name]
     
     @ocats = Ocat.all
-    
-    respond_to do |format|
+      respond_to do |format|
       if @occassion.save
         format.html {
           flash[:success] = 'Occasion was successfully created.'

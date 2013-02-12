@@ -14,7 +14,7 @@
   <tr>
     <td><%= recommendation.user.email %></td>
     <td><%= recommendation.product.name %></td>
-    <td><%= recommendation.occassion.name if recommendation.occassion %></td>
+    <td><%= recommendation.occassion.id  if recommendation.occassion %></td>
     <td><%= link_to 'Show', recommendation %></td>
     <td><%= link_to 'Edit', edit_recommendation_path(recommendation) %></td>
     <td><%= link_to 'Destroy', recommendation, confirm: 'Are you sure?', method: :delete %></td>

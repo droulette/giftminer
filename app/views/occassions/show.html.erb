@@ -5,7 +5,7 @@
       <span class='divider'>/</span>
     </li>
     <li>
-      <%= link_to 'Occasion', occassions_path %>
+      <%= link_to 'Occasions', occassions_path %>
       <span class='divider'>/</span>
     </li>
     <li>
@@ -23,12 +23,12 @@
   </p>
   <% end %>
   
-<% unless @occassion.description == '' %>
-  <p>
-    <b><%= "Description:" %></b>
-    <%= @occassion.description %>
-  </p>
-<% end %>
+  <% unless @occassion.description == '' %>
+    <p>
+      <b><%= "Description:" %></b>
+      <%= @occassion.description %>
+    </p>
+  <% end %>
   <p>
     <b>Date:</b>
     <%= @occassion.date.strftime("%B %d, %Y") %>
@@ -59,24 +59,45 @@
   <%= link_to 'Edit', edit_occassion_path(@occassion)  %>
 
 </div>
-<div class='occassionrec'>
 
-  <% unless @recommendation.nil? %>
-  <div class = "fleft"; style='width:325px;'>
-    <%= link_to(image_tag(@recommendation.pic.url(:medium), :class => 'thumbnail'), product_path(@recommendation.id)) %>
-  </div>
-  <div class = "show">
-    <h3> <%= @recommendation.name %> </h3>
-    <h4 style= 'color:#da4f49;'> <%= number_to_currency(number_with_precision(@recommendation.price, :precision => 2), :unit => "$") %> </h4>
-    <p>
-      <b>Description: </b><%= @recommendation.description %>
-    </p>
-  </div>
+<div class='occassionrec'>
+  <% if @my_recommendation %>
+    <h3>We recommend...</h3>
+    <div class = "fleft"; style='width:325px;'>
+      <%= link_to(image_tag(@my_recommendation.pic.url(:medium), :class => 'thumbnail'), product_path(@my_recommendation.id)) %>
+    </div>
+    <div class = "show">
+      <h3> <%= @my_recommendation.name %> </h3>
+      <h4 style= 'color:#da4f49;'> <%= number_to_currency(number_with_precision(@my_recommendation.price, :precision => 2), :unit => "$") %> </h4>
+      <p>
+        <b>Description: </b><%= @my_recommendation.description %>
+      </p>
+      </br>
+      <div class='clear'></div>
+      <div class="actions fleft">
+        <%= submit_tag 'Buy', :name => 'Buy', :class => 'btn btn-success' %>
+      </div>
+  
+      <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
+        <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
+        <%= f.hidden_field :occassion_id, :value => @occassion.id %>
+        <%= f.hidden_field :own, :value => 1 %>
+        <div class="actions fleft" style='margin-left:15px;'>
+          <%= f.submit 'Own', :class => 'btn btn-warning' %>
+        </div>
+      <% end %>
+      
+      <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
+        <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
+        <%= f.hidden_field :occassion_id, :value => @occassion.id %>
+        <%= f.hidden_field :pass, :value => 1 %>
+        <div class="actions fleft" style='margin-left:15px;'>
+          <%= f.submit 'Pass', :class => 'btn btn-danger' %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <h3>Sorry, we have no recommendations for you at this time. Please check back soon.</h3>
   <% end %>
 </div>
-<div class="clear"></div>
-
-
-
-
 

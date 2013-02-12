@@ -16,44 +16,8 @@ class Product < ActiveRecord::Base
   
   scope :sorteddesc, order("id DESC")
 
-  after_save :add_recommendation
-
   before_destroy :destroy_recommendations
 
-  def save_recommendation(user_id, occassion_id, product_id)
-    recommendation = Recommendation.new
-    recommendation.user_id = user_id
-    recommendation.product_id = product_id
-    recommendation.occassion_id = occassion_id
-    recommendation.save
-  end
-  
-  
-  def add_recommendation
-    occass = Occassion.all
-    products = Product.all
-    occass.each do |occas|
-      ocat_categories = occas.ocats ? occas.ocats.collect{|ocat| ocat.category } : []
-      product_categories = product_cats ? product_cats.collect{|product_category| product_category.name } : []
-      if occas.price_range == 'under $25' and occas.type_of_gift.downcase == 'silly' and (ocat_categories.include?('Birthday') or ocat_categories.include?('anniversary')) and product_categories.include?('Food')
-        occas.recommendations.each do |recommendation|
-          recommendation.destroy
-        end
-        save_recommendation(occas.user.id, occas.id, id)  
-      elsif occas.price_range == 'under $25' and product_categories.include?('Electronics')
-        occas.recommendations.each do |recommendation|
-          recommendation.destroy
-        end
-        save_recommendation(occas.user.id, occas.id, id)  
-      elsif (occas.price_range == "$25.01-$100" or occas.price_range == "$100.01-$250") and product_categories.include?('Clothes')
-        occas.recommendations.each do |recommendation|
-          recommendation.destroy
-        end
-        save_recommendation(occas.user.id, occas.id, id)  
-      end
-    end if product_cats
-  end
-  
   def destroy_recommendations
     recommendations.each do |recommendation|
       recommendation.destroy

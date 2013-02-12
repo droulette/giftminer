@@ -2,11 +2,10 @@
 
 FactoryGirl.define do
   factory :recipient do
-    user nil
     first_name "MyString"
     last_name "MyString"
     age_range "MyString"
     gender "MyString"
-    relation "MyString"
+    relationship "MyString"
   end
 end

@@ -39,14 +39,14 @@ class RecommendationsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    
-    @recommendation = Recommendation.new(params[:recommendation])
+    @recommendation = current_user.recommendations.build(params[:recommendation])
     @users=User.all
     @products=Product.all
     @occassions=Occassion.all
+
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to @recommendation, notice: 'Recommendation was successfully created.' }
+        format.html { redirect_to occassion_path(@recommendation.occassion_id)}
         format.json { render json: @recommendation, status: :created, location: @recommendation }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class RecommendationsController < ApplicationController
     @occassions=Occassion.all
     respond_to do |format|
       if @recommendation.update_attributes(params[:recommendation])
-        format.html { redirect_to @recommendation, notice: 'Recommendation was successfully updated.' }
+        format.html { redirect_to occassion_path(@recommendation.occassion_id) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

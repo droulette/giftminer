@@ -5,7 +5,8 @@ FactoryGirl.define do
     end  
     password 'foobar'
     confirmed_at 2013-01-01
- end
+    after(:build) { |instance| instance.recipients << create_list(:recipient, 1) }
+  end
 
   factory :product do
     sequence :name do |n|
