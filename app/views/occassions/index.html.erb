@@ -29,7 +29,7 @@
     <th>Edit</th>
     <th>Delete</th>
   </tr>
-    <% unless @occassions.blank? %>
+  <% unless @occassions.blank? %>
   <% @occassions.each do |occassion| %>
   <tr>
     <td><%= link_to occassion.name, occassion_path(occassion) %></td>
@@ -48,7 +48,7 @@
   </tr>
   
   <% end if @occassions %>
-      <% else %>
+    <% else %>
       <tr>
         <td colspan="6"> You have not entered any Occasion. Please add <%= link_to 'new occasions', new_occassion_path %>. </td>
       </tr>

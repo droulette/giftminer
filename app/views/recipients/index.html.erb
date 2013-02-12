@@ -23,7 +23,7 @@
       <th>Edit</th>
       <th>Delete</th>
     </tr>
-    <% unless @recipients.blank? %>
+    <% unless @recipients.blank? or @recipients.nil? %>
       <% @recipients.each do |recipient| %>
       <tr>
         <% unless recipient.full_name.blank? %>
