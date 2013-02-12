@@ -16,6 +16,12 @@
 
 <div class='well occassiondetails'>
   <h3> <%= @occassion.name %></h3>
+  <% if (@occassion.recipient) %>
+  <p>
+    <b>Recipient:</b>
+    <%= link_to @occassion.recipient_name, recipient_path(@occassion.recipient) %>
+  </p>
+  <% end %>
   
 <% unless @occassion.description == '' %>
   <p>

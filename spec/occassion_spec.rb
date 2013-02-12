@@ -11,19 +11,23 @@ describe Occassion do
 
   describe 'new' do
 
+    it 'creates a new record' do
+      Occassion.new.should be_a(Occassion)
+    end
+
     it 'creates a new occassion' do
       occassion = FactoryGirl.create(:occassion, :price_range=>'under $25')
       product = FactoryGirl.create(:product, :price=>24)
       ocat = FactoryGirl.create(:ocat)
       visit ('/occassions/new')
-      fill_in 'Name', :with => '49ers super bowl party'
+      fill_in 'Recipient Name', :with => 'a'
       fill_in 'Description', :with => 'hey o'
       fill_in 'Date', :with => '01/11/2013'
+      fill_in 'Occasion Name', :with => '49ers super bowl party'
       select 'under $25',:from => 'occassion_price_range'
       select 'Gamer',:from => 'occassion_type_of_gift'
       find(:css, "#occassion_ocat_ids_[value='1']").set(true)
       click_button('Create Occassion')
-      save_and_open_page
       page.should have_content('successful')
     end
 

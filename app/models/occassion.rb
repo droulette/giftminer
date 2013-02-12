@@ -4,8 +4,8 @@ class Occassion < ActiveRecord::Base
   has_many :recommendations
   has_many :products, :through => :recommendations
   has_and_belongs_to_many :ocats
-
-
+  
+  before_destroy :destroy_recommendations
   
   attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids, :recipient_id, :recipient_name
 
@@ -21,13 +21,11 @@ class Occassion < ActiveRecord::Base
   end
   
   def recipient_name=(name)
-    self.recipient = Recipient.find_or_create_by_recipient_name(name) if name.present?
+    if user and !name.nil?
+      name = name.split(' ')
+      self.recipient = user.recipients.find_by_first_name_and_last_name(name[0],name[1]) || user.recipients.create({'first_name' => name[0],'last_name' => name[1]})
+    end
   end
-  
-  
-  #after_save :create_recommendations
-
-  before_destroy :destroy_recommendations
   
   def save_recommendation(product_id)
     recommendation = Recommendation.new
@@ -36,44 +34,6 @@ class Occassion < ActiveRecord::Base
     recommendation.occassion_id = id
     recommendation.save
   end
-
-  # def create_recommendations
-  # ocats_name = ocats.collect{|ocat| ocat.category }
-  # product_cats = ProductCat.all
-  # if recommendations.length  > 0
-  # recommendations.each do |recommendation|
-  # recommendation.destroy
-  # end
-  # end
-  # if price_range == 'under $25' and type_of_gift.downcase == 'silly' and (ocats_name.include?('Birthday') or ocats_name.include?('anniversary'))
-  # product_cats.each do |product_cat|
-  # if product_cat.name == ('Food')
-  # product_cat.products.each do |product|
-  # save_recommendation(product.id)
-  # end
-  # end
-  # end
-  # elsif price_range == 'under $25'
-  # product_cats.each do |product_cat|
-  # if product_cat.name == ('Electronics')
-  # product_cat.products.each do |product|
-  # save_recommendation(product.id)
-  # end
-  # end
-  # end
-  # elsif price_range == "$25.01-$100" or price_range == "$100.01-$250"
-  # product_cats.each do |product_cat|
-  # if product_cat.name == ('Clothes')
-  # product_cat.products.each do |product|
-  # save_recommendation(product.id)
-  # end
-  # end
-  # end
-  # else if product_cat.last
-  # save_recommendation(product_cat.last.products.last.id)
-  # end
-  # end
-  # end
 
   def destroy_recommendations
     recommendations.each do |recommendation|

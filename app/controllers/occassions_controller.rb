@@ -55,8 +55,13 @@ class OccassionsController < ApplicationController
 
   # POST /occassions
   # POST /occassions.json
-  def create
+  def create    
     @occassion = current_user.occassions.build(params[:occassion])
+    
+    # if you pass recipient_name in before the @occassion-object is initialized,
+    # it won't be initialized correctly because there is no user_id
+    @occassion.recipient_name = params[:occassion][:recipient_name]
+    
     @ocats = Ocat.all
     
     respond_to do |format|
@@ -76,9 +81,11 @@ class OccassionsController < ApplicationController
   # PUT /occassions/1
   # PUT /occassions/1.json
   def update
-
     @occassion = Occassion.find(params[:id])
     @ocats = Ocat.all
+    
+    
+    
     respond_to do |format|
       if @occassion.update_attributes(params[:occassion])
         format.html {

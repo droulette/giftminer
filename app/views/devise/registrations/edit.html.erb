@@ -42,28 +42,12 @@
           <div class="control-group <%= resource.errors[:email].any? ? 'error' : '' %>">
             <%= f.label :email, :class => 'control-label' %>
             <div class='controls'>
-              <%= f.email_field :email, :id => 'inputError' %>
+              <%= f.email_field :email %>
               <span class='help-inline'><% if resource.errors[:email].include?("can't be blank") %>
-                <%= 'Please enter a Email '%>
+                  <%= 'Please enter a Email '%>
                 <% elsif resource.errors[:email].include?("is invalid") %>
-                <%= 'Please enter a valid Email' %>
+                  <%= 'Please enter a valid Email' %>
                 <% end %> </span>
-            </div>
-          </div>
-  
-          <div class="control-group">
-            <%= f.label :password, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.password_field :password, :id => 'inputError', :autocomplete => "off" %>
-              <span class='help-inline'>(leave blank if you don't want to change it)</span>
-            </div>
-          </div>
-  
-          <div class="control-group <%= resource.errors[:password].include?("doesn't match confirmation") ? 'error' : '' %>">
-            <%= f.label :password_confirmation, :class => 'control-label', :for => 'inputError' %>
-            <div class='controls'>
-              <%= f.password_field :password_confirmation, :autocomplete => "off", :id => 'inputError'   %>
-              <span class='help-inline'><%= 'Please confirm password' if resource.errors[:password].include?("doesn't match confirmation") %></span>
             </div>
           </div>
   
@@ -122,21 +106,39 @@
               <%= f.text_field :city %>
             </div
           </div>
-  
+
+          <br/>
+
           <div class="control-group">
             <%= f.label :state, :class => 'control-label' %>
             <div class='controls'>
               <%= f.text_field :state %>
             </div>
           </div>
-  
+
           <div class="control-group">
             <%= f.label :zip, :class => 'control-label' %>
             <div class='controls'>
               <%= f.text_field :zip %>
             </div>
           </div>
-  
+
+          <div class="control-group">
+            <%= f.label :password, :class => 'control-label' %>
+            <div class='controls'>
+              <%= f.password_field :password, :autocomplete => "off" %>
+              <span class='help-inline'>(leave blank if you don't want to change it)</span>
+            </div>
+          </div>
+
+          <div class="control-group <%= resource.errors[:password].include?("doesn't match confirmation") ? 'error' : '' %>">
+            <%= f.label :password_confirmation, :class => 'control-label' %>
+            <div class='controls'>
+              <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+              <span class='help-inline'><%= 'Please confirm password' if resource.errors[:password].include?("doesn't match confirmation") %></span>
+            </div>
+          </div>
+
           <div class='form-actions'>
             <%= f.submit "Update", :class => 'btn btn-danger' %>
           </div>

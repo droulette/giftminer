@@ -8,7 +8,7 @@ class RecipientsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @recipients_search.map(&:recipient_name) }
+      format.json { render json: @recipients_search.map(&:full_name) }
     end
 
 

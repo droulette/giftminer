@@ -3,7 +3,7 @@ class Recipient < ActiveRecord::Base
   has_many :occassions
   attr_accessible :age_range, :first_name, :gender, :last_name, :relationship, :recipient_name
 
-  def recipient_name
+  def full_name
     "#{first_name} #{last_name}"
   end
 

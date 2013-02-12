@@ -11,7 +11,7 @@
 </div>
 
 <div class='fright'>
-  <%= link_to 'Add Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
+  <%= link_to 'New Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
   <%= link_to "View as Calendar", home_dashboard_path, :class => 'btn btn-secondary' %>
 </div>
 
@@ -20,7 +20,8 @@
 
 <table class='table table-bordered table-striped table-condensed'>
   <tr>
-    <th>Name</th>
+    <th>Occasion Name</th>
+    <th>Recipient Name</th>
     <th>Description</th>
     <th>Date</th>
     <th>Price Range</th>
@@ -32,6 +33,12 @@
   <% @occassions.each do |occassion| %>
   <tr>
     <td><%= link_to occassion.name, occassion_path(occassion) %></td>
+    <td><% if occassion.recipient %>
+        <%= link_to occassion.recipient.full_name, recipient_path(occassion.recipient) %>
+      <% else %>
+        <%= '' %>
+      <% end %>
+      </td>
     <td><%= occassion.description %></td>
     <td><%= occassion.date.strftime("%B %d, %Y") %></td>
     <td><%= occassion.price_range %></td>
