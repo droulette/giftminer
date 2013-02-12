@@ -9,7 +9,6 @@
     </li>
   </ul>
 </div>
-
 <div class='fright' style='margin-bottom:20px;'>
   <%= link_to 'New Recipient', new_recipient_path, :class => 'btn btn-primary'  %>
 </div>
@@ -24,19 +23,23 @@
       <th>Edit</th>
       <th>Delete</th>
     </tr>
-
-
-  <% @recipients.each do |recipient| %>
-    <tr>
-      <% unless recipient.full_name.blank? %>
-        <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
-        <td><%= recipient.age_range %></td>
-        <td><%= recipient.gender %></td>
-        <td><%= recipient.relationship %></td>
-        <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
-        <td><%= link_to 'Destroy', recipient, confirm: 'Are you sure?', method: :delete %></td>
+    <% unless @recipients.blank? %>
+      <% @recipients.each do |recipient| %>
+      <tr>
+        <% unless recipient.full_name.blank? %>
+          <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
+          <td><%= recipient.age_range %></td>
+          <td><%= recipient.gender %></td>
+          <td><%= recipient.relationship %></td>
+          <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
+          <td><%= link_to 'Destroy', recipient, confirm: 'Are you sure?', method: :delete %></td>
+        <% end %>
+      </tr>
       <% end %>
-    </tr>
-  <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6"> You have not entered any recipients. Please add <%= link_to 'new recipients', new_recipient_path %>. </td>
+      </tr>
+    <% end %>
   </table>
 </div>
