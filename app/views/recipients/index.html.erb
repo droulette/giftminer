@@ -32,7 +32,7 @@
           <td><%= recipient.gender %></td>
           <td><%= recipient.relationship %></td>
           <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
-          <td><%= link_to 'Destroy', recipient, confirm: 'Are you sure?', method: :delete %></td>
+          <td><%= link_to 'Delete', recipient, confirm: 'Are you sure?', method: :delete %></td>
         <% end %>
       </tr>
       <% end %>
