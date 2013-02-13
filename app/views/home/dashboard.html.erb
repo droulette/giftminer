@@ -4,8 +4,8 @@
       <h3>My Occasions</h3>
     </div>
     <div class='fright' style='margin:12px 0px 25px 0px;'>
-      <%= link_to 'New Occasion', new_occassion_path, :class => 'btn btn-primary'  %>
-      <%= link_to "View as List", occassions_path, :class => 'btn btn-secondary' %>
+      <%= link_to 'New Occasion', new_occasion_path, :class => 'btn btn-primary'  %>
+      <%= link_to "View as List", occasions_path, :class => 'btn btn-secondary' %>
     </div>
   </div>
 
@@ -17,14 +17,14 @@
         <li><%= link_to raw("&raquo;"), :month => (@date.end_of_month+1).strftime("%Y-%m-01") %> </li>
       </ul>
     </div>
-      <%= calendar_for(@occassions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
+      <%= calendar_for(@occasions, :html => {:class => 'table table-bordered'}, :year => @date.year, :month => @date.month) do |calendar| %>
       <%= calendar.head('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')%>
-      <%= calendar.day(:day_method => :date) do |date, occassions| %>
-      <%= link_to date.day, new_occassion_path(:date => date) %>
+      <%= calendar.day(:day_method => :date) do |date, occasions| %>
+      <%= link_to date.day, new_occasion_path(:date => date) %>
       <ul style='list-style-type: none;margin:0;'>
-        <% occassions.each do |occassion| %>
+        <% occasions.each do |occasion| %>
         <li>
-          <%= link_to(truncate(occassion.name, :length =>15), occassion_path(occassion)) %>
+          <%= link_to(truncate(occasion.name, :length =>15), occasion_path(occasion)) %>
         </li>
         <% end %>
       </ul>

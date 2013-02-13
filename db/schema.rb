@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213062916) do
+ActiveRecord::Schema.define(:version => 20130213173442) do
 
   create_table "category_product_links", :force => true do |t|
     t.integer  "product_cat_id"
@@ -30,15 +30,15 @@ ActiveRecord::Schema.define(:version => 20130213062916) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "ocats_occassions", :force => true do |t|
+  create_table "ocats_occasions", :force => true do |t|
     t.integer "ocat_id"
-    t.integer "occassion_id"
+    t.integer "occasion_id"
   end
 
-  add_index "ocats_occassions", ["ocat_id"], :name => "index_ocats_occassions_on_ocat_id"
-  add_index "ocats_occassions", ["occassion_id"], :name => "index_ocats_occassions_on_occassion_id"
+  add_index "ocats_occasions", ["ocat_id"], :name => "index_ocats_occassions_on_ocat_id"
+  add_index "ocats_occasions", ["occasion_id"], :name => "index_ocats_occassions_on_occassion_id"
 
-  create_table "occassions", :force => true do |t|
+  create_table "occasions", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "date"
@@ -50,8 +50,8 @@ ActiveRecord::Schema.define(:version => 20130213062916) do
     t.integer  "recipient_id"
   end
 
-  add_index "occassions", ["recipient_id"], :name => "index_occassions_on_recipient_id"
-  add_index "occassions", ["user_id"], :name => "index_occassions_on_user_id"
+  add_index "occasions", ["recipient_id"], :name => "index_occassions_on_recipient_id"
+  add_index "occasions", ["user_id"], :name => "index_occassions_on_user_id"
 
   create_table "product_cats", :force => true do |t|
     t.string   "name"
@@ -91,9 +91,9 @@ ActiveRecord::Schema.define(:version => 20130213062916) do
   create_table "recommendations", :force => true do |t|
     t.integer  "product_id"
     t.integer  "user_id"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
-    t.integer  "occassion_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "occasion_id"
     t.integer  "pass"
     t.integer  "own"
   end

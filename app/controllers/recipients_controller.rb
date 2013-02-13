@@ -48,7 +48,10 @@ class RecipientsController < ApplicationController
 
     respond_to do |format|
       if @recipient.save
-        format.html { redirect_to @recipient, notice: 'Recipient was successfully created.' }
+        format.html {
+          flash[:success] = 'Recipient was successfully created.'
+          redirect_to @recipient 
+        }
         format.json { render json: @recipient, status: :created, location: @recipient }
       else
         format.html { render action: "new" }
@@ -64,7 +67,10 @@ class RecipientsController < ApplicationController
 
     respond_to do |format|
       if @recipient.update_attributes(params[:recipient])
-        format.html { redirect_to @recipient, notice: 'Recipient was successfully updated.' }
+        format.html {
+          flash[:success] = 'Recipient was successfully updated.'
+          redirect_to @recipient 
+        }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

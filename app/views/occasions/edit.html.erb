@@ -5,20 +5,18 @@
       <span class='divider'>/</span>
     </li>
     <li>
-      <%= link_to 'Occasions', occassions_path %>
+      <%= link_to 'Occasions', occasions_path %>
       <span class='divider'>/</span>
     </li>
     <li>
-      Enter an Occasion
+      <%= @occasion.name %>
     </li>
   </ul>
 </div>
-
 <div class='well'>
   <legend>
-    Enter an Occasion
+    <%= @occasion.name %>
   </legend>
 
   <%= render 'form' %>
 </div>
-

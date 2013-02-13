@@ -21,8 +21,8 @@
     <%= f.select :product_id, options_for_select(@products.collect{ |p| [p.name,p.id] }, @recommendation.product ? @recommendation.product.id : "") %>
   </div>
   <div class="field">
-    <%= f.label :occassion_id %><br />
-    <%= f.select :occassion_id, options_for_select(@occassions.collect{ |p| [p.name,p.id] }, @recommendation.occassion ? @recommendation.occassion.id : "") %>
+    <%= f.label :occasion_id %><br />
+    <%= f.select :occasion_id, options_for_select(@occasions.collect{ |p| [p.name,p.id] }, @recommendation.occasion ? @recommendation.occasion.id : "") %>
   </div>
   <div class="actions">
     <%= f.submit %>

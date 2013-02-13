@@ -10,14 +10,14 @@ class HomeController < ApplicationController
   
   def dashboard
     @new_products = Product.sorteddesc.limit(6) 
-    @occassions = current_user.occassions.sorteddesc
-    @occassions_upcoming = current_user.occassions.upcoming.sorteddesc
-    @occassions_past = current_user.occassions.past.sorteddesc
+    @occasions = current_user.occasions.sorteddesc
+    @occasions_upcoming = current_user.occasions.upcoming.sorteddesc
+    @occasions_past = current_user.occasions.past.sorteddesc
     @date = params[:month] ? Date.parse(params[:month]) : Date.today
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @occassions }
-      format.js  { render :json => @occassions }
+      format.xml  { render :xml => @occasions }
+      format.js  { render :json => @occasions }
     end
   end
   

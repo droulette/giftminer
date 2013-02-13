@@ -4,7 +4,7 @@ class RecommendationsController < ApplicationController
     @users=User.all
     @products=Product.all
     @recs=Recommendation.all
-    @occassions=Occassion.all
+    @occasions=Occasion.all
   end
   
   def show
@@ -21,7 +21,7 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.new
     @users=User.all
     @products=Product.all
-    @occassions=Occassion.all
+    @occasions=Occasion.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @recommendation }
@@ -33,7 +33,7 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.find(params[:id])
     @users=User.all
     @products=Product.all
-    @occassions=Occassion.all
+    @occasions=Occasion.all
   end
 
   # POST /products
@@ -42,11 +42,11 @@ class RecommendationsController < ApplicationController
     @recommendation = current_user.recommendations.build(params[:recommendation])
     @users=User.all
     @products=Product.all
-    @occassions=Occassion.all
+    @occasions=Occasion.all
 
     respond_to do |format|
       if @recommendation.save
-        format.html { redirect_to occassion_path(@recommendation.occassion_id)}
+        format.html { redirect_to occasion_path(@recommendation.occasion_id)}
         format.json { render json: @recommendation, status: :created, location: @recommendation }
       else
         format.html { render action: "new" }
@@ -61,10 +61,10 @@ class RecommendationsController < ApplicationController
     @recommendation = Recommendation.find(params[:id])
     @users=User.all
     @products=Product.all
-    @occassions=Occassion.all
+    @occasions=Occasion.all
     respond_to do |format|
       if @recommendation.update_attributes(params[:recommendation])
-        format.html { redirect_to occassion_path(@recommendation.occassion_id) }
+        format.html { redirect_to occasion_path(@recommendation.occasion_id) }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -11,11 +11,11 @@ Gift::Application.routes.draw do
   get 'support' => 'home#support'
   get 'thank_you' => 'home#thank_you'
 
-  resources :ocat_occassions
+  resources :ocat_occasions
   resources :ocats
   resources :category_product_links
   resources :product_cats
-  resources :occassions
+  resources :occasions
   resources :dashboard
   resources :products
   resources :recommendations

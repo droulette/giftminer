@@ -7,7 +7,7 @@ class RecommendationTest < ActiveSupport::TestCase
   
   test "should save recommendation" do
     recommendation = Recommendation.new
-    recommendation.occassion_id = 8
+    recommendation.occasion_id = 8
     recommendation.user_id = 4
     recommendation.product_id = 8
     assert recommendation.save, "recommendation could not be saved: #{recommendation.errors.full_messages.inspect}"
@@ -15,7 +15,7 @@ class RecommendationTest < ActiveSupport::TestCase
 
   test "should not save recommendation" do
     recommendation = Recommendation.new
-    recommendation.occassion_id = 6
+    recommendation.occasion_id = 6
     recommendation.user_id = 4
     assert !recommendation.save
   end

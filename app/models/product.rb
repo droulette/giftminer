@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   
   has_many :recommendations
   has_many :users, :through => :recommendations
-  has_many :occassions, :through => :recommendations
+  has_many :occasions, :through => :recommendations
   has_many :category_product_links  
   has_many :product_cats, :through => :category_product_links  
   has_many :reviews 

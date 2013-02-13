@@ -11,9 +11,5 @@ class SubscriptionTest < ActiveSupport::TestCase
       assert subscription.save, "subscription could not be saved: #{subscription.errors.full_messages.inspect}"
     end
   
-    test "should not save subscription" do
-      subscription = Subscription.new
-      assert !subscription.save
-    end
     
 end

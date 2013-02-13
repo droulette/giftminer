@@ -25,7 +25,7 @@ FactoryGirl.define do
     description 'cool beans'
   end
 
-  factory :occassion do
+  factory :occasion do
     user
     name 'MyString'
     description 'MyText'
@@ -34,9 +34,9 @@ FactoryGirl.define do
     type_of_gift "silly"
   end
 
-  factory :ocat_occassion do
+  factory :ocat_occasion do
     association :ocat
-    association :occassion
+    association :occasion
   end
   
   factory :ocat do

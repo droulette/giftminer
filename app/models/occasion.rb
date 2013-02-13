@@ -1,4 +1,4 @@
-class Occassion < ActiveRecord::Base
+class Occasion < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient
   has_many :recommendations
@@ -31,7 +31,7 @@ class Occassion < ActiveRecord::Base
     recommendation = Recommendation.new
     recommendation.user_id = user_id
     recommendation.product_id = product_id
-    recommendation.occassion_id = id
+    recommendation.occasion_id = id
     recommendation.save
   end
 

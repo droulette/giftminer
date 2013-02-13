@@ -32,15 +32,15 @@ describe Product do
       # #product = FactoryGirl.create(:product)
       # #productcat = FactoryGirl.create(:product_cat)
       # # category_product_link = FactoryGirl.create(:category_product_link)
-      # visit ('/occassions/new')
+      # visit ('/occasions/new')
       # fill_in 'Name', :with => '49ers super bowl party'
       # fill_in 'Description', :with => 'hey o'
       # fill_in 'Date', :with => '01/11/2013'
-      # select 'under $25',:from => 'occassion_price_range'
-      # select 'Gamer',:from => 'occassion_type_of_gift'
+      # select 'under $25',:from => 'occasion_price_range'
+      # select 'Gamer',:from => 'occasion_type_of_gift'
       # save_and_open_page
-      # find(:css, "#occassion_ocat_ids_[value='1']").set(true)
-      # click_button('Create Occassion')
+      # find(:css, "#occasion_ocat_ids_[value='1']").set(true)
+      # click_button('Create Occasion')
       # @recommendation.should_not be_nil
     # end
 

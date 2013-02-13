@@ -5,50 +5,50 @@
       <span class='divider'>/</span>
     </li>
     <li>
-      <%= link_to 'Occasions', occassions_path %>
+      <%= link_to 'Occasions', occasions_path %>
       <span class='divider'>/</span>
     </li>
     <li>
-      <%= @occassion.name %>
+      <%= @occasion.name %>
     </li>
   </ul>
 </div>
 
-<div class='well occassiondetails'>
-  <h3> <%= @occassion.name %></h3>
-  <% if (@occassion.recipient) %>
+<div class='well occasiondetails'>
+  <h3> <%= @occasion.name %></h3>
+  <% if (@occasion.recipient) %>
   <p>
     <b>Recipient:</b>
-    <%= link_to @occassion.recipient_name, edit_recipient_path(@occassion.recipient) %>
+    <%= link_to @occasion.recipient_name, edit_recipient_path(@occasion.recipient) %>
   </p>
   <% end %>
   
-  <% unless @occassion.description == '' %>
+  <% unless @occasion.description == '' %>
     <p>
       <b><%= "Description:" %></b>
-      <%= @occassion.description %>
+      <%= @occasion.description %>
     </p>
   <% end %>
   <p>
     <b>Date:</b>
-    <%= @occassion.date.strftime("%B %d, %Y") %>
+    <%= @occasion.date.strftime("%B %d, %Y") %>
   </p>
 
   <p>
     <b>Price range:</b>
-    <%= @occassion.price_range %>
+    <%= @occasion.price_range %>
   </p>
 
   <p>
     <b>Type of gift:</b>
-    <%= @occassion.type_of_gift %>
+    <%= @occasion.type_of_gift %>
   </p>
 
   <p>
     <b>Occasion type:</b>
     <br/>
-    <% if @occassion.ocats.count >0 %>
-      <% @occassion.ocats.each do |ocat| %>
+    <% if @occasion.ocats.count >0 %>
+      <% @occasion.ocats.each do |ocat| %>
         <%= ocat.category %></br>
       <% end %>
     <% else %>
@@ -56,11 +56,11 @@
     <% end %>
   </p>
 
-  <%= link_to 'Edit', edit_occassion_path(@occassion)  %>
+  <%= link_to 'Edit', edit_occasion_path(@occasion)  %>
 
 </div>
 
-<div class='occassionrec'>
+<div class='occasionrec'>
   <% if @my_recommendation %>
     <h3>We recommend...</h3>
     <div class = "fleft"; style='width:325px;'>
@@ -80,7 +80,7 @@
   
       <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
         <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
-        <%= f.hidden_field :occassion_id, :value => @occassion.id %>
+        <%= f.hidden_field :occasion_id, :value => @occasion.id %>
         <%= f.hidden_field :own, :value => 1 %>
         <div class="actions fleft" style='margin-left:15px;'>
           <%= f.submit 'Own', :class => 'btn btn-warning' %>
@@ -89,7 +89,7 @@
       
       <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
         <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
-        <%= f.hidden_field :occassion_id, :value => @occassion.id %>
+        <%= f.hidden_field :occasion_id, :value => @occasion.id %>
         <%= f.hidden_field :pass, :value => 1 %>
         <div class="actions fleft" style='margin-left:15px;'>
           <%= f.submit 'Pass', :class => 'btn btn-danger' %>

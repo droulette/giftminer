@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   
   has_many :recommendations
   has_many :products, :through => :recommendations
-  has_many :occassions
+  has_many :occasions
   has_many :reviews
   has_one :subscription
   has_many :recipients
