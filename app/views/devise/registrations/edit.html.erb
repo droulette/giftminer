@@ -10,128 +10,123 @@
   </ul>
 </div>
 
+<div class="container" style="margin-top: 20px">
+  <div class="row-fluid">
+    <div class="span3">
+      <ul class="nav nav-list bs-docs-sidenav" style='margin:0px;'>
+        <li class='active'>
+          <a href="<%= edit_registration_path(resource_name) %>"><i class="icon-chevron-right"></i>Profile</a>
+        </li>
+        <li>
+          <a href="<%= new_subscription_path %>">
+          <i class="icon-chevron-right"></i>Payment Info</a>
+        </li>
+        <li>
+          <a href="#"><i class="icon-chevron-right"></i>Link</a>
+        </li>
+        <li>
+          <a href="#"><i class="icon-chevron-right"></i>Link</a>
+        </li>
+      </ul>
+    </div><!--/span-->
+    <div class="span9 well">
 
-<div class='well'>
-  <div class="container-fluid" style="margin-top: 20px">
-    <div class="row-fluid">
-      <div class="span3">
-        <ul class="nav nav-list bs-docs-sidenav">
-          <li class='active'>
-            <a href="<%= edit_registration_path(resource_name) %>"><i class="icon-chevron-right"></i>Profile</a>
-          </li>
-          <li>
-            <a href="<%= new_subscription_path %>"><i class="icon-chevron-right"></i>Payment Info</a>
-          </li>
-          <li>
-            <a href="#"><i class="icon-chevron-right"></i>Link</a>
-          </li>
-          <li>
-            <a href="#"><i class="icon-chevron-right"></i>Link</a>
-          </li>
-        </ul>
-      </div><!--/span-->
-      <div class="span9">
-  <legend>
-    My Profile
-  </legend>
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal", :method => :put }) do |f| %>
+      <% devise_error_messages! %>
+        
+        <legend>
+          My Profile
+        </legend>
 
+        <div class="control-group">
+            <%= f.label :firstname, "First Name", :class => 'control-label' %>
+            <div class='controls'>
+              <%= f.text_field :firstname %>
+            </div>
+        </div>
 
-        <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :class => "form-horizontal", :method => :put }) do |f| %>
-        <% devise_error_messages! %>
-
-          <div class="control-group">
-              <%= f.label :firstname, "First Name", :class => 'control-label' %>
-              <div class='controls'>
-                <%= f.text_field :firstname %>
-              </div>
+        <div class="control-group">
+          <%= f.label :lastname, "Last Name", :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :lastname %>
           </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :address_line_1, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :address_line_1 %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :address_line_2, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :address_line_2 %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :city, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :city %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :state, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :state %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :zip, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.text_field :zip %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :gender, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]) %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :birthday, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.date_select :birthday, {:order => [:day, :month, :year]}, {:style => "width:125px"} %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :password, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.password_field :password, :autocomplete => "off" %>
+            <span class='help-inline'>(leave blank if you don't want to change it)</span>
+          </div>
+        </div>
+
+        <div class="control-group <%= resource.errors[:password].include?("doesn't match confirmation") ? 'error' : '' %>">
+          <%= f.label :password_confirmation, :class => 'control-label' %>
+          <div class='controls'>
+            <%= f.password_field :password_confirmation, :autocomplete => "off" %>
+            <span class='help-inline'><%= 'Please confirm password' if resource.errors[:password].include?("doesn't match confirmation") %></span>
+          </div>
+        </div>
+
+        <div class='form-actions'>
+          <%= f.submit "Update", :class => 'btn btn-danger' %>
+        </div>
+      <% end %>
+
+      <p>Cancel my account</p>
   
-          <div class="control-group">
-            <%= f.label :lastname, "Last Name", :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :lastname %>
-            </div>
-          </div>
-  
-          <div class="control-group">
-            <%= f.label :address_line_1, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :address_line_1 %>
-            </div>
-          </div>
-  
-          <div class="control-group">
-            <%= f.label :address_line_2, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :address_line_2 %>
-            </div>
-          </div>
-  
-          <div class="control-group">
-            <%= f.label :city, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :city %>
-            </div>
-          </div>
+      <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.</p>
 
-          <div class="control-group">
-            <%= f.label :state, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :state %>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <%= f.label :zip, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.text_field :zip %>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <%= f.label :gender, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.select :gender, options_for_select([["Male", "Male"], ["Female", "Female"]]) %>
-            </div>
-          </div>
-  
-          <div class="control-group">
-            <%= f.label :birthday, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.date_select :birthday, {:order => [:day, :month, :year]}, {:style => "width:125px"} %>
-            </div>
-          </div>
-
-          <div class="control-group">
-            <%= f.label :password, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.password_field :password, :autocomplete => "off" %>
-              <span class='help-inline'>(leave blank if you don't want to change it)</span>
-            </div>
-          </div>
-
-          <div class="control-group <%= resource.errors[:password].include?("doesn't match confirmation") ? 'error' : '' %>">
-            <%= f.label :password_confirmation, :class => 'control-label' %>
-            <div class='controls'>
-              <%= f.password_field :password_confirmation, :autocomplete => "off" %>
-              <span class='help-inline'><%= 'Please confirm password' if resource.errors[:password].include?("doesn't match confirmation") %></span>
-            </div>
-          </div>
-
-          <div class='form-actions'>
-            <%= f.submit "Update", :class => 'btn btn-danger' %>
-          </div>
-        <% end %>
-
-        <p>
-          Cancel my account
-        </p>
-    
-        <p>
-          Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %>.
-        </p>
-
-      </div>
-    </div><!--/row-->
-  </div>
+    </div>
+  </div><!--/row-->
 </div>
+

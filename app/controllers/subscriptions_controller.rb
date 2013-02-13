@@ -2,6 +2,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
   def index
+    render :nothing
     @subscription = current_user.subscription
 
     respond_to do |format|
@@ -14,7 +15,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1.json
   def show
     @subscription = Subscription.find(params[:id])
-
+    @payment_info = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @subscription }
@@ -24,6 +25,9 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/new
   # GET /subscriptions/new.json
   def new
+    # If the user already has a subscription, take them to the show page
+    redirect_to subscription_path(current_user.subscription) and return if current_user.subscription
+    
     @subscription = Subscription.new
 
     respond_to do |format|
@@ -42,9 +46,9 @@ class SubscriptionsController < ApplicationController
   def create
     params[:subscription].delete(:stripe_customer_token)
     @subscription = current_user.build_subscription(params[:subscription])
-
+    
     if @subscription.save_with_payment
-      redirect_to @subscription, :notice => "Thank you for subscribing!"
+      redirect_to subscription_path(@subscription)
     else
       render :new
     end

@@ -26,7 +26,7 @@
   <div class="field control-group">
     <%= f.label :gender, :class => 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :gender %>
+      <%= f.select :gender, options_for_select([["Male", "Male"], [ 'Female','Female']], @recipient.gender) %>
     </div>
   </div>
   

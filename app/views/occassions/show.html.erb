@@ -19,7 +19,7 @@
   <% if (@occassion.recipient) %>
   <p>
     <b>Recipient:</b>
-    <%= link_to @occassion.recipient_name, recipient_path(@occassion.recipient) %>
+    <%= link_to @occassion.recipient_name, edit_recipient_path(@occassion.recipient) %>
   </p>
   <% end %>
   

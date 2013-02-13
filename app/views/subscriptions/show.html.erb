@@ -5,23 +5,31 @@
       <span class='divider'>/</span>
     </li>
     <li>
-      <%= link_to 'Subscriptions', subscriptions_path %>
-      <span class='divider'>/</span>
-    </li>
-    <li>
-      My Subscription
+      Payment Info
     </li>
   </ul>
 </div>
 
-<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span3">
+      <ul class="nav nav-list bs-docs-sidenav" style="margin:0">
+        <li><a href="<%= edit_registration_path(resource_name) %>"><i class="icon-chevron-right"></i>Profile</a></li>
+        <li class="active"><a href="<%= new_subscription_path %>"><i class="icon-chevron-right"></i>Payment Info</a></li>
+        <li><a href="#"><i class="icon-chevron-right"></i>Link</a></li>
+        <li><a href="#"><i class="icon-chevron-right"></i>Link</a></li>
+      </ul>
+    </div><!--/span-->
+    <div class="span9 well">
+    <% debug(Stripe::Customer.retrieve("cus_1FBvllsHJU2SBl")) %>
+      <h3>Payment Information</h3>
+      <p>Email: <%= @payment_info.email %></p>
+      <p>Description: <%= @payment_info.description %></p>
+      <p>Active Card: <%= @payment_info.active_card %></p>
+      <p>Account Balance: <%= @payment_info.account_balance %></p>
+      
+      <%= link_to 'Delete', @subscription, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
 
-
-<p>
-  <b>Stripe customer token:</b>
-  <%= @subscription.stripe_customer_token %>
-</p>
-
-
-<%= link_to 'Edit', edit_subscription_path(@subscription) %> |
-<%= link_to 'Back', subscriptions_path %>
+    </div>
+  </div><!--/row-->
+</div>
