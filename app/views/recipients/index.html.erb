@@ -17,7 +17,7 @@
   <table class='table table-bordered table-striped table-condensed'>
     <tr>
       <th>Name</th>
-      <th>Age range</th>
+      <th>Age</th>
       <th>Gender</th>
       <th>Relationship</th>
       <th>Edit</th>
@@ -28,7 +28,7 @@
       <tr>
         <% unless recipient.full_name.blank? %>
           <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
-          <td><%= recipient.age_range %></td>
+          <td><%= recipient.age %></td>
           <td><%= recipient.gender %></td>
           <td><%= recipient.relationship %></td>
           <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>

@@ -13,4 +13,6 @@ class RegistrationsController < Devise::RegistrationsController
     thank_you_path
   end
 
+  def password_update
+  end
 end
