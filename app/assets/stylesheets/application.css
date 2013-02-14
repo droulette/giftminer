@@ -113,13 +113,12 @@ button.ui-button-icon-only {
 .occasiondetails {
   float: left;
   width: 200px;
-  margin-top: 25px;
 }
 
 .occasionrec {
   float: left;
   width: 675px;
-  margin: 25px 0px 0px 25px;
+  margin: 0 0px 0px 25px;
 }
 
 .dashboard {

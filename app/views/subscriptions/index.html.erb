@@ -16,19 +16,21 @@
 
 <table class='table table-bordered table-striped table-condensed'>
   <tr>
-    <th>Stripe customer token</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>User Email</th>
+    <th>Show</th>
+    <th>Edit</th>
+    <th>Destroy</th>
   </tr>
 
-<% if @subscription %>
-  <tr>
-    <td><%= @subscription.stripe_customer_token %></td>
-    <td><%= link_to 'Show', @subscription %></td>
-    <td><%= link_to 'Edit', edit_subscription_path(@subscription) %></td>
-    <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+<% if @subscriptions %>
+  <% @subscriptions.each do |subscription| %>
+    <tr>
+      <td><%= subscription.user.email if subscription.user_id %></td>
+      <td><%= link_to 'Show', @subscription %></td>
+      <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
+      <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
 <% else %>  
   <tr>
     <td>N/A</td>

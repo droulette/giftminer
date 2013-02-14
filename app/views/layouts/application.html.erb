@@ -18,33 +18,13 @@
         </div>
       </div>
     <% end %>
-    <div class='container' style='margin-top:5px;min-height:550px;'>
-
-      <div class='loginbar'>
-
-        <% if user_signed_in? %>
-          <div>
-            <%= link_to current_user.email, edit_user_registration_path %><% if current_user.admin? %>(Administrator)<% end %>
-            <%= link_to((image_tag avatar_url(current_user)),edit_user_registration_path) %> |
-            <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-          </div>
-        <% else %>
-          <% if params['controller']=="devise/sessions" && params['action']== 'new' %>
-            <%= link_to 'Sign Up', root_path %>
-          <% else %>
-            <div class='buttonlink'>
-              <%= link_to "Sign in", new_user_session_path %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div class='clear'></div>
-
+    <div class='container' style='margin-top:10px;min-height:550px;'>
       <div class="navbar" style='height:40px; margin-bottom:0px; border-radius: 30px 30px 30px 30px;'>
         <div class="navbar-inner">
           <a href="/" title="giftminer" class="brand" style="background:url(/assets/glyphicons_069_gift.png) 20px 6px no-repeat; padding-left: 50px">giftminer</a>
-          <ul class="nav">
-            <% if user_signed_in? %>
+
+          <% if user_signed_in? %>
+            <ul class="nav">
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Occasions<b class="caret"></b> </a>
                 <ul class="dropdown-menu">
@@ -68,8 +48,25 @@
                   </li>
                 </ul>
               </li>
-
-            <% else %>
+            </ul>
+            <ul class="nav" style="float:right;margin:0;">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="border:0;">
+                  <% if current_user.admin? %><i class="icon-glass icon-white"></i><% end %> Welcome, <%= current_user.email %> <%= image_tag(avatar_url(current_user)) %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <%= link_to raw('<i class="icon-tasks"></i> Account Settings'), edit_user_registration_path %>
+                  </li>
+                  <li>
+                    <%= link_to raw('<i class="icon-off"></i> Sign out'), destroy_user_session_path, :method => :delete %>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+        <% else %>
+            <ul class="nav">
               <li>
                 <%= link_to 'Support', support_path %>
               </li>
@@ -79,8 +76,11 @@
               <li>
                 <%= link_to 'Contact Us', contact_us_path %>
               </li>
-            <% end %>
-          </ul>
+            </ul>
+            <ul class="nav pull-right" style="margin:0;">
+              <li><%= link_to 'Sign in', new_user_session_path, :style=>"border:0"%></li>
+            </ul>
+        <% end %>
         </div>
       </div>
 
@@ -93,7 +93,7 @@
         </div>
       <% end %>
 
-      <div><%= yield %></div>
+      <div style="margin-top:10px"><%= yield %></div>
 
       <div class='clear'></div>
     </div><!-- end container -->

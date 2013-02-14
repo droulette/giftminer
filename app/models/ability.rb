@@ -2,12 +2,16 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    alias_action :show, :to => :show_action
     user ||= User.new
     if user.admin?
       can :manage, :all
-    end
-    if user
-      can :manage, [Subscription, Occasion, Recipient]
+    else
+      can :manage, [Occasion, Recipient]
+      can :show_action, Subscription
+      can :create, Subscription
+      can :update, Subscription
+      can :destroy, Subscription
     end
     # Define abilities for the passed in user here. For example:
     #
