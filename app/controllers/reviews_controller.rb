@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   # GET /reviews
   # GET /reviews.json
+  authorize_resource
   def index
     @reviews = Review.all
 

@@ -1,4 +1,5 @@
 class RecipientsController < ApplicationController
+  authorize_resource
   # GET /recipients
   # GET /recipients.json
   def index

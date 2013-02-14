@@ -10,6 +10,4 @@ class SubscriptionTest < ActiveSupport::TestCase
       subscription.stripe_customer_token = "fdfff34ffd"
       assert subscription.save, "subscription could not be saved: #{subscription.errors.full_messages.inspect}"
     end
-  
-    
 end

@@ -1,6 +1,7 @@
 class CategoryProductLinksController < ApplicationController
   # GET /category_product_links
   # GET /category_product_links.json
+  authorize_resource
   def index
     @category_product_links = CategoryProductLink.all
 

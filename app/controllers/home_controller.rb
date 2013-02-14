@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   #include CalendarHelper
+  skip_authorization_check
   def index
     cookies[:gender] ||= params[:gender] unless params[:gender].blank?
     if user_signed_in?

@@ -1,6 +1,7 @@
 class OcatOccasionsController < ApplicationController
   # GET /ocat_occasions
   # GET /ocat_occasions.json
+  authorize_resource
   def index
     @ocat_occasions = OcatOccasion.all
 

@@ -1,4 +1,5 @@
 class OcatsController < ApplicationController
+  authorize_resource
   # GET /ocats
   # GET /ocats.json
   def index

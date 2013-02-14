@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
+  authorize_resource
   def index
     render :nothing
     @subscription = current_user.subscription

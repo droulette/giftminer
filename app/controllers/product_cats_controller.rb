@@ -1,5 +1,6 @@
 class ProductCatsController < ApplicationController
   before_filter :authenticate_user!
+  authorize_resource
   # GET /product_cats
   # GET /product_cats.json
   def index

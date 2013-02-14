@@ -24,7 +24,7 @@
 
         <% if user_signed_in? %>
           <div>
-            <%= link_to current_user.email, edit_user_registration_path %>
+            <%= link_to current_user.email, edit_user_registration_path %><% if current_user.admin? %>(Administrator)<% end %>
             <%= link_to((image_tag avatar_url(current_user)),edit_user_registration_path) %> |
             <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
           </div>

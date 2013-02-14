@@ -8,6 +8,7 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'mysql', '2.8.1'
 
+
 gem 'execjs'
 gem 'therubyracer'
 gem 'rails3-jquery-autocomplete'
@@ -28,6 +29,7 @@ gem "watu_table_builder", :require => "table_builder"
 gem 'jquery-rails'
 
 gem 'devise'
+gem 'cancan'
 
 gem 'stripe'
 gem "paperclip", "~> 3.0"
