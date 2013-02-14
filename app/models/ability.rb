@@ -12,6 +12,7 @@ class Ability
       can :create, Subscription
       can :update, Subscription
       can :destroy, Subscription
+      can :show_action, Product
     end
     # Define abilities for the passed in user here. For example:
     #
