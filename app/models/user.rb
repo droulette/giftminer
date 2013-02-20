@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :avatar, :username, :gender, :birthday, :firstname, :lastname, :address_line_1, :address_line_2, :city, :state, :zip
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :avatar, :username, :gender, :birthday, 
+                  :firstname, :lastname, :address_line_1, :address_line_2, :city, :state, :zip, :role
   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
   ROLES = %w[admin moderator customer banned]
   
   def admin?
-    role == 'admin'
+    self.role == 'admin'
   end
   
 end

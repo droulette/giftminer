@@ -1,13 +1,11 @@
 class Occasion < ActiveRecord::Base
   belongs_to :user
   belongs_to :recipient
-  has_many :recommendations
+  has_many :recommendations, :dependent => :destroy
   has_many :products, :through => :recommendations
   has_and_belongs_to_many :ocats
   
-  before_destroy :destroy_recommendations
-  
-  attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids, :recipient_id, :recipient_name
+  attr_accessible :date, :description, :name, :price_range, :type_of_gift, :ocat_ids, :recipient_id, :recipient_name, :user_id, :created_at, :updated_at
 
   validates :date, :name, :price_range, :type_of_gift, :presence => true
 
@@ -24,20 +22,6 @@ class Occasion < ActiveRecord::Base
     if user and !name.nil?
       name = name.split(' ')
       self.recipient = user.recipients.find_by_first_name_and_last_name(name[0],name[1]) || user.recipients.create({'first_name' => name[0],'last_name' => name[1]})
-    end
-  end
-  
-  def save_recommendation(product_id)
-    recommendation = Recommendation.new
-    recommendation.user_id = user_id
-    recommendation.product_id = product_id
-    recommendation.occasion_id = id
-    recommendation.save
-  end
-
-  def destroy_recommendations
-    recommendations.each do |recommendation|
-      recommendation.destroy
     end
   end
 
@@ -144,9 +128,8 @@ class Occasion < ActiveRecord::Base
     if price_range == "under $25" or price_range == "$25.01-$100" or price_range == "$100.01-$250" or price_range == "$250+"
       my_recommendations.push(recent_product)
     end
-    
-    my_recommendations.reject{|product| recommendations.find_by_product_id(product.id).owned_or_passed? if recommendations.find_by_product_id(product.id) }
-    
-  end
 
+    my_recommendations.reject{|product| recommendations.find_by_product_id(product.id).owned_or_passed? if recommendations.find_by_product_id(product.id) }
+
+  end
 end

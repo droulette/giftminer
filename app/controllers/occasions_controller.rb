@@ -22,7 +22,7 @@ class OccasionsController < ApplicationController
     if @my_recommendation = @occasion.product_recommendations.first
       @recommendation = current_user.recommendations.find_by_product_id_and_occasion_id(@my_recommendation.id,@occasion.id) || current_user.recommendations.build(:product_id => @my_recommendation.id, :occasion_id => @occasion.id)
     end
-    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @occasion }
@@ -60,6 +60,7 @@ class OccasionsController < ApplicationController
     @occasion.recipient_name = params[:occasion][:recipient_name]
     
     @ocats = Ocat.all
+    
       respond_to do |format|
       if @occasion.save
         format.html {

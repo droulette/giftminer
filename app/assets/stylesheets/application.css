@@ -85,6 +85,17 @@ button.ui-button-icon-only {
   padding: 40px;
   width: auto;
 }
+.forget{
+  line-height: 12px !important;
+  padding: 0px 0px 0px 6px;
+  font-size:12px;
+  vertical-align:text-top;
+}
+
+.forget A:link {text-decoration: underline; color: white;}
+.forget A:visited {text-decoration: underline; color: white;}
+.forget A:active {text-decoration: underline; color: blue;}
+.forget A:hover {text-decoration: underline; color: blue;}
 
 .home {
   width: 600px;

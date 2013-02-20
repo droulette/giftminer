@@ -1,3 +1,14 @@
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= @product.name %>
+    </li>
+  </ul>
+</div>
 <div style='margin-top:45px;'>
   <div class = "fleft" style='width:380px;height:290px;padding:auto'>
     <%= image_tag @product.pic.url(:medium) %>

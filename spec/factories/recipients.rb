@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :recipient do
     first_name "MyString"
     last_name "MyString"
-    age_range "MyString"
+    age "MyString"
     gender "MyString"
     relationship "MyString"
   end
