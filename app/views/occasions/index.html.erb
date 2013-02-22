@@ -24,8 +24,9 @@
     <th>Recipient Name</th>
     <th>Description</th>
     <th>Date</th>
-    <th>Price Range</th>
-    <th>Type of Gift</th>
+    <th>Price Minimum</th>
+    <th>Price Maximum</th>
+    <th>Gift Type</th>
     <th>Edit</th>
     <th>Delete</th>
   </tr>
@@ -34,26 +35,29 @@
   <tr>
     <td><%= link_to occasion.name, occasion_path(occasion) %></td>
     <td><% if occasion.recipient %>
-        <%= link_to occasion.recipient.full_name, recipient_path(occasion.recipient) %>
-      <% else %>
-        <%= '' %>
-      <% end %>
-      </td>
+          <%= link_to occasion.recipient.full_name, recipient_path(occasion.recipient) %>
+        <% else %>
+          <%= '' %>
+        <% end %>
+    </td>
     <td><%= occasion.description %></td>
     <td><%= occasion.date.strftime("%B %d, %Y") %></td>
-    <td><%= occasion.price_range %></td>
-    <td><%= occasion.type_of_gift %></td>
+    <td><%= number_to_currency(number_with_precision(occasion.price_min, :precision => 2), :unit => "$") if occasion.price_min %></td>
+    <td><%= number_to_currency(number_with_precision(occasion.price_max, :precision => 2), :unit => "$") if occasion.price_max %></td>
+    <td><% occasion.gift_types.each do |gift_type| %>
+          <%= gift_type.name %><br/>
+        <% end %>
+    </td>
     <td><%= link_to 'Edit', edit_occasion_path(occasion) %></td>
     <td><%= link_to 'Delete', occasion, confirm: 'Are you sure?', :method => :delete %></td>
   </tr>
   
   <% end if @occasions %>
-    <% else %>
-      <tr>
-        <td colspan="6"> You have not entered any Occasion. Please add <%= link_to 'new occasions', new_occasion_path %>. </td>
-      </tr>
-    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="6"> You have not entered any Occasion. Please add <%= link_to 'new occasions', new_occasion_path %>. </td>
+    </tr>
+  <% end %>
 </table>
 
-<br />
 

@@ -5,6 +5,7 @@ class OccasionsController < ApplicationController
   # GET /occasions.json
   def index
     @occasions = current_user.occasions.sorteddesc.all
+
     @products = Product.all
     respond_to do |format|
       format.html # index.html.erb
@@ -18,11 +19,12 @@ class OccasionsController < ApplicationController
     @occasion = Occasion.find(params[:id])
     @products = Product.all
     @productcats = ProductCat.all
+    @gift_types = @occasion.gift_types
 
     if @my_recommendation = @occasion.product_recommendations.first
       @recommendation = current_user.recommendations.find_by_product_id_and_occasion_id(@my_recommendation.id,@occasion.id) || current_user.recommendations.build(:product_id => @my_recommendation.id, :occasion_id => @occasion.id)
     end
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @occasion }
@@ -37,6 +39,7 @@ class OccasionsController < ApplicationController
     @products = Product.all
     @productcats = ProductCat.all
     @category_product_link = CategoryProductLink.all
+    @gift_types = GiftType.all
     @occasion.date ||= params[:date]
     respond_to do |format|
       format.html # new.html.erb
@@ -48,20 +51,23 @@ class OccasionsController < ApplicationController
   def edit
     @occasion = Occasion.find(params[:id])
     @ocats = Ocat.all
+    @gift_types = GiftType.all
   end
 
   # POST /occasions
   # POST /occasions.json
   def create
+    
     @occasion = current_user.occasions.build(params[:occasion])
+    @gift_types = GiftType.all
     
     # if you pass recipient_name in before the @occasion-object is initialized,
     # it won't be initialized correctly because there is no user_id
     @occasion.recipient_name = params[:occasion][:recipient_name]
     
     @ocats = Ocat.all
-    
-      respond_to do |format|
+
+    respond_to do |format|
       if @occasion.save
         format.html {
           flash[:success] = 'Occasion was successfully created.'

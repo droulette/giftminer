@@ -35,22 +35,27 @@
   </p>
 
   <p>
-    <b>Price range:</b>
-    <%= @occasion.price_range %>
+    <b>Price Minimum:</b>
+    <%= @occasion.price_min %>
+  </p>
+
+  <p>
+    <b>Price Maximum:</b>
+    <%= @occasion.price_max %>
   </p>
 
   <p>
     <b>Type of gift:</b>
-    <%= @occasion.type_of_gift %>
+    <% @gift_types.each do |gift_type| %>
+      <%= gift_type.name %><br/>
+    <% end %>
   </p>
 
   <p>
     <b>Occasion type:</b>
     <br/>
-    <% if @occasion.ocats.count >0 %>
-      <% @occasion.ocats.each do |ocat| %>
-        <%= ocat.category %></br>
-      <% end %>
+    <% if @occasion.ocat %>
+        <%= @occasion.ocat.name %></br>
     <% else %>
       none selected
     <% end %>

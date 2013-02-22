@@ -1,4 +1,4 @@
-class CreateOcatOccassions < ActiveRecord::Migration
+class CreateOcatsOccassions < ActiveRecord::Migration
   def change
     create_table :ocats_occassions do |t|
       t.references :ocat

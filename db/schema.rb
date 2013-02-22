@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130213201804) do
+ActiveRecord::Schema.define(:version => 20130222182114) do
 
   create_table "category_product_links", :force => true do |t|
     t.integer  "product_cat_id"
@@ -23,35 +23,57 @@ ActiveRecord::Schema.define(:version => 20130213201804) do
   add_index "category_product_links", ["product_cat_id"], :name => "index_category_product_links_on_product_cat_id"
   add_index "category_product_links", ["product_id"], :name => "index_category_product_links_on_product_id"
 
-  create_table "ocats", :force => true do |t|
-    t.string   "category"
+  create_table "gift_types", :force => true do |t|
+    t.string   "name"
     t.string   "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "ocats_occasions", :force => true do |t|
-    t.integer "ocat_id"
+  create_table "gift_types_occasions", :force => true do |t|
+    t.integer "gift_type_id"
     t.integer "occasion_id"
   end
 
-  add_index "ocats_occasions", ["ocat_id"], :name => "index_ocats_occassions_on_ocat_id"
-  add_index "ocats_occasions", ["occasion_id"], :name => "index_ocats_occassions_on_occassion_id"
+  add_index "gift_types_occasions", ["gift_type_id"], :name => "index_gift_types_occasions_on_gift_type_id"
+  add_index "gift_types_occasions", ["occasion_id"], :name => "index_gift_types_occasions_on_occasion_id"
+
+  create_table "ocats", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "occasions", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "date"
     t.integer  "user_id"
-    t.string   "price_range"
-    t.string   "type_of_gift"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
     t.integer  "recipient_id"
+    t.decimal  "price_max",    :precision => 8, :scale => 2
+    t.decimal  "price_min",    :precision => 8, :scale => 2
+    t.integer  "ocat_id"
   end
 
   add_index "occasions", ["recipient_id"], :name => "index_occassions_on_recipient_id"
   add_index "occasions", ["user_id"], :name => "index_occassions_on_user_id"
+
+  create_table "occasions_price_ranges", :force => true do |t|
+    t.integer "occasion_id"
+    t.integer "price_range_id"
+  end
+
+  add_index "occasions_price_ranges", ["occasion_id"], :name => "index_occasions_price_ranges_on_occasion_id"
+  add_index "occasions_price_ranges", ["price_range_id"], :name => "index_occasions_price_ranges_on_price_range_id"
+
+  create_table "price_ranges", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "product_cats", :force => true do |t|
     t.string   "name"

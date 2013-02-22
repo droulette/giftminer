@@ -27,7 +27,8 @@ describe OccasionsController, :type => :controller do
     
     it 'assigns the requested occasion to @occasion' do
       @user = FactoryGirl.create(:user)
-      @occasion = FactoryGirl.create(:occasion, :user_id => @user.id)
+      @ocat = FactoryGirl.create(:ocat)
+      @occasion = FactoryGirl.create(:occasion, :user_id => @user.id, :ocat_id => @ocat.id)
       @product = FactoryGirl.create(:product)
       @my_recommendation = FactoryGirl.create(:recommendation, :product_id => @product.id, :occasion_id => @occasion.id, :user_id => @user.id)
       get :show, id: @occasion.id

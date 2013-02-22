@@ -12,7 +12,6 @@
       <%= form_for(@subscription, :html => { :class => "form-horizontal"}) do |f| %>
 
       <legend>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></legend>
-      <% debug(Stripe::Customer.retrieve("cus_1FBvllsHJU2SBl")) %>
 
         <%= f.hidden_field :stripe_customer_token %>
         

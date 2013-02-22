@@ -23,4 +23,12 @@ class Product < ActiveRecord::Base
       recommendation.destroy
     end
   end
+  
+  def product_cats_names
+    product_cats.collect(&:name)
+  end
+  
+  def has_product_cats_names?(names=[])
+    (product_cats_names & names).any? unless names.nil?
+  end
 end

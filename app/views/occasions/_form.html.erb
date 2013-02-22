@@ -33,27 +33,36 @@
     </div>
   </div>
   
-  <div class="field control-group  <%= 'error' if @occasion.errors[:price_range].any? %>">
-    <%= f.label :price_range, :class => 'control-label' %>
+  <div class="field control-group  <%= 'error' if @occasion.errors[:price_min].any? %>">
+    <%= f.label :price_min, 'Price Minimum', :class => 'control-label' %>
     <div class='controls'>
-      <%= f.select :price_range, options_for_select([["under $25", "under $25"], ["$25.01-$100", "$25.01-$100"], ["$100.01-$250", "$100.01-$250"], ["$250+", "$250+"]], @occasion.price_range) %>
+      <%= f.text_field :price_min %>
+      <span class='help-inline'><%= 'Please enter a minimum price' if @occasion.errors[:price_min].any? %></span>
+    </div>
+  </div>
+
+  <div class="field control-group  <%= 'error' if @occasion.errors[:price_max].any? %>">
+    <%= f.label :price_max, 'Price Maximum', :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :price_max %>
+      <span class='help-inline'><%= 'Please enter a maximum price' if @occasion.errors[:price_max].any? %></span>
     </div>
   </div>
   
-  <div class="field control-group  <%= 'error' if @occasion.errors[:type_of_gift].any? %>">
-    <%= f.label :type_of_gift, :class => 'control-label' %>
+  <div class="field control-group <%= 'error' if @occasion.errors[:gift_type].any? %>">
+    <%= f.label :gift_type, :class => 'control-label' %>
     <div class='controls'>
-      <%= f.select :type_of_gift, options_for_select([["Silly", "Silly"], ["Serious", "Serious"], ["Gamer", "Gamer"], ["Romantic", "Romantic"], ["Cool", "Cool"]], @occasion.type_of_gift) %>
+      <% @gift_types.each do |gift_type| %>
+        <label class='checkbox'><%= check_box_tag "occasion[gift_type_ids][]", gift_type.id %>
+        <%= gift_type.name %></label>
+      <% end %>
     </div>
   </div>
   
   <div class ="field control-group">
-    <%= f.label :category, :class => 'control-label' %>
+    <%= label :ocat_id, 'Category', :class => 'control-label' %>
     <div class='controls'>
-      <% @ocats.each do |ocat| %>
-      <label class='checkbox'> <%= check_box_tag 'occasion[ocat_ids][]', ocat.id, @occasion.ocat_ids.include?(ocat) %>
-        <%= ocat.category %> </label>
-      <% end %>
+      <%= f.select(:ocat_id, @ocats.collect {|ocat| [ocat.name, ocat.id]}, options ={:prompt => "Select a category"}) %>
     </div>
   </div>
   

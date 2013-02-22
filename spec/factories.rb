@@ -16,26 +16,32 @@ FactoryGirl.define do
     description 'MyText'
     gender 'MyString'
     age_range 'MyString'
-    after(:build) { |instance| instance.product_cats << create_list(:product_cat, 5) }
   end
   
   factory :product_cat do
-    name 'Other'
+    name 'Toys'
     description 'cool beans'
+  end
+
+  factory :category_product_link do
+    product
+    product_cat
   end
 
   factory :occasion do
     user
+    ocat
     name 'MyString'
     description 'MyText'
     date '01/01/2010'
-    price_range "under $25"
-    type_of_gift "silly"
-    after(:build) { |instance| instance.ocats << create_list(:ocat, 1) }
+    price_min 6
+    price_max 1888
   end
   
   factory :ocat do
-    category 'different_name'
+    sequence :name do |n|
+      "test#{n}"
+    end  
     description 'different'
   end
 
