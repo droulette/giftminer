@@ -36,6 +36,8 @@ gem "paperclip", "~> 3.0"
 gem "american_date"
 gem 'launchy'
 
+gem 'activeadmin'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'guard-rspec'

@@ -7,6 +7,7 @@
       <span class='help-inline'><%= 'Please enter a Name' if @occasion.errors[:name].any? %></span>
     </div>
   </div>
+  
   <div class="field control-group <%= 'error' if @occasion.errors[:recipient_name].any? %>">
       <%= f.label :recipient_name, "Recipient Name", :class => 'control-label' %>
     <div class='controls'>
@@ -37,7 +38,7 @@
     <%= f.label :price_min, 'Price Minimum', :class => 'control-label' %>
     <div class='controls'>
       <%= f.text_field :price_min %>
-      <span class='help-inline'><%= 'Please enter a minimum price' if @occasion.errors[:price_min].any? %></span>
+      <span class='help-inline'><%= 'Please enter a valid minimum price' if @occasion.errors[:price_min].any? %></span>
     </div>
   </div>
 
@@ -59,10 +60,11 @@
     </div>
   </div>
   
-  <div class ="field control-group">
+  <div class ="field control-group <%= 'error' if @occasion.errors[:ocat_id].any? %>">
     <%= label :ocat_id, 'Category', :class => 'control-label' %>
     <div class='controls'>
       <%= f.select(:ocat_id, @ocats.collect {|ocat| [ocat.name, ocat.id]}, options ={:prompt => "Select a category"}) %>
+
     </div>
   </div>
   
