@@ -7,7 +7,8 @@ class Product < ActiveRecord::Base
   has_many :occasions, :through => :recommendations
   has_many :category_product_links  
   has_many :product_cats, :through => :category_product_links  
-  has_many :reviews 
+  has_many :reviews
+  has_many :products
   
   accepts_nested_attributes_for :category_product_links
   attr_accessible :category_product_links

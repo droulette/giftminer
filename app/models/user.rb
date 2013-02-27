@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_many :reviews
   has_one :subscription
   has_many :recipients
+  has_many :orders
+  
   # attr_accessible :title, :body
 
   ROLES = %w[admin moderator customer banned]

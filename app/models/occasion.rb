@@ -5,6 +5,7 @@ class Occasion < ActiveRecord::Base
   has_many :products, :through => :recommendations
   has_and_belongs_to_many :gift_types
   belongs_to :ocat
+  has_many :orders
   
   attr_accessible :date, :description, :name, :price_max, :price_min, :gift_type, :ocat_ids, :recipient_id, :recipient_name, 
                   :user_id, :created_at, :updated_at, :gift_type_ids, :ocat_id
@@ -38,11 +39,15 @@ class Occasion < ActiveRecord::Base
   end
 
   def product_recommendations
+    # in case if occasion doesnt have price min or max
+    price_min ||= 0
+    price_max ||= 100000
+    
     # select product in the price_range
     products = Product.all.select{|product| (price_min..price_max) === product.price }
 
     # map ocat to product_cats
-    products.select!{|product| product.has_product_cats_names?(MINERMAGIC[ocat.name]) }
+    products.select!{|product| product.has_product_cats_names?(MINERMAGIC[ocat.name]) } if ocat
 
     # reject product that are owned or passed
     products.reject{|product| recommendations.find_by_product_id(product.id).owned_or_passed? if recommendations.find_by_product_id(product.id) }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130227180900) do
+ActiveRecord::Schema.define(:version => 20130227204048) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -101,6 +101,20 @@ ActiveRecord::Schema.define(:version => 20130227180900) do
 
   add_index "occasions_price_ranges", ["occasion_id"], :name => "index_occasions_price_ranges_on_occasion_id"
   add_index "occasions_price_ranges", ["price_range_id"], :name => "index_occasions_price_ranges_on_price_range_id"
+
+  create_table "orders", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "product_id"
+    t.integer  "occasion_id"
+    t.integer  "quantity"
+    t.decimal  "total"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "orders", ["occasion_id"], :name => "index_orders_on_occasion_id"
+  add_index "orders", ["product_id"], :name => "index_orders_on_product_id"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
 
   create_table "price_ranges", :force => true do |t|
     t.string   "name"
