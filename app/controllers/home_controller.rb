@@ -11,7 +11,7 @@ class HomeController < ApplicationController
   
   def dashboard
     @new_products = Product.sorteddesc.limit(6) 
-    @occasions = current_user.occasions.sorteddesc
+    @occasions = current_user.occasions.sorteddesc or []
     @occasions_upcoming = current_user.occasions.upcoming.sorteddesc
     @occasions_past = current_user.occasions.past.sorteddesc
     @date = params[:month] ? Date.parse(params[:month]) : Date.today

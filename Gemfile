@@ -8,6 +8,8 @@ gem 'rails', '3.2.3'
 gem 'sqlite3'
 gem 'mysql', '2.8.1'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 gem 'execjs'
 gem 'therubyracer'

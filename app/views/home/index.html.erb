@@ -52,7 +52,9 @@
       </p>
     </div>
   </div>
+
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"well",:style=>"float:right;background-color: rgba(245,245,245,.5);margin-top:29px"}) do |f| %>
+  <div><%= link_to image_tag('Facebook_sign_in.png'), user_omniauth_authorize_path(:facebook) %></div>
   <h3 style="margin-top:0">Sign up for <span style="color:#df382c">FREE!</span></h3>
   <%= devise_error_messages! %>
   <div>
