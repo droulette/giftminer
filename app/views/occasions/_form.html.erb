@@ -54,8 +54,10 @@
     <%= f.label :gift_type, :class => 'control-label' %>
     <div class='controls'>
       <% @gift_types.each do |gift_type| %>
-        <label class='checkbox'><%= check_box_tag "occasion[gift_type_ids][]", gift_type.id %>
-        <%= gift_type.name %></label>
+        <label class='checkbox'>
+          <%= check_box_tag "occasion[gift_type_ids][]", gift_type.id, @occasion.gift_types.include?(gift_type) %>
+          <%= gift_type.name %>
+        </label>
       <% end %>
     </div>
   </div>
@@ -64,12 +66,14 @@
     <%= label :ocat_id, 'Category', :class => 'control-label' %>
     <div class='controls'>
       <%= f.select(:ocat_id, @ocats.collect {|ocat| [ocat.name, ocat.id]}, options ={:prompt => "Select a category"}) %>
-
     </div>
   </div>
   
   <div class="actions form-actions">
     <%= f.submit 'Submit', :class => 'btn btn-primary' %>
   </div>
+  
+
+  
 <% end %>
 

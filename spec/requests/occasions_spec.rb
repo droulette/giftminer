@@ -8,7 +8,8 @@ describe Occasion do
   end
 
   after(:each)  { User.delete_all }
-
+  after(:each)  { Ocat.delete_all }
+  
   describe 'functional' do
     
     it 'creates a new occasion' do

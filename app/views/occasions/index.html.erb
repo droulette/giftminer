@@ -27,6 +27,7 @@
     <th>Price Minimum</th>
     <th>Price Maximum</th>
     <th>Gift Type</th>
+    <th>Category</th>
     <th>Edit</th>
     <th>Delete</th>
   </tr>
@@ -47,7 +48,7 @@
     <td><% occasion.gift_types.each do |gift_type| %>
           <%= gift_type.name %><br/>
         <% end %>
-    </td>
+    <td><% occasion.ocat.name if occasion.ocat %></td>
     <td><%= link_to 'Edit', edit_occasion_path(occasion) %></td>
     <td><%= link_to 'Delete', occasion, confirm: 'Are you sure?', :method => :delete %></td>
   </tr>

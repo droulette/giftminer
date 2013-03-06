@@ -19,10 +19,20 @@ class OccasionsController < ApplicationController
     @occasion = Occasion.find(params[:id])
     @products = Product.all
     @productcats = ProductCat.all
-    @gift_types = @occasion.gift_types
-
+    @gift_types = GiftType.all
+    @order = Order.new
+    @user = current_user
+    @subscription = Subscription.new
+    @my_sub = @user.subscription
+    if @my_sub
+      @payment_info = Stripe::Customer.retrieve(@my_sub.stripe_customer_token)
+    end
     if @my_recommendation = @occasion.product_recommendations.first
       @recommendation = current_user.recommendations.find_by_product_id_and_occasion_id(@my_recommendation.id,@occasion.id) || current_user.recommendations.build(:product_id => @my_recommendation.id, :occasion_id => @occasion.id)
+    end
+
+    if @my_recommendation
+      @product = Product.find(@my_recommendation.id)
     end
     
     respond_to do |format|
@@ -34,6 +44,7 @@ class OccasionsController < ApplicationController
   # GET /occasions/new
   # GET /occasions/new.json
   def new
+    
     @occasion = Occasion.new
     @ocats = Ocat.all
     @products = Product.all

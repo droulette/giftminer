@@ -11,10 +11,9 @@ class Occasion < ActiveRecord::Base
                   :user_id, :created_at, :updated_at, :gift_type_ids, :ocat_id
 
   validates :date, :name, :price_max, :price_min, :ocat_id, :presence => true
-  validates :price_min, :price_max, :presence => true
- # validates :price_min, :numericality => {greater_than: 0, less_than_or_equal_to: :price_max}, :unless => Proc.new{|occasion| occasion.price_min.nil? || occasion.price_max.nil? }
+  validates :price_min, :numericality => {greater_than: 0, less_than_or_equal_to: :price_max}, :unless => Proc.new{|occasion| occasion.price_min.nil? || occasion.price_max.nil? }
 
-  scope :sorteddesc, order("date ASC")
+  scope :sorteddesc, order("date DESC")
   scope :upcoming, where('date >= ?',  Date.today)
   scope :past, where('date < ?',  Date.today)
   
@@ -40,16 +39,24 @@ class Occasion < ActiveRecord::Base
 
   def product_recommendations
     # in case if occasion doesnt have price min or max
-    price_min ||= 0
-    price_max ||= 100000
+    self.price_min ||= 0
+    self.price_max ||= 100
     
     # select product in the price_range
-    products = Product.all.select{|product| (price_min..price_max) === product.price }
+    products = Product.all.select{|product| (self.price_min..self.price_max) === product.price }
 
     # map ocat to product_cats
     products.select!{|product| product.has_product_cats_names?(MINERMAGIC[ocat.name]) } if ocat
 
     # reject product that are owned or passed
-    products.reject{|product| recommendations.find_by_product_id(product.id).owned_or_passed? if recommendations.find_by_product_id(product.id) }
+    products.reject! do |product|
+      next true if recommendations.find_by_product_id(product.id) and recommendations.find_by_product_id(product.id).owned_or_passed?
+      
+      next true if orders.find_by_product_id(product.id)
+      
+      next true if recipient and recipient.orders and recipient.orders.find_by_product_id(product.id)
+    end
+    
+    products
   end
 end

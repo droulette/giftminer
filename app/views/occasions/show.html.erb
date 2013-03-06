@@ -17,10 +17,10 @@
 <div class='well occasiondetails'>
   <h3> <%= @occasion.name %></h3>
   <% if (@occasion.recipient) %>
-  <p>
-    <b>Recipient:</b>
-    <%= link_to @occasion.recipient_name, edit_recipient_path(@occasion.recipient) %>
-  </p>
+    <p>
+      <b>Recipient:</b>
+      <%= link_to @occasion.recipient_name, edit_recipient_path(@occasion.recipient) %>
+    </p>
   <% end %>
   
   <% unless @occasion.description == '' %>
@@ -46,8 +46,12 @@
 
   <p>
     <b>Type of gift:</b>
-    <% @gift_types.each do |gift_type| %>
-      <%= gift_type.name %><br/>
+    <% if @occasion.gift_types %>
+      <% @occasion.gift_types.each do |gift_type| %>
+        <%= gift_type.name %><br/>
+      <% end %>
+    <% else %>
+      <%= none selected %>
     <% end %>
   </p>
 
@@ -55,7 +59,7 @@
     <b>Occasion type:</b>
     <br/>
     <% if @occasion.ocat %>
-        <%= @occasion.ocat.name %></br>
+      <%= @occasion.ocat.name %></br>
     <% else %>
       none selected
     <% end %>
@@ -79,30 +83,103 @@
       </p>
       </br>
       <div class='clear'></div>
-      <div class="actions fleft">
-        <%= submit_tag 'Buy', :name => 'Buy', :class => 'btn btn-success' %>
+
+
+      <div class='fleft'>
+        <div id="buy" class="modal hide fade in" style="display: none;">
+          <div class="modal-header">
+            <a class="close" data-dismiss="modal">×</a>
+            <h3>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></h3>
+          </div>
+          <div class="modal-body">
+            <% unless @my_sub %>
+              <%= form_for(@subscription, :html => { :class => "form-horizontal"}) do |f| %>
+
+                <%= f.hidden_field :stripe_customer_token %>
+
+                <%= f.hidden_field :user_id, :value => current_user.id %>
+
+                <div class="field control-group">
+                  <%= label_tag :card_number, "Credit Card Number ", :class => 'control-label' %>
+                  <div class='controls'>
+                    <%= text_field_tag :card_number, nil, name: nil %>
+                  </div>
+                </div>
+                <div class="field control-group">
+                  <%= label_tag :card_code, "Security Code on Card", :class => 'control-label' %>
+                  <div class='controls'>
+                    <%= text_field_tag :card_code, nil, name: nil, :autocomplete =>'off' %>
+                  </div>
+                </div>
+                <div class="field control-group">
+                  <%= label_tag :card_month, "Card Expiration", :class => 'control-label' %>
+                  <div class='controls'>
+                    <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month", style: "width:110px"}%>
+                    <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year", style: "width:110px"}%>
+                  </div>
+                </div>
+
+                <div id="stripe_error">
+                  <noscript>
+                    JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+                  </noscript>
+                </div>
+
+                <div class="actions form-actions">
+                  <%= f.submit 'Buy', :class => 'btn btn-primary' %>
+                  <a href="#" class="btn" data-dismiss="modal">Close</a>
+                </div>
+              <% end %>
+            <% else %>
+              <div>
+                <p>Email: <%= @payment_info.email if @payment_info.email %></p>
+                <p>Description: <%= @payment_info.description if @payment_info.description %></p>
+                <p>Active Card: <%= @payment_info.active_card if @payment_info.active_card %></p>
+                <p>Account Balance: <%= @payment_info.account_balance %></p>
+                <%= form_for(@order, :html => {:style =>'margin:0px;'}) do |f| %>
+                  <%= f.hidden_field :total, :value => @product.price %>
+                  <%= f.hidden_field :quantity, :value => 1 %>
+                  <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
+                  <%= f.hidden_field :occasion_id, :value => @occasion.id %>
+                  <%= f.hidden_field :user_id, :value => @user.id %>
+
+                  <div class="modal-footer">
+                    <%= f.submit 'Buy', :class => 'actions btn btn-success' %>
+                    <a href="#" class="btn" data-dismiss="modal">Close</a>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <a data-toggle="modal" href="#buy" class="btn btn-success">Buy</a>
+        <%= link_to "Buy", new_order_path({:occasion_id=>@occasion.id,:product_id=>@my_recommendation.id}), :class => 'btn btn-primary' %>
+                  
       </div>
-  
-      <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
-        <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
-        <%= f.hidden_field :occasion_id, :value => @occasion.id %>
-        <%= f.hidden_field :own, :value => 1 %>
-        <div class="actions fleft" style='margin-left:15px;'>
-          <%= f.submit 'Own', :class => 'btn btn-warning' %>
-        </div>
-      <% end %>
-      
-      <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
-        <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
-        <%= f.hidden_field :occasion_id, :value => @occasion.id %>
-        <%= f.hidden_field :pass, :value => 1 %>
-        <div class="actions fleft" style='margin-left:15px;'>
-          <%= f.submit 'Pass', :class => 'btn btn-danger' %>
-        </div>
-      <% end %>
+      <div class='fleft'>
+        <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
+          <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
+          <%= f.hidden_field :occasion_id, :value => @occasion.id %>
+          <%= f.hidden_field :own, :value => 1 %>
+          <div class="actions fleft" style='margin-left:15px;'>
+            <%= f.submit 'Own', :class => 'btn btn-warning' %>
+          </div>
+        <% end %>
+      </div>
+      <div class='fleft'>  
+        <%= form_for(@recommendation, :html => {:style =>'margin:0px;'}) do |f| %>
+          <%= f.hidden_field :product_id, :value => @my_recommendation.id %>
+          <%= f.hidden_field :occasion_id, :value => @occasion.id %>
+          <%= f.hidden_field :pass, :value => 1 %>
+          <div class="actions fleft" style='margin-left:15px;'>
+            <%= f.submit 'Pass', :class => 'btn btn-danger' %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% else %>
     <h3>Sorry, we have no recommendations for you at this time. Please check back soon.</h3>
   <% end %>
 </div>
+<div class='clear'></div>
 

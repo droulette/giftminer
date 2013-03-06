@@ -13,7 +13,6 @@ describe OccasionsController, :type => :controller do
       @user.occasions.stub!(:all).and_return(@occasions)
       get :index
       assigns(:occasions).should == @occasions
-
     end
     
     it 'renders index' do
