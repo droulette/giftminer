@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130306015717) do
+ActiveRecord::Schema.define(:version => 20130313193351) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -27,6 +27,22 @@ ActiveRecord::Schema.define(:version => 20130306015717) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "addresses", :force => true do |t|
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip_code"
+    t.string   "address_type"
+    t.integer  "recipient_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "addresses", ["recipient_id"], :name => "index_addresses_on_recipient_id"
+  add_index "addresses", ["user_id"], :name => "index_addresses_on_user_id"
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -115,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20130306015717) do
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
+    t.integer  "address_id"
   end
 
   add_index "orders", ["occasion_id"], :name => "index_orders_on_occasion_id"

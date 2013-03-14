@@ -1,0 +1,33 @@
+<div class='well'>
+  <p>
+    <b>Recipient:</b>
+    <%= @address.recipient.full_name %>
+  </p>
+  <p>
+    <b>Address line 1:</b>
+    <%= @address.address_line_1 %>
+  </p>
+  
+  <p>
+    <b>Address line 2:</b>
+    <%= @address.address_line_2 %>
+  </p>
+  
+  <p>
+    <b>City:</b>
+    <%= @address.city %>
+  </p>
+  
+  <p>
+    <b>State:</b>
+    <%= @address.state %>
+  </p>
+  
+  <p>
+    <b>Zip code:</b>
+    <%= @address.zip_code %>
+  </p>
+
+  <%= link_to 'Edit', edit_address_path(@address) %> |
+  <%= link_to 'Back', addresses_path %>
+</div>

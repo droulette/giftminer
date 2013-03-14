@@ -11,6 +11,9 @@ gem 'mysql', '2.8.1'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+gem 'ffaker'
+gem 'populator'
+
 gem 'execjs'
 gem 'therubyracer'
 gem 'rails3-jquery-autocomplete'

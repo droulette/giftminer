@@ -1,30 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= link_to 'Order History', orders_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      <%= @order.id %>
+    </li>
+  </ul>
+</div>
 
-<p>
-  <b>User:</b>
-  <%= @order.user.email %>
-</p>
-
-<p>
-  <b>Product:</b>
-  <%= @order.product.name %>
-</p>
-
-<p>
-  <b>Occasion:</b>
-  <%= @order.occasion.name %>
-</p>
-
-<p>
-  <b>Quantity:</b>
-  <%= @order.quantity %>
-</p>
-
-<p>
-  <b>Total:</b>
-  <%= @order.total %>
-</p>
-
+<div class='well'>
+  <div class='fleft' style='width:160px;border-right:1px solid black;'>
+    <h4>Order Details</h4>
+    <p>Order Number:&nbsp; <%= @order.id %>
+    <p>Occasion:&nbsp;  <%= link_to @order.occasion.name, occasion_path(@occasion) %></p>
+    <p>Recipient:&nbsp;  <%= @order.occasion.recipient.full_name if @order.occasion.recipient %></p>
+  </div>
+  <div class='fleft' style='width:225px;margin-left:15px;border-right:1px solid black;'>
+    <h4>Shipping Address</h4>
+    <p><%= @order.occasion.recipient.full_name if @order.occasion.recipient %></p>
+    <p> <%= @order.address_line_1 %></p>
+    <p><%= @order.address_line_2 %></p>
+    <p><%= @order.city %>, &nbsp;<%= @order.state %>&nbsp;<%= @order.zip_code %></p>
+  </div>
+  <div class='fleft' style='width:400px;margin-left:15px;'>
+    <h4>Product Details</h4>
+    <div class = "fleft" style='margin-right:10px;'>
+      <%= link_to(image_tag(@product.pic.url(:thumb), :class => 'thumbnail'), product_path(@product.id)) %>
+    </div>
+    <div class='fleft' style='margin-t:15px;'>
+      <p>Product:&nbsp; <%= link_to @order.product.name, product_path(@product) %></p>
+      <p>Total:&nbsp;  <%= number_to_currency(number_with_precision(@order.total, :precision => 2), :unit => "$") %></p>
+      <p>Order Date: &nbsp; <%= @order.created_at %>
+    </div>
+  </div>
+  <div class='clear'></div>
+</div>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

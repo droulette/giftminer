@@ -44,7 +44,6 @@ class OccasionsController < ApplicationController
   # GET /occasions/new
   # GET /occasions/new.json
   def new
-    
     @occasion = Occasion.new
     @ocats = Ocat.all
     @products = Product.all
@@ -97,7 +96,7 @@ class OccasionsController < ApplicationController
   def update
     @occasion = Occasion.find(params[:id])
     @ocats = Ocat.all
-    
+    @gift_types = GiftType.all
     respond_to do |format|
       if @occasion.update_attributes(params[:occasion])
         format.html {

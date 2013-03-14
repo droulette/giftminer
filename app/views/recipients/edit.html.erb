@@ -16,6 +16,49 @@
 <div class='well'>
 <legend>Update recipient</legend>
 
-<%= render 'form' %>
+<%= form_for(@recipient, :html => { :class => "form-horizontal"}) do |f| %>
+
+  <div class="field control-group <%= 'error' if @recipient.errors[:first_name].any? %>">
+    <%= f.label :first_name, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :first_name %>
+            <span class='help-inline'><%= 'Please enter a First Name' if @recipient.errors[:first_name].any? %></span>
+    </div>
+  </div>
+
+  <div class="field control-group">
+    <%= f.label :last_name, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+
+  <div class="field control-group">
+    <%= f.label :age, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.select :age, (1..100) %>
+    </div>
+  </div>
+  
+  <div class="field control-group">
+    <%= f.label :gender, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.select :gender, options_for_select([["Male", "Male"], [ 'Female','Female']], @recipient.gender) %>
+    </div>
+  </div>
+  
+  <div class="field control-group">
+    <%= f.label :relationship, :class => 'control-label' %>
+    <div class='controls'>
+      <%= f.text_field :relationship %>
+    </div>
+  </div>
+  
+  <div class="actions form-actions">
+    <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= link_to('Add New Shipping Address', new_address_path(:recipient_id => @recipient.id)) %>
 
 </div>

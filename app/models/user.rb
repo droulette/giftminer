@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :avatar, :username, :gender, :birthday, 
                   :firstname, :lastname, :address_line_1, :address_line_2, :city, :state, :zip, :role,:provider, :uid,
-                  :fb_url, :location, :locale, :timezone
+                  :fb_url, :location, :locale, :timezone, :confirmed_at
   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
   has_one :subscription
   has_many :recipients
   has_many :orders
+  has_many :addresses
   
   # attr_accessible :title, :body
 

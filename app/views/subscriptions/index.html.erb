@@ -28,7 +28,7 @@
       <td><%= subscription.user.email if subscription.user_id %></td>
       <td><%= link_to 'Show', @subscription %></td>
       <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-      <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
+      <td><%= link_to 'Destroy', subscription, confirm: 'Are you sure?', method: :delete %></td>
     </tr>
   <% end %>
 <% else %>  

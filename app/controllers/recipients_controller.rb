@@ -4,7 +4,6 @@ class RecipientsController < ApplicationController
   # GET /recipients.json
   def index
     @recipients = current_user.recipients.all
-    
     @recipients_search = current_user.recipients.order(:first_name).where("first_name like ?", "#{params[:term]}%")
 
     respond_to do |format|
@@ -30,7 +29,8 @@ class RecipientsController < ApplicationController
   # GET /recipients/new.json
   def new
     @recipient = Recipient.new
-
+    @address = @recipient.addresses.build
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @recipient }
@@ -40,13 +40,15 @@ class RecipientsController < ApplicationController
   # GET /recipients/1/edit
   def edit
     @recipient = Recipient.find(params[:id])
+    @address = @recipient.addresses.build
+
   end
 
   # POST /recipients
   # POST /recipients.json
-  def create
+  def create    
     @recipient = current_user.recipients.new(params[:recipient])
-
+    
     respond_to do |format|
       if @recipient.save
         format.html {
@@ -65,7 +67,6 @@ class RecipientsController < ApplicationController
   # PUT /recipients/1.json
   def update
     @recipient = Recipient.find(params[:id])
-
     respond_to do |format|
       if @recipient.update_attributes(params[:recipient])
         format.html {

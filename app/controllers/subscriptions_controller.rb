@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions.json
   authorize_resource
   def index
-    @subscriptions = Subscription.all
+    @subscriptions = current_user.subscription
 
     respond_to do |format|
       format.html # index.html.erb

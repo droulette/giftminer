@@ -1,6 +1,5 @@
 <%= form_for(@recipient, :html => { :class => "form-horizontal"}) do |f| %>
-
-
+  <legend>Recipient</legend>
   <div class="field control-group <%= 'error' if @recipient.errors[:first_name].any? %>">
     <%= f.label :first_name, :class => 'control-label' %>
     <div class='controls'>
@@ -15,18 +14,18 @@
       <%= f.text_field :last_name %>
     </div>
   </div>
-    
+
   <div class="field control-group">
     <%= f.label :age, :class => 'control-label' %>
     <div class='controls'>
-      <%= f.select :age, (1..100) %>
+      <%= f.select :age, (1..100), :include_blank => "Select Age" %>
     </div>
   </div>
   
   <div class="field control-group">
     <%= f.label :gender, :class => 'control-label' %>
     <div class='controls'>
-      <%= f.select :gender, options_for_select([["Male", "Male"], [ 'Female','Female']], @recipient.gender) %>
+      <%= f.select :gender, options_for_select([["Male", "Male"], [ 'Female','Female']], @recipient.gender), :include_blank => "Select Gender" %>
     </div>
   </div>
   
@@ -37,6 +36,46 @@
     </div>
   </div>
   
+
+  <%= f.fields_for :addresses, @address do |shipping_address| %>
+    <legend>Shipping Info</legend>
+    <div class="field control-group">
+      <%= shipping_address.label :address_line_1, :class => 'control-label' %>
+      <div class='controls'>
+        <%= shipping_address.text_field :address_line_1 %>
+      </div>
+    </div>
+    <div class="field control-group">
+      <%= shipping_address.label :address_line_2, :class => 'control-label' %>
+      <div class='controls'>
+        <%= shipping_address.text_field :address_line_2 %>
+      </div>
+    </div>
+    <div class="field control-group">
+      <%= shipping_address.label :city, :class => 'control-label' %>
+      <div class='controls'>
+        <%= shipping_address.text_field :city %>
+      </div>
+    </div>
+    <div class="field control-group">
+      <%= shipping_address.label :state, :class => 'control-label' %>
+      <div class='controls'>
+        <%= shipping_address.select :state, us_states, :include_blank => "Select State" %>
+      </div>
+    </div>
+    <div class="field control-group">
+      <%= shipping_address.label :zip_code, :class => 'control-label' %>
+      <div class='controls'>
+        <%= shipping_address.text_field :zip_code %>
+      </div>
+    </div>
+
+    <%= shipping_address.hidden_field :address_type, :value => 'shipping' %>
+    <%= shipping_address.hidden_field :user_id, :value => current_user.id %>
+
+  <% end %>
+
+
   <div class="actions form-actions">
     <%= f.submit 'Submit', :class => 'btn btn-primary' %>
   </div>

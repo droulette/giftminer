@@ -1,57 +1,138 @@
-<%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+<div style='margin-top:5px;'>
+  <ul class='breadcrumb'>
+    <li>
+      <%= link_to 'Home', root_path %>
+      <span class='divider'>/</span>
+    </li>
+    <li>
+      Shopping Cart
+    </li>
+  </ul>
+</div>
 
-      <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+<div class='container'>
+  <div class='well fleft' style='width:235px;margin-right:25px;min-height:150px'>
+    <h4><%= link_to @order.occasion.name, occasion_path(@order.occasion.id) %></h4>
+    <% if @order.occasion.recipient %>
+      <p>
+        <b>Recipient:</b>
+        <%= link_to @order.occasion.recipient_name, recipient_path(@order.occasion.recipient.id) %>
+      </p>
+    <% end %>
+    <p>
+      <%= @order.occasion.date.strftime("%B %d, %Y") %>
+    </p>
+  </div>
+
+  <div class='well fright product' style='width:600px;min-height:150px;'>
+    <div class='fleft' style='margin-right:10px;'>
+      <%= link_to(image_tag(@order.product.pic.url(:small), :class => 'thumbnail'), product_path(@order.product.id)) %>
+    </div>
+    <div class ='fleft'>
+      <h4> <%= link_to @order.product.name, product_path(@order.product.id) %> </h4>
+      <p style= 'color:#da4f49;'> <%= number_to_currency(number_with_precision(@order.product.price, :precision => 2), :unit => "$") %> </p>
+    </div>
+  </div>
+</div>
+
+<div class='clear'></div>
+
+<div class='well'>
+  <%= form_for(@order, :html => { :class => "form-horizontal"}) do |f| %>
+    <% if @order.occasion.recipient.addresses.count >0 %>
+      <div class='fleft' style='width:200px;'>
+       <h4>Shipping Addresses</h4>
+          <table>
+            <% @order.occasion.recipient.addresses.each do |address| %>
+              <tr>
+                <td>
+                  <%= f.radio_button :address_id, address.id %>
+                </td>
+                <td>
+                  <%= address.address_line_1 %><br/>
+                  <% unless address.address_line_2.blank? %>
+                    <%= address.address_line_2 %><br/>
+                  <% end %>
+                  <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/>
+                </td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+    <% end %>
+    <div class='fleft' style='width:650px;border-left:1px solid black;margin-left:10px;'>
+      <legend style='margin-left:25px;'>Shipping Address</legend>
+
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+
+      <%= f.hidden_field :product_id, :value => @order.product.id %>
+
+      <%= f.hidden_field :occasion_id, :value => @order.occasion.id %>
+
+      <%= f.hidden_field :quantity, :value => 1 %>
+
+      <%= f.hidden_field :total, :value => @order.product.price %>
+
+      <div class="field control-group <%= 'error' if @order.errors[:address_line_1].any? %>">
+        <%= f.label :address_line_1, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :address_line_1 %>
+          <span class='help-inline'><%= 'Please enter Address Line 1' if @order.errors[:address_line_1].any? %></span>
+        </div>
+      </div>
+      <div class="field control-group">
+        <%= f.label :address_line_2, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :address_line_2 %>
+        </div>
+      </div>
+      <div class="field control-group <%= 'error' if @order.errors[:city].any? %>">
+        <%= f.label :city, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :city %>
+          <span class='help-inline'><%= 'Please enter City' if @order.errors[:city].any? %></span>
+        </div>
+      </div>
+      <div class="field control-group <%= 'error' if @order.errors[:state].any? %>">
+        <%= f.label :state, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.select :state, us_states, :include_blank => "Select State", :size => '30' %>
+          <span class='help-inline'><%= 'Please enter a Decription' if @order.errors[:state].any? %></span>
+        </div>
+      </div>
+      <div class="field control-group <%= 'error' if @order.errors[:zip_code].any? %>">
+        <%= f.label :zip_code, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :zip_code %>
+          <span class='help-inline'><%= 'Please enter a Decription' if @order.errors[:zip_code].any? %></span>
+        </div>
+      </div>
+      <% unless current_user.subscription %>
+        <div class='actions form-actions'>
+          <%= f.submit 'Continue to Payment', :class=>'btn btn-warning' %>
+        </div>
       <% end %>
-      </ul>
+    </div>
+    <div class='clear'></div>
+    <% if current_user.subscription %>
+      <div style='margin-left:35px;'>
+        <div>
+          <legend>Payment Information</legend>
+          <p>Email: <%= current_user.email %></p>
+          <p>Description: <%= @payment_info.description %></p>
+          <p>Active Card: <%= @payment_info.active_card %></p>
+          <p>Account Balance: <%= @payment_info.account_balance %></p>
+        </div>
+        <div class="actions form-actions">
+          <%= f.submit 'Buy', :class => 'btn-success' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+      
+
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="field">
-    <%= f.label :product %><br />
-    <%= f.text_field :product %>
-  </div>
-  <div class="field">
-    <%= f.label :occasion %><br />
-    <%= f.text_field :occasion %>
-  </div>
-  <div class="field">
-    <%= f.label :quantity %><br />
-    <%= f.number_field :quantity %>
-  </div>
-  <div class="field">
-    <%= f.label :total %><br />
-    <%= f.text_field :total %>
-  </div>
-  <div class="field">
-    <%= f.label :address_line_1 %><br />
-    <%= f.text_field :address_line_1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address_line_2 %><br />
-    <%= f.text_field :address_line_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :zip_code %><br />
-    <%= f.text_field :zip_code %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+  <div class='clear'></div>
+</div>

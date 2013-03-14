@@ -15,27 +15,43 @@
 </div>
 
 <div class="well">
-<p>
-  <b>Full name:</b>
-  <%= @recipient.full_name %>
-</p>
+  <div>
+    <h4>Recipient Details</h4>
+    <p>
+      <b>Full name:</b>
+      <%= @recipient.full_name %>
+    </p>
+    <p>
+      <b>Age:</b>
+      <%= @recipient.age %>
+    </p>
+    <p>
+      <b>Gender:</b>
+      <%= @recipient.gender %>
+    </p>
+    <p>
+      <b>Relationship:</b>
+      <%= @recipient.relationship %>
+    </p>
+    <%= link_to 'Edit', edit_recipient_path(@recipient) %>|
+    <%= link_to 'Destroy', recipient_path(@recipient), confirm: 'Are you sure?', method: :delete  %><br/>
+  </div>
+  <br/>
+  <div>
+    <h4>Shipping Addresses</h4>
+    <% if @recipient.addresses %>
+      <% @recipient.addresses.each do |shipping_address|%>
+        <p><%= shipping_address.address_line_1 %></p>
+        <% if shipping_address.address_line_2 %>
+          <p><%= shipping_address.address_line_2 %></p>
+        <% end%>
+        <%= shipping_address.city %>,&nbsp;<%= shipping_address.state %>&nbsp;<%= shipping_address.zip_code %></p>
 
-<p>
-  <b>Age:</b>
-  <%= @recipient.age %>
-</p>
-
-<p>
-  <b>Gender:</b>
-  <%= @recipient.gender %>
-</p>
-
-<p>
-  <b>Relationship:</b>
-  <%= @recipient.relationship %>
-</p>
-
-
-<%= link_to 'Edit', edit_recipient_path(@recipient) %> |
-<%= link_to 'Back', recipients_path %>
+        <%= link_to 'Edit', edit_address_path(shipping_address) %>|
+        <%= link_to 'Destroy', address_path(shipping_address), confirm: 'Are you sure?', method: :delete  %><br/></br/>
+      <% end %>
+    <% end %>
+    <%= link_to('Add New Shipping Address',new_address_path(:recipient_id => @recipient.id)) %>
+  </div>
+  <div class='clear'></div>
 </div>

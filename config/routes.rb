@@ -1,4 +1,6 @@
 Gift::Application.routes.draw do
+  resources :addresses
+
   resources :orders
 
   ActiveAdmin.routes(self)
@@ -8,7 +10,6 @@ Gift::Application.routes.draw do
   resources :recipients
 
   resources :subscriptions
-
   resources :reviews
 
   get 'home/dashboard' => 'home#dashboard'

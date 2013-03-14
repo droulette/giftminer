@@ -12,8 +12,9 @@ class OrdersController < InheritedResources::Base
   end
 
   def show
-    @recipient = Order.find(params[:id])
-
+    @order = Order.find(params[:id])
+    @product = @order.product
+    @occasion = @order.occasion
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
@@ -21,8 +22,12 @@ class OrdersController < InheritedResources::Base
   end
 
   def new
-    @order = Order.new
-
+    @order = current_user.orders.build({:product_id=>params[:product_id],:occasion_id=>params[:occasion_id]})
+    
+    if current_user.subscription
+      @payment_info = Stripe::Customer.retrieve(current_user.subscription.stripe_customer_token)
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @order }
@@ -31,16 +36,37 @@ class OrdersController < InheritedResources::Base
 
   def edit
     @order = Order.find(params[:id])
+    @subscription = Subscription.new
   end
 
   def create
-    @order = current_user.orders.new(params[:order])
-
+    if params[:order][:address_line_1].blank? and
+      params[:order][:address_line_2].blank? and
+      params[:order][:city].blank? and
+      params[:order][:state].blank? and
+      params[:order][:zip_code].blank? 
+      if params[:order][:address_id]
+        address = Address.find(params[:order][:address_id])
+        params[:order][:address_line_1] = address.address_line_1
+        params[:order][:address_line_2] = address.address_line_2
+        params[:order][:city] = address.city
+        params[:order][:state] = address.state
+        params[:order][:zip_code] = address.zip_code
+      end
+    end
+    @payment_info = Stripe::Customer.retrieve(current_user.subscription.stripe_customer_token)
+    @occasion = Occasion.find(params[:order][:occasion_id])
+    @product = Product.find(params[:order][:product_id])
+    @order = current_user.orders.build(params[:order])
     respond_to do |format|
       if @order.save
         format.html {
-          flash[:success] = 'Order was successfully created.'
-          redirect_to occasion_path(@order.occasion_id)
+          # flash[:success] = 'Order was successfully created.'
+          if @order.user.subscription
+            redirect_to(order_path(@order), :notice => 'Thank you for your business')
+          else
+            redirect_to edit_order_path(@order)
+          end
         }
         format.json { render json: @order, status: :created, location: @order }
       else

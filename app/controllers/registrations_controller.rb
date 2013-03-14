@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-
+  @user = current_user
   protected
   # The path used after sign up. You need to overwrite this method
   # in your own RegistrationsController.
