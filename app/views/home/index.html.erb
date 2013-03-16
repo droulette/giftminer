@@ -14,32 +14,21 @@
     </div>
     <div class="steps well">
       <%= image_tag "laptop.png", :style => "top: -30px; left:55px; position:absolute" %>
-      <p>
-        <span class="badge">Step 1</span>
-      </p>
-      <h4>
-        Tell us the occasion
-      </h4>
-      <p>
-        What, when and for whom?<br />
-        <i>Birthdays, Anniversaries, Holidays, etc...</i>
-      </p>
+      <p><span class="badge">Step 1</span></p>
+      <h4>Tell us the occasion</h4>
+      <p>What, when and for whom?<br /><i>Birthdays, Anniversaries, Holidays, etc...</i></p>
     </div>
+    
     <div class="steps well">
-      <p>
-        <span class="badge">Step 2</span>
-      </p>
+      <p><span class="badge">Step 2</span></p>
       <%= image_tag "giftbox.png", :style => "top: -30px; left:55px; position:absolute" %>
-      <h4>
-        We'll find the gift
-      </h4>
+      <h4>We'll find the gift</h4>
       <p>Our algorithm will recommend the perfect gift for your occasion.<br />&nbsp;</p>
     </div>
+    
     <div class="steps well">
       <%= image_tag "smile.png", :style => "top: -30px; left:55px; position:absolute" %>
-      <p>
-        <span class="badge">Step 3</span>
-      </p>
+      <p><span class="badge">Step 3</span></p>
       <h4>
         <% if cookies[:gender] == 'female' %>
           We save you time!
@@ -47,34 +36,36 @@
           You take the credit!
         <% end %>
       </h4>
-      <p>
-        We will buy, wrap, and ship the gift for you automatically.<br />&nbsp;
-      </p>
+      <p>We will buy, wrap, and ship the gift for you automatically.<br />&nbsp;</p>
     </div>
   </div>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html=>{:class=>"well",:style=>"float:right;background-color: rgba(245,245,245,.5);margin-top:29px"}) do |f| %>
-  <div><%= link_to image_tag('Facebook_sign_in.png'), user_omniauth_authorize_path(:facebook) %></div>
-  <h3 style="margin-top:0">Sign up for <span style="color:#df382c">FREE!</span></h3>
-  <%= devise_error_messages! %>
-  <div>
-    <%= f.label :email %>
-    <%= f.email_field :email, :autocomplete=>'off' %>
-  </div>
-  <div>
-    <%= f.label :password %>
-    <%= f.password_field :password, :autocomplete=>'off' %>
-  </div>
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :autocomplete=>'off' %>
-  </div>
-  <div style="margin-top:10px">
-    <%= f.submit "Sign up", :class => 'signupbutton btn btn-primary', :style=>"float:left" %>
-    <div class="clear"></div>
-  </div>
-
-  <% end %>
+    <div><%= link_to image_tag('Facebook_sign_in.png'), user_omniauth_authorize_path(:facebook) %></div>
+    <h3 style="margin-top:0">Sign up for <span style="color:#df382c">FREE!</span></h3>
+    <%= devise_error_messages! %>
+    
+    <div>
+      <%= f.label :email %>
+      <%= f.email_field :email, :autocomplete=>'off' %>
+    </div>
+    
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password, :autocomplete=>'off' %>
+    </div>
+    
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :autocomplete=>'off' %>
+    </div>
+    
+    <div style="margin-top:10px">
+      <%= f.submit "Sign up", :class => 'signupbutton btn btn-primary', :style=>"float:left" %>
+      <div class="clear"></div>
+    </div>
+  
+    <% end %>
 
   <div style="clear:both"></div>
 </div>
@@ -82,17 +73,13 @@
 <div class="row">
   <div class="span6">
     <blockquote>
-      <p>
-        I LOOOOVEEE shopping. Now there is a way to automatically shop? Sign me up!
-      </p>
+      <p>I LOOOOVEEE shopping. Now there is a way to automatically shop? Sign me up!</p>
       <small>Uyen Do from <cite title="Source Title">Shopaholic Anonymous</cite></small>
     </blockquote>
   </div>
   <div class="span6">
     <blockquote class="pull-right">
-      <p>
-        My wife is one of those people who has everything. It is very hard to shop for her. Giftminer gives me great suggestions and draws money directly from my bank account. Yay!
-      </p>
+      <p>My wife is one of those people who has everything. It is very hard to shop for her. Giftminer gives me great suggestions and draws money directly from my bank account. Yay!</p>
       <small>Vinh Pham in the <cite title="Source Title">Forest Somewhere</cite></small>
     </blockquote>
   </div>

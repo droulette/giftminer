@@ -22,20 +22,20 @@
     <p>Recipient:&nbsp;  <%= @order.occasion.recipient.full_name if @order.occasion.recipient %></p>
   </div>
   <div class='fleft' style='width:225px;margin-left:15px;border-right:1px solid black;'>
-    <h4>Shipping Address</h4>
-    <p><%= @order.occasion.recipient.full_name if @order.occasion.recipient %></p>
-    <p> <%= @order.address_line_1 %></p>
+    <h4>Shipping Info</h4>
+    <p><%= @order.name %></p>
+    <p><%= @order.address_line_1 %></p>
     <p><%= @order.address_line_2 %></p>
     <p><%= @order.city %>, &nbsp;<%= @order.state %>&nbsp;<%= @order.zip_code %></p>
   </div>
   <div class='fleft' style='width:400px;margin-left:15px;'>
     <h4>Product Details</h4>
     <div class = "fleft" style='margin-right:10px;'>
-      <%= link_to(image_tag(@product.pic.url(:thumb), :class => 'thumbnail'), product_path(@product.id)) %>
+      <%= link_to(image_tag(@order.product.pic.url(:thumb), :class => 'thumbnail'), product_path(@order.product.id)) %>
     </div>
     <div class='fleft' style='margin-t:15px;'>
-      <p>Product:&nbsp; <%= link_to @order.product.name, product_path(@product) %></p>
-      <p>Total:&nbsp;  <%= number_to_currency(number_with_precision(@order.total, :precision => 2), :unit => "$") %></p>
+      <p>Product:&nbsp; <%= link_to @order.product.name, product_path(@order.product) %></p>
+      <p>Total:&nbsp;  <%= number_to_currency(@order.price_decimal, :unit => "$") %></p>
       <p>Order Date: &nbsp; <%= @order.created_at %>
     </div>
   </div>

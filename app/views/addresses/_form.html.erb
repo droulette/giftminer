@@ -18,33 +18,41 @@
         <%= f.text_field :address_line_1 %>
       </div>
     </div>
+
     <div class="field control-group">
       <%= f.label :address_line_2, :class => 'control-label' %>
       <div class='controls'>
         <%= f.text_field :address_line_2 %>
       </div>
     </div>
+
     <div class="field control-group">
       <%= f.label :city, :class => 'control-label' %>
       <div class='controls'>
         <%= f.text_field :city %>
         </div>
     </div>
+
     <div class="field control-group">
       <%= f.label :state, :class => 'control-label' %>
       <div class='controls'>
         <%= f.select :state, us_states, :include_blank => "Select State" %>
       </div>
     </div>
+
     <div class="field control-group">
       <%= f.label :zip_code, :class => 'control-label' %>
       <div class='controls'>
         <%= f.text_field :zip_code %>
       </div>
     </div>
+
     <%= f.hidden_field :recipient_id, :value => params[:recipient_id] %>
+
     <%= f.hidden_field :user_id, :value => current_user.id %>
+
     <%= f.hidden_field :address_type, :value => 'shipping' %>    
+
     <div class="actions form-actions">
       <%= f.submit %>
     </div>

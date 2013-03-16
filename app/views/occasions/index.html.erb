@@ -43,8 +43,8 @@
     </td>
     <td><%= occasion.description %></td>
     <td><%= occasion.date.strftime("%B %d, %Y") %></td>
-    <td><%= number_to_currency(number_with_precision(occasion.price_min, :precision => 2), :unit => "$") if occasion.price_min %></td>
-    <td><%= number_to_currency(number_with_precision(occasion.price_max, :precision => 2), :unit => "$") if occasion.price_max %></td>
+    <td><%= cents_to_dollars(occasion.price_min, :unit => "$") if occasion.price_min %></td>
+    <td><%= cents_to_dollars(occasion.price_max, :unit => "$") if occasion.price_max %></td>
     <td><% occasion.gift_types.each do |gift_type| %>
           <%= gift_type.name %><br/>
         <% end %>

@@ -1,12 +1,7 @@
 <div style='margin-top:5px;'>
   <ul class='breadcrumb'>
-    <li>
-      <%= link_to 'Home', root_path %>
-      <span class='divider'>/</span>
-    </li>
-    <li>
-      Order History
-    </li>
+    <li><%= link_to 'Home', root_path %><span class='divider'>/</span></li>
+    <li>Order History</li>
   </ul>
 </div>
 
@@ -17,13 +12,11 @@
         <li><a href="<%= edit_registration_path(resource_name) %>"><i class="icon-chevron-right"></i>Profile</a></li>
         <li><a href="<%= new_subscription_path %>"><i class="icon-chevron-right"></i>Payment Info</a></li>
         <li class='active'><a href="<%= orders_path %>"><i class="icon-chevron-right"></i>Order History</a></li>
-        <li><a href="#"><i class="icon-chevron-right"></i>Link</a></li>
       </ul>
     </div><!--/span-->
+    
     <div class="span9 well">
-
       <h1>Order History</h1>
-      
       <table class='table table-bordered table-striped table-condensed'>
         <tr>
           <th>Order Number</th>
@@ -33,24 +26,22 @@
           <th>Quantity</th>
           <th>Total</th>
         </tr>
-      
-      <% @orders.each do |order| %>
-        <tr>
-          <td><%= link_to order.id, order_path(order.id) %>
-          <td><%= link_to order.product.name, product_path(order.product.id) %></td>
-          <td><%= link_to order.occasion.name, occasion_path(order.occasion.id) if order.occasion %></td>
-          <td><% if order.occasion.recipient_id %>
-            <%= link_to order.occasion.recipient.full_name, recipient_path(order.occasion.recipient_id) %>
-            <% else %>
-              n/a
-            <% end %>
-          </td>
-          <td><%= order.quantity %></td>
-          <td><%= order.total %></td>
-        </tr>
-      <% end %>
+        <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.id, order_path(order.id) %>
+            <td><%= link_to order.product.name, product_path(order.product.id) %></td>
+            <td><%= link_to order.occasion.name, occasion_path(order.occasion.id) if order.occasion %></td>
+            <td><% if order.occasion.recipient_id %>
+              <%= link_to order.occasion.recipient.full_name, recipient_path(order.occasion.recipient_id) %>
+              <% else %>
+                n/a
+              <% end %>
+            </td>
+            <td><%= order.quantity %></td>
+            <td><%= cents_to_dollars(order.total, :unit => "$") %></td>
+          </tr>
+        <% end %>
       </table>
-      
 
     </div>
   </div><!--/row-->

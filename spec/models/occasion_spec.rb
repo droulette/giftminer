@@ -19,7 +19,6 @@ describe Occasion do
     it 'does not create occasion w/o a name' do
       FactoryGirl.build(:occasion, :name => nil).should_not be_valid
     end
-    
 
     it 'does not create occasion w/o a date' do
       FactoryGirl.build(:occasion, :date => nil).should_not be_valid
@@ -78,6 +77,15 @@ describe Occasion do
       recommendation = FactoryGirl.create(:recommendation, :occasion_id => occasion.id, :product_id => product.id, :pass => 1)
       category_product_link = FactoryGirl.create(:category_product_link, :product_id => product.id, :product_cat_id => product_cat.id)
       occasion.product_recommendations.should_not include(product)
+    end
+
+    it "destroys the recommendation when destroyed" do
+      occasion = FactoryGirl.create(:occasion, :name => "party")
+      product = FactoryGirl.create(:product, :price => 50)
+      recommendation = FactoryGirl.create(:recommendation, :occasion_id => occasion.id, :product_id => product.id)
+      occasion.recommendations<< recommendation
+      occasion.destroy
+      Recommendation.all.should_not include(recommendation.id)
     end
 
   end

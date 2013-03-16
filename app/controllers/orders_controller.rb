@@ -13,8 +13,6 @@ class OrdersController < InheritedResources::Base
 
   def show
     @order = Order.find(params[:id])
-    @product = @order.product
-    @occasion = @order.occasion
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
@@ -40,7 +38,8 @@ class OrdersController < InheritedResources::Base
   end
 
   def create
-    if params[:order][:address_line_1].blank? and
+    if params[:order][:name].blank? and
+      params[:order][:address_line_1].blank? and
       params[:order][:address_line_2].blank? and
       params[:order][:city].blank? and
       params[:order][:state].blank? and
@@ -54,19 +53,32 @@ class OrdersController < InheritedResources::Base
         params[:order][:zip_code] = address.zip_code
       end
     end
-    @payment_info = Stripe::Customer.retrieve(current_user.subscription.stripe_customer_token)
-    @occasion = Occasion.find(params[:order][:occasion_id])
-    @product = Product.find(params[:order][:product_id])
+    
+    if current_user.subscription
+      @payment_info = Stripe::Customer.retrieve(current_user.subscription.stripe_customer_token)
+    end
+    
     @order = current_user.orders.build(params[:order])
+    
     respond_to do |format|
       if @order.save
+        
+        # Create the charge on Stripe's servers - this will charge the user's card
+        begin
+          charge = Stripe::Charge.create(
+            :amount => @order.total, # amount in cents, again
+            :currency => "usd",
+            :card => @order.stripe_card_token,
+            :description => @order.user.email
+          )
+          
+          nil
+        rescue Stripe::CardError => e
+          # The card has been declined
+        end
+
         format.html {
-          # flash[:success] = 'Order was successfully created.'
-          if @order.user.subscription
-            redirect_to(order_path(@order), :notice => 'Thank you for your business')
-          else
-            redirect_to edit_order_path(@order)
-          end
+          redirect_to(order_path(@order), :notice => 'Thank you for your business')
         }
         format.json { render json: @order, status: :created, location: @order }
       else

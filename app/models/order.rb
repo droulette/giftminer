@@ -2,11 +2,13 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :occasion
   belongs_to :product
-  attr_accessible :quantity, :total, :occasion_id, :product_id, :user_id, :address_line_1, :address_line_2, :city, :state, :zip_code, :address_id
+  attr_accessible :quantity, :total, :occasion_id, :product_id, :user_id, 
+                  :name, :address_line_1, :address_line_2, :city, :state, :zip_code, 
+                  :address_id, :stripe_card_token
   
   scope :sorteddesc, order("created_at DESC")
       
-  validates :address_line_1, :city, :state, :zip_code, :presence => true
+  validates :name, :address_line_1, :city, :state, :zip_code, :presence => true
       
   # after_save :create_shipping_address
 
@@ -22,4 +24,5 @@ class Order < ActiveRecord::Base
     address.user_id = user.id
     address.save
   end
+  
 end

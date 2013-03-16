@@ -32,4 +32,5 @@ class Product < ActiveRecord::Base
   def has_product_cats_names?(names=[])
     (product_cats_names & names).any? unless names.nil?
   end
+
 end

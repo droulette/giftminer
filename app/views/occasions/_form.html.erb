@@ -1,5 +1,15 @@
 <%= form_for(@occasion, :html => { :class => "form-horizontal"}) do |f| %>
+  <% if @occasion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@occasion.errors.count, "error") %> prohibited this category_product_link from being saved:</h2>
 
+      <ul>
+      <% @occasion.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
   <div class="field control-group <%= 'error' if @occasion.errors[:name].any? %>">
     <%= f.label :name, "Occasion Name", :class => 'control-label' %>
     <div class='controls'>
@@ -37,7 +47,7 @@
   <div class="field control-group  <%= 'error' if @occasion.errors[:price_min].any? %>">
     <%= f.label :price_min, 'Price Minimum', :class => 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :price_min %>
+      <%= f.text_field :price_min, :value => cents_to_dollars(@occasion.price_min, :unit => "$") %>
       <span class='help-inline'><%= 'Please enter a valid minimum price' if @occasion.errors[:price_min].any? %></span>
     </div>
   </div>
@@ -45,7 +55,7 @@
   <div class="field control-group  <%= 'error' if @occasion.errors[:price_max].any? %>">
     <%= f.label :price_max, 'Price Maximum', :class => 'control-label' %>
     <div class='controls'>
-      <%= f.text_field :price_max %>
+      <%= f.text_field :price_max, :value => cents_to_dollars(@occasion.price_max, :unit => "$")  %>
       <span class='help-inline'><%= 'Please enter a maximum price' if @occasion.errors[:price_max].any? %></span>
     </div>
   </div>

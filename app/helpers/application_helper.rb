@@ -80,4 +80,9 @@ module ApplicationHelper
       ['WY', 'WY']
     ]
   end
+  
+  def cents_to_dollars(cents,options={})
+    number_to_currency(cents/100.0,:unit=>options[:unit])
+  end
+
 end

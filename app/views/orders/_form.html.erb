@@ -1,12 +1,7 @@
 <div style='margin-top:5px;'>
   <ul class='breadcrumb'>
-    <li>
-      <%= link_to 'Home', root_path %>
-      <span class='divider'>/</span>
-    </li>
-    <li>
-      Shopping Cart
-    </li>
+    <li><%= link_to 'Home', root_path %><span class='divider'>/</span></li>
+    <li>Shopping Cart</li>
   </ul>
 </div>
 
@@ -30,7 +25,7 @@
     </div>
     <div class ='fleft'>
       <h4> <%= link_to @order.product.name, product_path(@order.product.id) %> </h4>
-      <p style= 'color:#da4f49;'> <%= number_to_currency(number_with_precision(@order.product.price, :precision => 2), :unit => "$") %> </p>
+      <p style= 'color:#da4f49;'> <%= cents_to_dollars(@order.product.price, :unit => "$") %> </p>
     </div>
   </div>
 </div>
@@ -41,24 +36,24 @@
   <%= form_for(@order, :html => { :class => "form-horizontal"}) do |f| %>
     <% if @order.occasion.recipient.addresses.count >0 %>
       <div class='fleft' style='width:200px;'>
-       <h4>Shipping Addresses</h4>
-          <table>
-            <% @order.occasion.recipient.addresses.each do |address| %>
-              <tr>
-                <td>
-                  <%= f.radio_button :address_id, address.id %>
-                </td>
-                <td>
-                  <%= address.address_line_1 %><br/>
-                  <% unless address.address_line_2.blank? %>
-                    <%= address.address_line_2 %><br/>
-                  <% end %>
-                  <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/>
-                </td>
-              </tr>
-            <% end %>
-          </table>
-        </div>
+        <h4>Shipping Addresses</h4>
+        <table>
+          <% @order.occasion.recipient.addresses.each do |address| %>
+            <tr>
+              <td>
+                <%= f.radio_button :address_id, address.id %>
+              </td>
+              <td>
+                <%= address.address_line_1 %><br/>
+                <% unless address.address_line_2.blank? %>
+                  <%= address.address_line_2 %><br/>
+                <% end %>
+                <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
     <% end %>
     <div class='fleft' style='width:650px;border-left:1px solid black;margin-left:10px;'>
       <legend style='margin-left:25px;'>Shipping Address</legend>
@@ -72,6 +67,14 @@
       <%= f.hidden_field :quantity, :value => 1 %>
 
       <%= f.hidden_field :total, :value => @order.product.price %>
+      
+      <div class="field control-group <%= 'error' if @order.errors[:name].any? %>">
+        <%= f.label :name, :class => 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :name %>
+          <span class='help-inline'><%= 'Please enter Name' if @order.errors[:name].any? %></span>
+        </div>
+      </div>
 
       <div class="field control-group <%= 'error' if @order.errors[:address_line_1].any? %>">
         <%= f.label :address_line_1, :class => 'control-label' %>
@@ -80,12 +83,14 @@
           <span class='help-inline'><%= 'Please enter Address Line 1' if @order.errors[:address_line_1].any? %></span>
         </div>
       </div>
+
       <div class="field control-group">
         <%= f.label :address_line_2, :class => 'control-label' %>
         <div class='controls'>
           <%= f.text_field :address_line_2 %>
         </div>
       </div>
+
       <div class="field control-group <%= 'error' if @order.errors[:city].any? %>">
         <%= f.label :city, :class => 'control-label' %>
         <div class='controls'>
@@ -93,6 +98,7 @@
           <span class='help-inline'><%= 'Please enter City' if @order.errors[:city].any? %></span>
         </div>
       </div>
+
       <div class="field control-group <%= 'error' if @order.errors[:state].any? %>">
         <%= f.label :state, :class => 'control-label' %>
         <div class='controls'>
@@ -100,20 +106,57 @@
           <span class='help-inline'><%= 'Please enter a Decription' if @order.errors[:state].any? %></span>
         </div>
       </div>
+
       <div class="field control-group <%= 'error' if @order.errors[:zip_code].any? %>">
         <%= f.label :zip_code, :class => 'control-label' %>
         <div class='controls'>
           <%= f.text_field :zip_code %>
-          <span class='help-inline'><%= 'Please enter a Decription' if @order.errors[:zip_code].any? %></span>
+          <span class='help-inline'><%= 'Please enter Zip code' if @order.errors[:zip_code].any? %></span>
         </div>
       </div>
+      
+      <fieldset>
+        <legend style='margin-left:25px;'>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></legend>
+
+        <%= f.hidden_field :stripe_card_token %>
+
+        <div class="field control-group">
+          <%= label_tag :card_number, "Credit Card Number ", :class => 'control-label' %>
+          <div class='controls'>
+            <%= text_field_tag :card_number, nil, name: nil %>
+          </div>
+        </div>
+        <div class="field control-group">
+          <%= label_tag :card_code, "Security Code on Card", :class => 'control-label' %>
+          <div class='controls'>
+            <%= text_field_tag :card_code, nil, name: nil, :autocomplete =>'off' %>
+          </div>
+        </div>
+        <div class="field control-group">
+          <%= label_tag :card_month, "Card Expiration", :class => 'control-label' %>
+          <div class='controls'>
+            <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"}%>
+            <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}%>
+          </div>
+        </div>
+  
+        <div id="stripe_error">
+          <noscript>
+            JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+          </noscript>
+        </div>
+      </fieldset>
+
       <% unless current_user.subscription %>
         <div class='actions form-actions'>
-          <%= f.submit 'Continue to Payment', :class=>'btn btn-warning' %>
+          <%= f.submit 'Buy the Gift', :class=>'btn btn-success' %>
         </div>
       <% end %>
+
     </div>
+
     <div class='clear'></div>
+
     <% if current_user.subscription %>
       <div style='margin-left:35px;'>
         <div>
@@ -130,9 +173,7 @@
     <% end %>
   </div>
 
-      
 
-    </div>
   <% end %>
   <div class='clear'></div>
 </div>

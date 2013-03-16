@@ -17,7 +17,7 @@
 <% @products.each do |product| %>
   <tr>
     <td><%= link_to "#{product.name}", product_path(product) %></td>
-    <td><%= number_to_currency(number_with_precision(product.price, :precision => 2), :unit => "$") %></td>
+    <td><%= cents_to_dollars(product.price, :unit => "$")%></td>
     <td><%= product.description %></td>
     <td><%= product.gender %></td>
     <td><%= product.age_range %></td>

@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require autocomplete-rails
-//= require_tree .
+
 
 $(function() {
 	$(".datepicker").datepicker();

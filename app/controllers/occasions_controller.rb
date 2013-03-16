@@ -21,12 +21,7 @@ class OccasionsController < ApplicationController
     @productcats = ProductCat.all
     @gift_types = GiftType.all
     @order = Order.new
-    @user = current_user
     @subscription = Subscription.new
-    @my_sub = @user.subscription
-    if @my_sub
-      @payment_info = Stripe::Customer.retrieve(@my_sub.stripe_customer_token)
-    end
     if @my_recommendation = @occasion.product_recommendations.first
       @recommendation = current_user.recommendations.find_by_product_id_and_occasion_id(@my_recommendation.id,@occasion.id) || current_user.recommendations.build(:product_id => @my_recommendation.id, :occasion_id => @occasion.id)
     end
@@ -67,7 +62,10 @@ class OccasionsController < ApplicationController
   # POST /occasions
   # POST /occasions.json
   def create
-    
+
+    params[:occasion][:price_min] = params[:occasion][:price_min].to_d * 100
+    params[:occasion][:price_max] = params[:occasion][:price_max].to_d * 100
+
     @occasion = current_user.occasions.build(params[:occasion])
     @gift_types = GiftType.all
     
@@ -77,6 +75,9 @@ class OccasionsController < ApplicationController
     
     @ocats = Ocat.all
 
+
+
+    
     respond_to do |format|
       if @occasion.save
         format.html {
@@ -97,6 +98,9 @@ class OccasionsController < ApplicationController
     @occasion = Occasion.find(params[:id])
     @ocats = Ocat.all
     @gift_types = GiftType.all
+
+    params[:occasion][:price_min] = params[:occasion][:price_min].gsub('$','').to_d * 100
+    params[:occasion][:price_max] = params[:occasion][:price_max].gsub('$','').to_d * 100
     respond_to do |format|
       if @occasion.update_attributes(params[:occasion])
         format.html {

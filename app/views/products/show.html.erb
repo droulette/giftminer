@@ -20,7 +20,7 @@
     </p>
 
     <p>
-      <h4 style="color:#da4f49;"><%= number_to_currency(number_with_precision(@product.price, :precision => 2), :unit => "$") %></h4>
+      <h4 style="color:#da4f49;"><%= cents_to_dollars(@product.price, :unit => "$") %></h4>
     </p>
     </br>
     <p>

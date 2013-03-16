@@ -29,8 +29,7 @@ class ProductsController < ApplicationController
     @product = Product.new
     @cat= ProductCat.new
     @product_cat= ProductCat.all
-       
-    
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @product }
@@ -47,11 +46,15 @@ class ProductsController < ApplicationController
   # POST /products.json
   def create
     product_cat_ids = params['product'].delete('product_cat_ids')
-    
+
+    params[:product][:price] = params[:product][:price].to_d * 100
+
     @product = Product.new(params[:product])
     @product_cat= ProductCat.all
     @cat= ProductCat.new
     
+
+
     product_cat_ids.each do |product_cat_id|
       @product.category_product_links.build({:product_cat_id => product_cat_id})
     end if product_cat_ids
@@ -75,7 +78,9 @@ class ProductsController < ApplicationController
     @category_product_links= CategoryProductLink.all
     
     @product_cat_ids = Array.new
-     
+    
+    params[:product][:price] = params[:product][:price].to_d * 100
+    
     @product.category_product_links.each do |x|
         @product_cat_ids.push(x.product_cat_id)
         unless params['product']['product_cat_ids'] && params['product']['product_cat_ids'].include?(x.product_cat_id)

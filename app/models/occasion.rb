@@ -39,8 +39,8 @@ class Occasion < ActiveRecord::Base
 
   def product_recommendations
     # in case if occasion doesnt have price min or max
-    self.price_min ||= 0
-    self.price_max ||= 100
+    self.price_min ||= 1
+    self.price_max ||= 10000
     
     # select product in the price_range
     products = Product.all.select{|product| (self.price_min..self.price_max) === product.price }

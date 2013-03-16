@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130313193351) do
+ActiveRecord::Schema.define(:version => 20130315001531) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -99,11 +99,11 @@ ActiveRecord::Schema.define(:version => 20130313193351) do
     t.text     "description"
     t.datetime "date"
     t.integer  "user_id"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "recipient_id"
-    t.decimal  "price_max",    :precision => 8, :scale => 2
-    t.decimal  "price_min",    :precision => 8, :scale => 2
+    t.integer  "price_max",    :limit => 8
+    t.integer  "price_min",    :limit => 8
     t.integer  "ocat_id"
   end
 
@@ -123,15 +123,17 @@ ActiveRecord::Schema.define(:version => 20130313193351) do
     t.integer  "product_id"
     t.integer  "occasion_id"
     t.integer  "quantity"
-    t.decimal  "total"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.integer  "total"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.string   "address_line_1"
     t.string   "address_line_2"
     t.string   "city"
     t.string   "state"
     t.string   "zip_code"
     t.integer  "address_id"
+    t.string   "name"
+    t.string   "stripe_card_token"
   end
 
   add_index "orders", ["occasion_id"], :name => "index_orders_on_occasion_id"
@@ -153,7 +155,7 @@ ActiveRecord::Schema.define(:version => 20130313193351) do
 
   create_table "products", :force => true do |t|
     t.string   "name"
-    t.decimal  "price"
+    t.integer  "price"
     t.text     "description"
     t.string   "gender"
     t.string   "age_range"

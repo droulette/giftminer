@@ -1,12 +1,7 @@
 <div style='margin-top:5px;'>
   <ul class='breadcrumb'>
-    <li>
-      <%= link_to 'Home', root_path %>
-      <span class='divider'>/</span>
-    </li>
-    <li>
-      Subscriptions
-    </li>
+    <li><%= link_to 'Home', root_path %><span class='divider'>/</span></li>
+    <li>Subscriptions</li>
   </ul>
 </div>
 
@@ -22,19 +17,17 @@
     <th>Destroy</th>
   </tr>
 
-<% if @subscriptions %>
-  <% @subscriptions.each do |subscription| %>
+  <% if @subscription %>
+      <tr>
+        <td><%= @subscription.user.email %></td>
+        <td><%= link_to 'Show', @subscription %></td>
+        <td><%= link_to 'Edit', edit_subscription_path(@subscription) %></td>
+        <td><%= link_to 'Destroy', @subscription, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% else %>  
     <tr>
-      <td><%= subscription.user.email if subscription.user_id %></td>
-      <td><%= link_to 'Show', @subscription %></td>
-      <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
-      <td><%= link_to 'Destroy', subscription, confirm: 'Are you sure?', method: :delete %></td>
+      <td>N/A</td>
     </tr>
   <% end %>
-<% else %>  
-  <tr>
-    <td>N/A</td>
-  </tr>
-<% end %>
 
 </table>

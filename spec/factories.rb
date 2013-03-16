@@ -53,6 +53,4 @@ FactoryGirl.define do
     pass 0
   end
 
-
-
 end
