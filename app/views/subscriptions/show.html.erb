@@ -21,9 +21,9 @@
     </div><!--/span-->
     <div class="span9 well">
       <h3>Credit Card on File</h3>
-      <p>Last 4 digits of Credit Card: <%= @payment_info.active_card.last4 %></p>
-      <p>Card Type: <%= @payment_info.active_card.type %></p>
-      <p>Expiration: <%= @payment_info.active_card.exp_month %>/<%= @payment_info.active_card.exp_year %></p>
+      <p>Last 4 digits of Credit Card: <%= @payment_info.active_card.last4 if @payment_info.active_card %></p>
+      <p>Card Type: <%= @payment_info.active_card.type if @payment_info.active_card %></p>
+      <p>Expiration: <%= @payment_info.active_card.exp_month if @payment_info.active_card %>/<%= @payment_info.active_card.exp_year if @payment_info.active_card %></p>
       <p>Account Balance: <%= @payment_info.account_balance %></p>
       
       <%= link_to 'Delete', @subscription, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-danger' %>
