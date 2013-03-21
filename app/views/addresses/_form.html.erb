@@ -59,19 +59,17 @@
   <% end %>
 </div>
 
-<% @recipient.addresses.each do |address| %>
+<% @address.recipient.addresses.each do |address| %>
   <% if address.address_type == 'shipping' %>
     <div class='fleft'>
       <p>Shipping Addresses</p>
-      <% @recipient.addresses.each do |recipient| %>
         <%= address.address_line_1 %><br/>
         <% unless address.address_line_2.blank? %>
           <%= address.address_line_2 %><br/>
         <% end %>
         <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/>
         <%= link_to 'choose address','#' %><br/><br/>
-      <% end %>
     </div>
   <% end %>
-<% end %>
+<% end if @address.recipient %>
 <div class='clear'></div>

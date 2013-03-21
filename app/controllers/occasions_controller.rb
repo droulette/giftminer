@@ -1,6 +1,5 @@
 class OccasionsController < ApplicationController
   before_filter :authenticate_user!
-  authorize_resource
   # GET /occasions
   # GET /occasions.json
   def index

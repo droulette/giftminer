@@ -2,10 +2,15 @@
 
 FactoryGirl.define do
   factory :order do
-    user nil
-    product_references "MyString"
-    occasion nil
+    name 'Thomas'
+    user
+    product
+    occasion
     quantity 1
-    total "9.99"
+    total 99
+    address_line_1 '123 fake st'
+    city 'san francisco'
+    state 'CA'
+    zip_code '94111'
   end
 end

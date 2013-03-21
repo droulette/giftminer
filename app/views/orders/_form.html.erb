@@ -6,7 +6,7 @@
 </div>
 
 <div class='container'>
-  <div class='well fleft' style='width:235px;margin-right:25px;min-height:150px'>
+  <div class='well fleft' style='width:180px;margin-right:25px;min-height:150px'>
     <h4><%= link_to @order.occasion.name, occasion_path(@order.occasion.id) %></h4>
     <% if @order.occasion.recipient %>
       <p>
@@ -19,7 +19,7 @@
     </p>
   </div>
 
-  <div class='well fright product' style='width:600px;min-height:150px;'>
+  <div class='well fright product' style='width:655px;min-height:150px;'>
     <div class='fleft' style='margin-right:10px;'>
       <%= link_to(image_tag(@order.product.pic.url(:small), :class => 'thumbnail'), product_path(@order.product.id)) %>
     </div>
@@ -36,7 +36,7 @@
   <%= form_for(@order, :html => { :class => "form-horizontal"}) do |f| %>
     <% if @order.occasion.recipient.addresses.count >0 %>
       <div class='fleft' style='width:200px;'>
-        <h4>Shipping Addresses</h4>
+        <h4>Shipping Addresses for <%= @order.occasion.recipient.full_name %></h4>
         <table>
           <% @order.occasion.recipient.addresses.each do |address| %>
             <tr>
@@ -44,11 +44,12 @@
                 <%= f.radio_button :address_id, address.id %>
               </td>
               <td>
+                
                 <%= address.address_line_1 %><br/>
                 <% unless address.address_line_2.blank? %>
                   <%= address.address_line_2 %><br/>
                 <% end %>
-                <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/>
+                <%= address.city %>,&nbsp;<%= address.state %>&nbsp;<%= address.zip_code %><br/><br/>
               </td>
             </tr>
           <% end %>
@@ -71,7 +72,7 @@
       <div class="field control-group <%= 'error' if @order.errors[:name].any? %>">
         <%= f.label :name, :class => 'control-label' %>
         <div class='controls'>
-          <%= f.text_field :name %>
+          <%= f.text_field :name  %>
           <span class='help-inline'><%= 'Please enter Name' if @order.errors[:name].any? %></span>
         </div>
       </div>
@@ -103,7 +104,7 @@
         <%= f.label :state, :class => 'control-label' %>
         <div class='controls'>
           <%= f.select :state, us_states, :include_blank => "Select State", :size => '30' %>
-          <span class='help-inline'><%= 'Please enter a Decription' if @order.errors[:state].any? %></span>
+          <span class='help-inline'><%= 'Please enter a State' if @order.errors[:state].any? %></span>
         </div>
       </div>
 
@@ -114,63 +115,65 @@
           <span class='help-inline'><%= 'Please enter Zip code' if @order.errors[:zip_code].any? %></span>
         </div>
       </div>
-      
-      <fieldset>
-        <legend style='margin-left:25px;'>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></legend>
+      <% if current_user.subscription %>
+        <div style='margin-left:35px;'>
+          <div>
+            <legend>Payment Information</legend>
+              <p>Last 4 digits of Credit Card: <%= @payment_info.active_card.last4 %></p>
+              <p>Card Type: <%= @payment_info.active_card.type %></p>
+              <p>Expiration: <%= @payment_info.active_card.exp_month %>/<%= @payment_info.active_card.exp_year %></p>
+              <p>Account Balance: <%= @payment_info.account_balance %></p>
+          </div>
+          <div>
 
-        <%= f.hidden_field :stripe_card_token %>
-
-        <div class="field control-group">
-          <%= label_tag :card_number, "Credit Card Number ", :class => 'control-label' %>
-          <div class='controls'>
-            <%= text_field_tag :card_number, nil, name: nil %>
+          </div>
+          <div class="actions form-actions">
+            <%= f.submit 'Buy', :class => 'btn-success' %>
           </div>
         </div>
-        <div class="field control-group">
-          <%= label_tag :card_code, "Security Code on Card", :class => 'control-label' %>
-          <div class='controls'>
-            <%= text_field_tag :card_code, nil, name: nil, :autocomplete =>'off' %>
-          </div>
-        </div>
-        <div class="field control-group">
-          <%= label_tag :card_month, "Card Expiration", :class => 'control-label' %>
-          <div class='controls'>
-            <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"}%>
-            <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}%>
-          </div>
-        </div>
+      <% else %>
+        <fieldset>
+          <legend style='margin-left:25px;'>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></legend>
   
-        <div id="stripe_error">
-          <noscript>
-            JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
-          </noscript>
-        </div>
-      </fieldset>
-
-      <% unless current_user.subscription %>
-        <div class='actions form-actions'>
-          <%= f.submit 'Buy the Gift', :class=>'btn btn-success' %>
-        </div>
+          <%= f.hidden_field :stripe_card_token %>
+  
+          <div class="field control-group">
+            <%= label_tag :card_number, "Credit Card Number ", :class => 'control-label' %>
+            <div class='controls'>
+              <%= text_field_tag :card_number, nil, name: nil %>
+            </div>
+          </div>
+          <div class="field control-group">
+            <%= label_tag :card_code, "Security Code on Card", :class => 'control-label' %>
+            <div class='controls'>
+              <%= text_field_tag :card_code, nil, name: nil, :autocomplete =>'off' %>
+            </div>
+          </div>
+          <div class="field control-group">
+            <%= label_tag :card_month, "Card Expiration", :class => 'control-label' %>
+            <div class='controls'>
+              <%= select_month nil, {add_month_numbers_true: true}, {name: nil, id: "card_month"}%>
+              <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: "card_year"}%>
+            </div>
+          </div>
+    
+          <div id="stripe_error">
+            <noscript>
+              JavaScript is not enabled and is required for this form. First enable it in your web browser settings.
+            </noscript>
+          </div>
+        </fieldset>
+  
+        <% unless current_user.subscription %>
+          <div class='actions form-actions'>
+            <%= f.submit 'Buy the Gift', :class=>'btn btn-success' %>
+          </div>
+        <% end %>
       <% end %>
-
     </div>
 
     <div class='clear'></div>
 
-    <% if current_user.subscription %>
-      <div style='margin-left:35px;'>
-        <div>
-          <legend>Payment Information</legend>
-          <p>Email: <%= current_user.email %></p>
-          <p>Description: <%= @payment_info.description %></p>
-          <p>Active Card: <%= @payment_info.active_card %></p>
-          <p>Account Balance: <%= @payment_info.account_balance %></p>
-        </div>
-        <div class="actions form-actions">
-          <%= f.submit 'Buy', :class => 'btn-success' %>
-        </div>
-      </div>
-    <% end %>
   </div>
 
 

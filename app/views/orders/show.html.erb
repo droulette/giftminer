@@ -18,8 +18,8 @@
   <div class='fleft' style='width:160px;border-right:1px solid black;'>
     <h4>Order Details</h4>
     <p>Order Number:&nbsp; <%= @order.id %>
-    <p>Occasion:&nbsp;  <%= link_to @order.occasion.name, occasion_path(@occasion) %></p>
-    <p>Recipient:&nbsp;  <%= @order.occasion.recipient.full_name if @order.occasion.recipient %></p>
+    <p>Occasion:&nbsp;  <%= link_to @order.occasion.name, occasion_path(@order.occasion.id) %></p>
+    <p>Recipient:&nbsp;  <%= link_to @order.occasion.recipient.full_name, recipient_path(@order.occasion.recipient.id) if @order.occasion.recipient %></p>
   </div>
   <div class='fleft' style='width:225px;margin-left:15px;border-right:1px solid black;'>
     <h4>Shipping Info</h4>
@@ -35,7 +35,7 @@
     </div>
     <div class='fleft' style='margin-t:15px;'>
       <p>Product:&nbsp; <%= link_to @order.product.name, product_path(@order.product) %></p>
-      <p>Total:&nbsp;  <%= number_to_currency(@order.price_decimal, :unit => "$") %></p>
+      <p>Total:&nbsp;  <%= cents_to_dollars(@order.total, :unit => "$") %></p>
       <p>Order Date: &nbsp; <%= @order.created_at %>
     </div>
   </div>

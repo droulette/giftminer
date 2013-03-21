@@ -1,5 +1,5 @@
 <div class='fright' style='margin:20px 0 20px 0;'>
-<%= link_to 'New Product', new_product_path, :class => 'btn btn-primary'  %>
+  <%= link_to 'New Product', new_product_path, :class => 'btn btn-primary'  %>
 </div>
 </br></br>
 
@@ -24,5 +24,5 @@
     <td><%= link_to 'Edit', edit_product_path(product) %></td>
     <td><%= link_to 'Destroy', product, confirm: 'Are you sure?', method: :delete, :class => 'btn btn-primary'  %></td>
   </tr>
-<% end %>
+<% end if @products %>
 </table>

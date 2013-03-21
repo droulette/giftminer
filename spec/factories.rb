@@ -5,7 +5,7 @@ FactoryGirl.define do
     end  
     password 'foobar'
     confirmed_at 2013-01-01
-    after(:create) { |instance| instance.recipients << create_list(:recipient, 1) }
+    # after(:create) { |instance| instance.recipients << create_list(:recipient, 1) }
   end
 
   factory :product do
@@ -31,6 +31,7 @@ FactoryGirl.define do
   factory :occasion do
     user
     ocat
+    recipient
     name 'MyString'
     description 'MyText'
     date '01/01/2010'

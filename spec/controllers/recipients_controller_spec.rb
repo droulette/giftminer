@@ -18,7 +18,16 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe RecipientsController do
+describe RecipientsController, :type => :controller do
+  login_user
+  
+  before(:each) do
+  end
+  
+  after(:each) do
+    User.delete_all
+    Recipient.delete_all
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Recipient. As you add validations to Recipient, be sure to
@@ -36,20 +45,21 @@ describe RecipientsController do
 
   describe "GET index" do
     it "assigns all recipients as @recipients" do
-      recipient = Recipient.create! valid_attributes
+      controller.stub!(:current_user).and_return(@user)
+      @recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
       get :index, {}, valid_session
-      assigns(:recipients).should eq([recipient])
+      assigns(:recipients).should eq([@recipient])
     end
   end
 
   describe "GET show" do
     it "assigns the requested recipient as @recipient" do
-      recipient = Recipient.create! valid_attributes
+      recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
       get :show, {:id => recipient.to_param}, valid_session
       assigns(:recipient).should eq(recipient)
     end
   end
-
+# 
   describe "GET new" do
     it "assigns a new recipient as @recipient" do
       get :new, {}, valid_session
@@ -59,7 +69,7 @@ describe RecipientsController do
 
   describe "GET edit" do
     it "assigns the requested recipient as @recipient" do
-      recipient = Recipient.create! valid_attributes
+      recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
       get :edit, {:id => recipient.to_param}, valid_session
       assigns(:recipient).should eq(recipient)
     end
@@ -68,19 +78,24 @@ describe RecipientsController do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Recipient" do
-        expect {
-          post :create, {:recipient => valid_attributes}, valid_session
-        }.to change(Recipient, :count).by(1)
+        controller.stub!(:current_user).and_return(@user)
+        u = FactoryGirl.build(:recipient, :user_id => @user.id, :first_name => 'Bill')
+        post :create, recipient: u.attributes
+        Recipient.last.first_name.should eq('Bill')
       end
 
       it "assigns a newly created recipient as @recipient" do
-        post :create, {:recipient => valid_attributes}, valid_session
+        controller.stub!(:current_user).and_return(@user)
+        u = FactoryGirl.build(:recipient, :user_id => @user.id)
+        post :create, recipient: u.attributes
         assigns(:recipient).should be_a(Recipient)
         assigns(:recipient).should be_persisted
       end
 
       it "redirects to the created recipient" do
-        post :create, {:recipient => valid_attributes}, valid_session
+        controller.stub!(:current_user).and_return(@user)
+        u = FactoryGirl.build(:recipient, :user_id => @user.id)
+        post :create, recipient: u.attributes
         response.should redirect_to(Recipient.last)
       end
     end
@@ -88,15 +103,17 @@ describe RecipientsController do
     describe "with invalid params" do
       it "assigns a newly created but unsaved recipient as @recipient" do
         # Trigger the behavior that occurs when invalid params are submitted
+        controller.stub!(:current_user).and_return(@user)
         Recipient.any_instance.stub(:save).and_return(false)
-        post :create, {:recipient => { "user" => "invalid value" }}, valid_session
+        post :create, {:recipient => { "first_name" => "invalid value" }}, valid_session
         assigns(:recipient).should be_a_new(Recipient)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
+        controller.stub!(:current_user).and_return(@user)
         Recipient.any_instance.stub(:save).and_return(false)
-        post :create, {:recipient => { "user" => "invalid value" }}, valid_session
+        post :create, {:recipient => { "first_name" => "invalid value" }}, valid_session
         response.should render_template("new")
       end
     end
@@ -105,7 +122,7 @@ describe RecipientsController do
   describe "PUT update" do
     describe "with valid params" do
       it "updates the requested recipient" do
-        recipient = Recipient.create! valid_attributes
+        recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
         # Assuming there are no other recipients in the database, this
         # specifies that the Recipient created on the previous line
         # receives the :update_attributes message with whatever params are
@@ -115,32 +132,32 @@ describe RecipientsController do
       end
 
       it "assigns the requested recipient as @recipient" do
-        recipient = Recipient.create! valid_attributes
-        put :update, {:id => recipient.to_param, :recipient => valid_attributes}, valid_session
-        assigns(:recipient).should eq(recipient)
+        @recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
+        put :update, {:id => @recipient, recipient: FactoryGirl.attributes_for(:recipient)}, valid_session
+        assigns(:recipient).should eq(@recipient)
       end
 
       it "redirects to the recipient" do
-        recipient = Recipient.create! valid_attributes
-        put :update, {:id => recipient.to_param, :recipient => valid_attributes}, valid_session
-        response.should redirect_to(recipient)
+        @recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
+        put :update, {:id => @recipient, recipient: FactoryGirl.attributes_for(:recipient)}, valid_session
+        response.should redirect_to(@recipient)
       end
     end
 
     describe "with invalid params" do
       it "assigns the recipient as @recipient" do
-        recipient = Recipient.create! valid_attributes
+        recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
         # Trigger the behavior that occurs when invalid params are submitted
         Recipient.any_instance.stub(:save).and_return(false)
-        put :update, {:id => recipient.to_param, :recipient => { "user" => "invalid value" }}, valid_session
+        put :update, {:id => recipient.to_param, :recipient => { "first_name" => "invalid value" }}, valid_session
         assigns(:recipient).should eq(recipient)
       end
 
       it "re-renders the 'edit' template" do
-        recipient = Recipient.create! valid_attributes
+        recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
         # Trigger the behavior that occurs when invalid params are submitted
         Recipient.any_instance.stub(:save).and_return(false)
-        put :update, {:id => recipient.to_param, :recipient => { "user" => "invalid value" }}, valid_session
+        put :update, {:id => recipient.to_param, :recipient => { "first_name" => "invalid value" }}, valid_session
         response.should render_template("edit")
       end
     end
@@ -148,14 +165,14 @@ describe RecipientsController do
 
   describe "DELETE destroy" do
     it "destroys the requested recipient" do
-      recipient = Recipient.create! valid_attributes
+      recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
       expect {
         delete :destroy, {:id => recipient.to_param}, valid_session
       }.to change(Recipient, :count).by(-1)
     end
 
     it "redirects to the recipients list" do
-      recipient = Recipient.create! valid_attributes
+      recipient = FactoryGirl.create(:recipient, :user_id => @user.id)
       delete :destroy, {:id => recipient.to_param}, valid_session
       response.should redirect_to(recipients_url)
     end

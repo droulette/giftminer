@@ -24,7 +24,7 @@
 <div class="field control-group <%= 'error' if @product.errors[:price].any? %>">
   <%= f.label :price, :class => 'control-label' %>
   <div class='controls'>
-    <%= f.text_field :price, :value => cents_to_dollars(@product.price, :unit => "$") %>
+    <%= f.text_field :price, :value => @product.price ? cents_to_dollars(@product.price, :unit => "$") : '' %>
   </div>
 </div>
 <div class="field control-group <%= 'error' if @product.errors[:description].any? %>">

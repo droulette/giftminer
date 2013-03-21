@@ -25,7 +25,6 @@ class AddressesController < ApplicationController
   # GET /addresses/new.json
   def new
     @address = Address.new
-    @recipient = Recipient.find(params[:recipient_id])
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @address }
@@ -35,7 +34,6 @@ class AddressesController < ApplicationController
   # GET /addresses/1/edit
   def edit
     @address = Address.find(params[:id])
-    @recipient = Recipient.find(@address.recipient_id)
   end
 
   # POST /addresses

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130315001531) do
+ActiveRecord::Schema.define(:version => 20130320214726) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -99,11 +99,11 @@ ActiveRecord::Schema.define(:version => 20130315001531) do
     t.text     "description"
     t.datetime "date"
     t.integer  "user_id"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "recipient_id"
-    t.integer  "price_max",    :limit => 8
-    t.integer  "price_min",    :limit => 8
+    t.integer  "price_max"
+    t.integer  "price_min"
     t.integer  "ocat_id"
   end
 
@@ -134,6 +134,8 @@ ActiveRecord::Schema.define(:version => 20130315001531) do
     t.integer  "address_id"
     t.string   "name"
     t.string   "stripe_card_token"
+    t.string   "stripe_charge_id"
+    t.integer  "subscription_id"
   end
 
   add_index "orders", ["occasion_id"], :name => "index_orders_on_occasion_id"

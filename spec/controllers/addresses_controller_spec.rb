@@ -18,7 +18,12 @@ require 'spec_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-describe AddressesController do
+describe AddressesController, :type => :controller do
+  login_user
+
+  after(:each) do
+    User.delete_all
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Address. As you add validations to Address, be sure to
@@ -36,7 +41,8 @@ describe AddressesController do
 
   describe "GET index" do
     it "assigns all addresses as @addresses" do
-      address = Address.create! valid_attributes
+      controller.stub!(:current_user).and_return(@user)
+      address = FactoryGirl.create(:address, :user_id => @user.id)
       get :index, {}, valid_session
       assigns(:addresses).should eq([address])
     end
@@ -44,7 +50,8 @@ describe AddressesController do
 
   describe "GET show" do
     it "assigns the requested address as @address" do
-      address = Address.create! valid_attributes
+      recipient = FactoryGirl.create(:recipient)
+      address = FactoryGirl.create(:address, :recipient_id => recipient.id)
       get :show, {:id => address.to_param}, valid_session
       assigns(:address).should eq(address)
     end
@@ -121,9 +128,10 @@ describe AddressesController do
       end
 
       it "redirects to the address" do
-        address = Address.create! valid_attributes
+        recipient = FactoryGirl.create(:recipient)
+        address = FactoryGirl.create(:address, :recipient_id => recipient.id)
         put :update, {:id => address.to_param, :address => valid_attributes}, valid_session
-        response.should redirect_to(address)
+        response.should redirect_to(recipient)
       end
     end
 

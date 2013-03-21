@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :subscription do
-    user nil
-    stripe_customer_token "MyString"
+    user
+    stripe_customer_token "cus_1Tr4V5qs4QWpU8"
   end
 end

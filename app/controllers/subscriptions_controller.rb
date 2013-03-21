@@ -1,13 +1,13 @@
 class SubscriptionsController < ApplicationController
   # GET /subscriptions
   # GET /subscriptions.json
-  authorize_resource
+  # authorize_resource
   def index
     @subscription = current_user.subscription
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @subscriptions }
+      format.json { render json: @subscription }
     end
   end
 
@@ -15,7 +15,13 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1.json
   def show
     @subscription = Subscription.find(params[:id])
-    @payment_info = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
+    
+    begin
+      @payment_info = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
+    rescue Exception => e
+      logger.error "Stripe error while creating customer: #{e.message}"
+    end
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @subscription }
@@ -44,10 +50,18 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions
   # POST /subscriptions.json
   def create
-    params[:subscription].delete(:stripe_customer_token)
+    stripe_card_token = params.delete :stripe_card_token
     @subscription = current_user.build_subscription(params[:subscription])
     
-    if @subscription.save_with_payment
+    begin
+      customer = Stripe::Customer.create(description:current_user.email, card:stripe_card_token) if stripe_card_token
+      @subscription.stripe_customer_token = customer.id if customer.id
+      
+    rescue Exception => e
+      logger.error "Stripe error while creating customer: #{e.message}"
+    end
+    
+    if @subscription.save
       redirect_to subscription_path(@subscription)
     else
       render :new
@@ -77,7 +91,7 @@ class SubscriptionsController < ApplicationController
     @subscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url }
+      format.html { redirect_to new_subscription_path }
       format.json { head :no_content }
     end
   end

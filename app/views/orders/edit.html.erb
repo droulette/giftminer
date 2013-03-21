@@ -1,9 +1,9 @@
 <div class='well'>
-  <%= form_for(@subscription, :html => { :class => "form-horizontal"}) do |f| %>
+  <%= form_for(@order, :html => { :class => "form-horizontal"}) do |f| %>
 
   <legend>Payment Information <%= image_tag('glossy.png',:style=>"width:100px;margin-top:-5px")%></legend>
 
-    <%= f.hidden_field :stripe_customer_token %>
+    <%= f.hidden_field :stripe_card_token %>
     
     <%= f.hidden_field :user_id, :value => current_user.id %>
 
