@@ -34,7 +34,7 @@
 
 <div class='well'>
   <%= form_for(@order, :html => { :class => "form-horizontal"}) do |f| %>
-    <% if @order.occasion.recipient.addresses.count >0 %>
+    <% if @order.occasion.recipient and @order.occasion.addresses.count > 0 %>
       <div class='fleft' style='width:200px;'>
         <h4>Shipping Addresses for <%= @order.occasion.recipient.full_name %></h4>
         <table>
