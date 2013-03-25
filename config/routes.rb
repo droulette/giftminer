@@ -7,7 +7,9 @@ Gift::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  resources :recipients
+  resources :recipients do
+    get 'import', :on => :collection
+  end
 
   resources :subscriptions
   resources :reviews

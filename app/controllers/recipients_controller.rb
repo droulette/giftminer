@@ -28,6 +28,8 @@ class RecipientsController < ApplicationController
   # GET /recipients/new
   # GET /recipients/new.json
   def new
+    @graph = Koala::Facebook::API.new(current_user.token)
+    @friend=  @graph.get_connections("me", "friends", :fields => "name, id, education")
     @recipient = Recipient.new
     @address = @recipient.addresses.build
     
@@ -91,5 +93,29 @@ class RecipientsController < ApplicationController
       format.html { redirect_to recipients_url }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    if params[:source] == 'facebook'
+      @graph = Koala::Facebook::API.new(current_user.token)
+      @graph.get_connection("me","friends",:fields => "name, id, username").each do |friend|
+        @friend = @graph.get_object(friend["id"])
+        
+        unless @recipient = Recipient.find_by_fb_id(@friend["id"])
+          @recipient = current_user.recipients.build
+          @recipient.fb_id = @friend["id"]
+        end
+        
+        @recipient.first_name = @friend["first_name"]
+        @recipient.last_name = @friend["last_name"]
+        @recipient.gender = @friend["gender"]
+        
+        unless @recipient.save
+          ## Complain
+        end
+      end
+    end
+    
+    redirect_to recipients_url
   end
 end

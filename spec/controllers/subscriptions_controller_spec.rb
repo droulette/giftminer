@@ -171,7 +171,7 @@ describe SubscriptionsController, :type => :controller do
     it "redirects to the subscriptions list" do
       subscription = FactoryGirl.create(:subscription, :user_id => @user.id)
       delete :destroy, {:id => subscription.to_param}, valid_session
-      response.should redirect_to(subscriptions_url)
+      response.should redirect_to(new_subscription_path)
     end
   end
 

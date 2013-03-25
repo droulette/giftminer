@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :avatar, :username, :gender, :birthday, 
-                  :firstname, :lastname, :address_line_1, :address_line_2, :city, :state, :zip, :role,:provider, :uid,
-                  :fb_url, :location, :locale, :timezone, :confirmed_at
+                  :firstname, :lastname, :address_line_1, :address_line_2, :city, :state, :zip, :role, :provider, :uid,
+                  :fb_url, :location, :locale, :timezone, :confirmed_at, :token, :expires_at
   
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }
   
@@ -33,8 +33,9 @@ class User < ActiveRecord::Base
     user = User.where(:provider => auth.provider, :uid => auth.uid).first || User.find_by_email(auth.info.email)
     # If we cannot find user, create a new record
     unless user
-        user = User.new(password:Devise.friendly_token[0,20],provider:auth.provider,uid:auth.uid,firstname:auth.extra.raw_info.first_name,
-        lastname:auth.extra.raw_info.last_name,username:auth.extra.raw_info.username,email:auth.extra.raw_info.email,fb_url:auth.extra.raw_info.link,
+        user = User.new(password:Devise.friendly_token[0,20],provider:auth.provider,uid:auth.uid,token:auth.credentials.token,
+        expires_at:auth.credentials.expires_at,firstname:auth.extra.raw_info.first_name,lastname:auth.extra.raw_info.last_name,
+        username:auth.extra.raw_info.username,email:auth.extra.raw_info.email,fb_url:auth.extra.raw_info.link,
         location:auth.extra.raw_info.location,gender:auth.extra.raw_info.gender,locale:auth.extra.raw_info.locale,
         timezone:auth.extra.raw_info.timezone)
         user.confirm!
@@ -45,6 +46,8 @@ class User < ActiveRecord::Base
     user.update_attributes(
       provider:auth.provider,
       uid:auth.uid,
+      token:auth.credentials.token,
+      expires_at:auth.credentials.expires_at,
       firstname:auth.extra.raw_info.firstname,
       lastname:auth.extra.raw_info.lastname,
       username:auth.extra.raw_info.username,
@@ -56,6 +59,7 @@ class User < ActiveRecord::Base
       timezone:auth.extra.raw_info.timezone)
     user
   end
+  
   
   def self.new_with_session(params, session)
     super.tap do |user|

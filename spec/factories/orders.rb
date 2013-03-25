@@ -6,11 +6,13 @@ FactoryGirl.define do
     user
     product
     occasion
+    subscription
     quantity 1
     total 99
     address_line_1 '123 fake st'
     city 'san francisco'
     state 'CA'
     zip_code '94111'
+    # stripe_card_token 'tok_1VDNjw8LpxCoRM'
   end
 end

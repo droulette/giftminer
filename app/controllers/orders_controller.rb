@@ -85,7 +85,7 @@ class OrdersController < InheritedResources::Base
           @order.save
         rescue Stripe::CardError => e
           # The card has been declined
-          logger.error "Stripe error while charging card: #{e.mesage}"
+          logger.error "Stripe error while charging card: #{e.message}"
           current_user.subscription.destroy if current_user.subscription
           redirect_to(edit_order_path(@order), :warning => 'We could not charge your credit card, please enter your payment information again.') and return 
         end
@@ -119,7 +119,7 @@ class OrdersController < InheritedResources::Base
           elsif @order.stripe_card_token
             data.merge!({:card => @order.stripe_card_token})
           end
-          debugger
+
           charge = Stripe::Charge.create(data)
           
           @order.subscription_id = current_user.subscription.id if current_user.subscription

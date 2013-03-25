@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130320214726) do
+ActiveRecord::Schema.define(:version => 20130323033732) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -179,6 +179,7 @@ ActiveRecord::Schema.define(:version => 20130320214726) do
     t.string   "relationship"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false
+    t.string   "fb_id"
   end
 
   add_index "recipients", ["user_id"], :name => "index_recipients_on_user_id"
@@ -252,6 +253,8 @@ ActiveRecord::Schema.define(:version => 20130320214726) do
     t.string   "location"
     t.integer  "timezone"
     t.string   "locale"
+    t.string   "token"
+    t.integer  "expires_at"
   end
 
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
