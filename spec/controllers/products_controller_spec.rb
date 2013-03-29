@@ -11,6 +11,7 @@ describe ProductsController, :type => :controller do
   describe 'get index' do
 
     it 'populates an array of products' do
+      Product.delete_all
       @products = FactoryGirl.create(:product)
       get :index
       assigns(:products).should eq([@products])

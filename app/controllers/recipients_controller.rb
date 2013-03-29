@@ -98,18 +98,17 @@ class RecipientsController < ApplicationController
   def import
     if params[:source] == 'facebook'
       @graph = Koala::Facebook::API.new(current_user.token)
-      @graph.get_connection("me","friends",:fields => "name, id, username").each do |friend|
-        @friend = @graph.get_object(friend["id"])
+      @graph.get_connection("me","friends",:fields => "name, id, username, first_name, last_name, gender, birthday").each do |friend|
         
-        unless @recipient = Recipient.find_by_fb_id(@friend["id"])
+        unless @recipient = Recipient.find_by_fb_id(friend["id"])
           @recipient = current_user.recipients.build
-          @recipient.fb_id = @friend["id"]
+          @recipient.fb_id = friend["id"]
         end
         
-        @recipient.first_name = @friend["first_name"]
-        @recipient.last_name = @friend["last_name"]
-        @recipient.gender = @friend["gender"]
-        
+        @recipient.first_name = friend["first_name"]
+        @recipient.last_name = friend["last_name"]
+        @recipient.gender = friend["gender"]
+        @recipient.birthday = friend["birthday"] if friend["birthday"]
         unless @recipient.save
           ## Complain
         end

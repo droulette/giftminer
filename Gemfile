@@ -21,6 +21,8 @@ gem 'rails3-jquery-autocomplete'
 gem 'koala'
 gem 'fb_graph'
 
+gem 'uservoice-ruby'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

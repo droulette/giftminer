@@ -5,6 +5,7 @@ FactoryGirl.define do
     end  
     password 'foobar'
     confirmed_at 2013-01-01
+    token 'AAAGULB7DYlUBAC9NyxUHFzxiDqltOvB5oTBkcOfFRDijLts9FuY1anOdzzbEBHgnF3FLjZBEmjRBW8YtqMnsHgy3Qy1ZCLiwTZAIaBSyAZDZD'
     # after(:create) { |instance| instance.recipients << create_list(:recipient, 1) }
   end
 

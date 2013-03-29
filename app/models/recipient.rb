@@ -13,7 +13,8 @@ class Recipient < ActiveRecord::Base
     v.blank?
   }}
   
-  attr_accessible :id, :user_id, :created_at, :updated_at, :age, :first_name, :gender, :last_name, :relationship, :recipient_name, :addresses_attributes
+  attr_accessible :id, :user_id, :created_at, :updated_at, :age, :first_name, :gender, :last_name, :relationship, :recipient_name, 
+                  :addresses_attributes, :fb_id, :birthday
 
   validates :first_name, :presence => true 
   

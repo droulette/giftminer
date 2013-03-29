@@ -62,6 +62,7 @@ describe RecipientsController, :type => :controller do
 # 
   describe "GET new" do
     it "assigns a new recipient as @recipient" do
+      controller.stub!(:current_user).and_return(@user)
       get :new, {}, valid_session
       assigns(:recipient).should be_a_new(Recipient)
     end

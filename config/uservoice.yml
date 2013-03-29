@@ -1,0 +1,4 @@
+uservoice:
+  sso_key: <Single Sign-on Key>
+  script_key: 200360
+  subdomain: giftminer

@@ -11,7 +11,9 @@
 </div>
 <div class='fright' style='margin-bottom:20px;'>
   <%= link_to 'New Recipient', new_recipient_path, :class => 'btn btn-primary'  %>
-  <%= link_to 'Import from Facebook', import_recipients_path(:source=>'facebook'), :class => 'btn btn-primary'  %>
+  <% if current_user.provider == 'facebook' %>
+    <%= link_to 'Import from Facebook', import_recipients_path(:source=>'facebook'), :class => 'btn btn-info'  %>
+  <% end %>
 </div>
 
 <div>
@@ -20,6 +22,7 @@
       <th>Name</th>
       <th>Age</th>
       <th>Gender</th>
+      <th>Birthday</th>
       <th>Relationship</th>
       <th>Edit</th>
       <th>Delete</th>
@@ -31,6 +34,7 @@
           <td><%= link_to recipient.full_name, recipient_path(recipient) %></td>
           <td><%= recipient.age %></td>
           <td><%= recipient.gender %></td>
+          <td><%= recipient.birthday ||= '' %></td>
           <td><%= recipient.relationship %></td>
           <td><%= link_to 'Edit', edit_recipient_path(recipient) %></td>
           <td><%= link_to 'Delete', recipient, confirm: 'Are you sure?', method: :delete %></td>
