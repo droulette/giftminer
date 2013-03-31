@@ -26,3 +26,5 @@
   </tr>
 <% end if @products %>
 </table>
+
+<%= will_paginate @products, previous_label: h("<"), next_label: h(">") %>

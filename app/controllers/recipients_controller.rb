@@ -3,7 +3,7 @@ class RecipientsController < ApplicationController
   # GET /recipients
   # GET /recipients.json
   def index
-    @recipients = current_user.recipients.all
+    @recipients = current_user.recipients.all.paginate(page: params[:page], :per_page => 10)
     @recipients_search = current_user.recipients.order(:first_name).order(:last_name).where("first_name like ?", "#{params[:term]}%")
 
     respond_to do |format|
@@ -28,8 +28,8 @@ class RecipientsController < ApplicationController
   # GET /recipients/new
   # GET /recipients/new.json
   def new
-    @graph = Koala::Facebook::API.new(current_user.token)
-    @friend=  @graph.get_connections("me", "friends", :fields => "name, id, education")
+    @graph = Koala::Facebook::API.new(current_user.token) if current_user.token
+    @friend=  @graph.get_connections("me", "friends", :fields => "name, id, education") if @graph
     @recipient = Recipient.new
     @address = @recipient.addresses.build
     

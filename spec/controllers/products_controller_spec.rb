@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'will_paginate/array'
 describe ProductsController, :type => :controller do
   login_user
   

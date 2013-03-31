@@ -1,14 +1,12 @@
 class OrdersController < InheritedResources::Base
 
   def index
-    @orders = current_user.orders.sorteddesc.all
+    @orders = current_user.orders.sorteddesc.all.paginate(page: params[:page], :per_page => 10)
     
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @orders }
     end
-
-
   end
 
   def show

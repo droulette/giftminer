@@ -32,7 +32,7 @@
               <td><%= link_to order.id, order_path(order.id) %></td>
               <td><%= link_to order.product.name, product_path(order.product.id) %></td>
               <td><%= link_to order.occasion.name, occasion_path(order.occasion.id) if order.occasion %></td>
-              <td><% if order.occasion.recipient_id %>
+              <td><% if order.occasion.recipient_id and order.occasion.recipient %>
                 <%= link_to order.occasion.recipient.full_name, recipient_path(order.occasion.recipient_id) %>
                 <% else %>
                   n/a
@@ -47,7 +47,7 @@
           
         <% end %>
       </table>
-
+      <%= will_paginate @orders, previous_label: h("<"), next_label: h(">") %>
     </div>
   </div><!--/row-->
 </div>

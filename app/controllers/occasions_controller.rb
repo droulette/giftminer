@@ -1,10 +1,10 @@
 class OccasionsController < ApplicationController
   before_filter :authenticate_user!
+
   # GET /occasions
   # GET /occasions.json
   def index
-    @occasions = current_user.occasions.sorteddesc.all
-
+    @occasions = current_user.occasions.sorteddesc.all.paginate(page: params[:page], :per_page => 10)
     @products = Product.all
     respond_to do |format|
       format.html # index.html.erb

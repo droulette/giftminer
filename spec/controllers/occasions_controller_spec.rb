@@ -1,5 +1,5 @@
 require 'spec_helper'
-
+require 'will_paginate/array'
 describe OccasionsController, :type => :controller do
   login_user
   after(:each)  { User.delete_all }
